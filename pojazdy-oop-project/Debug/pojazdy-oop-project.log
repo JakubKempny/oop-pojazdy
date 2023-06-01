@@ -1,2 +1,6 @@
-﻿  pojazdy-oop-project.cpp
+﻿  Funkcje.cpp
+D:\Programowanie\GitHub Repo\oop-pojazdy\pojazdy-oop-project\Funkcje.cpp(28,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+  pojazdy-oop-project.cpp
+  Generowanie kodu...
+D:\Programowanie\GitHub Repo\oop-pojazdy\pojazdy-oop-project\Funkcje.cpp(21): warning C4715: "wczytajPlik”: niewszystkie ścieżki kodu zwracają wartość
   pojazdy-oop-project.vcxproj -> D:\Programowanie\GitHub Repo\oop-pojazdy\Debug\pojazdy-oop-project.exe
