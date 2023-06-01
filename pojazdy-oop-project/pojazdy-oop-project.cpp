@@ -4,9 +4,11 @@
 using namespace std;
 
 int main(){
-    /*vector<Car*> tab;
-    Car* car1 = new Car();
-    tab.push_back(car1);*/
-
+    //Demonstracyjna zmian commita:
+    KontenerCar konCar("Data/Pojazdy.txt");
+    konCar.createMapFromFile(wczytajPlik(konCar.getPathToFile()));
+    konCar.info();
+    konCar.addRecord();
+    konCar.saveChanges();
 }
 

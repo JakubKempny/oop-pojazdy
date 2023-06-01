@@ -11,3 +11,5 @@
 #include <map>
 
 using namespace std;
+
+vector<string> wczytajPlik(const string nazwaP);

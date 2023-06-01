@@ -5,7 +5,21 @@ class Kontener {
 };
 
 class KontenerCar:Kontener {
-
+	map<string, Car*> mapCar; // <nr Vim, wskaŸnik na Car>
+	string pathToFile;
+public:
+	KontenerCar() {};
+	KontenerCar(string s):pathToFile(s) {};
+	string getPathToFile() { return pathToFile; }
+	void createMapFromFile(vector<string> wiersze);
+	void info() override { // tymczasowo
+		for (auto i = mapCar.begin(); i != mapCar.end();++i) {
+			cout << i->first <<";";
+			cout << i->second->formatDataToString()<<endl;
+		}
+	}
+	void addRecord();
+	void saveChanges(); // nadpisuje dane z pliku
 };
 
 class KontenerKierow:Kontener {

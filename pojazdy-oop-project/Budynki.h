@@ -14,7 +14,7 @@ public:
 
 class StacjaPaliw: Budynek {
 	string firma;
-	map<Rpaliwa, double> ceny;
+	map<string, double> ceny;
 	double discount=0; // - wartoœæ zni¿ki, jeœli = 0 to jej nie ma
 public:
 	StacjaPaliw(string a, string f) :Budynek(a), firma(f){} // niedokoñczony
