@@ -1,5 +1,6 @@
 #include "Header.h"
 
+
 // Przyjmuje nazwe pliku. Zwraca wektor stringów, gdzie ka¿dy string to jest jeden wiersz z pliku
 vector<string> wczytajPlik(const string nazwaP){ 
 	fstream plik(nazwaP, ios::in);
@@ -14,17 +15,15 @@ vector<string> wczytajPlik(const string nazwaP){
 		return wektor;
 	}
 	else {
-		//wywal wyj¹tek 
-		cout << "Nie udalo sie otowrzyc pliku" << endl;
+		throw CustomException("Nie udalo sie otworzyc pliku: "+nazwaP);
 	}
-	
 }
 
 void KontenerCar::createMapFromFile(vector<string> wiersze) {
-	
 	string marka, model, rpaliwa, vim;
 	unsigned int rok;
 	double spalanie, maxP;
+	mapCar.clear(); // tak na wypadek jabyœmy chcieli wywo³aæ t¹ funkcjê drugi raz
 	for (int i = 0; i < wiersze.size(); ++i) {
 		stringstream ss(wiersze[i]);
 		getline(ss, vim, ';');
@@ -36,6 +35,9 @@ void KontenerCar::createMapFromFile(vector<string> wiersze) {
 		ss.ignore(); // Ignorowanie œrednika
 		getline(ss, rpaliwa, ';');
 		ss >> maxP;
+		if (!ss.eof()) {
+			throw CustomException("Blad odczytu danych z pliku. Blad wystapil dla auta o numerze Vin: "+vim);
+		}
 		Car* wskCar = new Car(marka, model, rok, spalanie, rpaliwa, maxP);
 		mapCar.insert(make_pair(vim, wskCar));
 	}
@@ -48,7 +50,7 @@ void KontenerCar::addRecord() {
 	cin >> vim;
 	for (auto i = mapCar.begin(); i != mapCar.end(); ++i) {
 		if (vim == i->first) {
-			// wywal wyjatek !!!!!
+			// wywal wyj¹tek !!!!!
 			// powtarza siê klucz unikalny
 		}
 	}
@@ -70,15 +72,34 @@ void KontenerCar::addRecord() {
 	cout << "Dodano nowe auto. Aby zmiana byla trwala zapisz zmiany."<<endl;
 }
 
-void KontenerCar::saveChanges() {
-	fstream plik(this->getPathToFile(),ios::out | ios::trunc); // plik otwarty tak aby nadpisa³ dane zawarte w pliku
-	stringstream ss;
-	for (auto i = mapCar.begin(); i != mapCar.end(); ++i) {
-		ss << i->first << ";"<<i->second->formatDataToString()<<"\n";
+void KontenerCar::delRecord(string vin) {
+	bool exist = false;
+	for (auto i : mapCar) {
+		if (i.first == vin) exist = true;
 	}
-	plik << ss.str();
-	plik.close();
-	cout << "Zapisano zmiany" << endl;
+	if (exist) {
+		mapCar.erase(vin);
+		cout << "Auto o kodzie vin:" << vin << " zostalo usuniete" << endl;
+	}
+	else {
+		// wywal wyj¹tek !!!
+		// Nie ma takiego auta w mapCar
+	}
+}
+
+void KontenerCar::saveChanges() {
+	ifstream f(this->getPathToFile());
+	if (f.good()) { // trzeba sprawdzic czy taki plik istnieje, gdyby nie istnia³ to program bez tego if'a stworzy³by nowy plik, a tego nie chcemy
+		fstream plik(this->getPathToFile(), ios::out | ios::trunc); // plik otwarty tak aby nadpisa³ dane zawarte w pliku
+		stringstream ss;
+		for (auto i = mapCar.begin(); i != mapCar.end(); ++i) {
+			ss << i->first << ";" << i->second->formatDataToString() << "\n";
+		}
+		plik << ss.str();
+		plik.close();
+		cout << "Zapisano zmiany" << endl;
+	}
+	
 }
 
 string Car::formatDataToString() {
