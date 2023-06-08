@@ -21,12 +21,37 @@ int main(){
     }
     konCar.info();
 
-    cout << "Chcesz dodac nowe auto? (y/n)";
-    cin >> odp;
-    if(odp == "y") konCar.addRecord();
+    //cout << "Chcesz dodac nowe auto? (y/n)";
+    //cin >> odp;
+    //if(odp == "y") konCar.addRecord();
 
-    konCar.delRecord("3");
-    konCar.saveChanges();
+    //konCar.delRecord("3");
+    //konCar.saveChanges();
+
+    //TEST DLA PRACOWNIKA
+
+    KontenerKierow konPrac("Data/Pracownicy.txt");
+    try {
+        vector<string> wiersze = wczytajPlik(konPrac.getPathToFile());
+        konPrac.createMapFromFile(wiersze);
+    }
+    catch (CustomException& e) {
+        cerr << e.what() << endl;
+    }
+    konPrac.info();
+
+    cout << "Chcesz dodac nowego pracownika? (y/n)";
+    cin >> odp;
+    if (odp == "y") konPrac.addRecord(konCar);
+    try
+    {
+        konPrac.delRecord("12345678908");
+    }
+    catch (string e)
+    {
+        cout << e;
+    }
+    konPrac.saveChanges();
 
 }
 

@@ -154,3 +154,165 @@ string Silnik::formatDataToString() {
 	ss >> sTmp >> pTmp;
 	return sTmp + ";" + rodzajPaliwa + ";" + pTmp;
 }
+
+//Imo chyba lepiej bedzie to rozdzielic na osobne pliki typu: funkcje_glowne, funkcje_pracownik, funkcje_pojazdy, funkcje_budynki
+//ale na razie wrzuce wszystko dla pracownika tutaj ponizej
+
+bool is_digits(const string& str) // Funkcja do sprawdzania czy string zawiera same cyfry
+{
+	return str.find_first_not_of("0123456789") == std::string::npos;
+}
+
+bool containsOnlyLetters(string const& str) {
+	return str.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") == std::string::npos;
+}
+
+Pesel::Pesel(string n) //Funkcja sprawdzajaca czy PESEL jest poprawny
+{
+	if ((is_digits(n)) && (n.length() == 11)) {
+		nr = n;
+	}
+	else {
+		string e = "Niepoprawny pesel";
+		throw e;
+	}
+}
+
+string Pracownik::formatDataToString() {
+	return  imie + ";" + nazwisko + ";" + vinPojazdu + ";";
+}
+
+bool KontenerKierow::vinWolny(string vin) //Sprawdza czy numer VIN nie jest juz przypadkie zajety przez innego kierowce
+{
+	string linia;
+	string nazwa = this->getPathToFile();
+	ifstream plik(nazwa);
+	if (!plik) {
+		cout << "Nie mozna otworzyc pliku." << endl;
+		return false;
+	}
+	while (getline(plik, linia)) {
+		istringstream iss(linia);
+		string kolumny[4];
+		string separator = ";";
+		for (int i = 0; i < 4; ++i) {
+			if (!getline(iss, kolumny[i], separator[0])) {
+				cout << "Nieprawidlowy format linii." << endl;
+				plik.close();
+				return false;
+			}
+		}
+
+		if (kolumny[3] == vin && kolumny[3].size() == vin.size())
+		{
+			plik.close();
+			return true;
+		}
+	}
+	plik.close();
+	return false;
+
+}
+
+bool KontenerCar::vinIstnieje(string vin) //Sprawdza czy numer VIN istnieje w bazie pojazdy
+{
+	for (auto i = mapCar.begin(); i != mapCar.end(); ++i) {
+		if (vin == i->first)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void KontenerKierow::createMapFromFile(vector<string> wiersze) {
+	string imie, nazwisko, pesel, vin;
+	mapPrac.clear();
+	for (int i = 0; i < wiersze.size(); ++i) {
+		stringstream ss(wiersze[i]);
+		getline(ss, pesel, ';');
+		getline(ss, imie, ';');
+		getline(ss, nazwisko, ';');
+		getline(ss, vin, ';');
+		Pracownik* wskPrac = new Pracownik(imie, nazwisko, pesel, vin);
+		mapPrac.insert(make_pair(pesel, wskPrac));
+	}
+}
+
+void KontenerKierow::addRecord(KontenerCar& k) {
+	string imie, nazwisko, pesel, vin;
+	string e;
+	cout << "Podaj Pesel pracownika:";
+	try
+	{
+		cin >> pesel;
+		for (auto i = mapPrac.begin(); i != mapPrac.end(); ++i) {
+			if (pesel == i->first) {
+				e = "W bazie znajduje sie juz uzytkownik o podanym numerze Pesel! ";
+				throw e;
+			}
+		}
+		cout << "Podaj imie pracownika:";
+		cin >> imie;
+		if (containsOnlyLetters(imie) == false)
+		{
+			e = "Imie zawiera niedozwolone znaki! ";
+			throw e;
+		}
+		cout << "Podaj nazwisko pracownika:";
+		cin >> nazwisko;
+		if (containsOnlyLetters(nazwisko) == false)
+		{
+			e = "Nazwisko zawiera niedozwolone znaki! ";
+			throw e;
+		}
+		cout << "Podaj vin pojazdu pracownika:";
+		cin >> vin;
+		if (!k.vinIstnieje(vin))
+		{
+			e = "Podany samochod nie istnieje! ";
+			throw e;
+		}
+		if (vinWolny(vin))
+		{
+			e = "Podany samochod jest juz przypisany do innego kierowcy! ";
+			throw e;
+		}
+		Pracownik* wskNewPrac = new Pracownik(imie, nazwisko, pesel, vin);
+		mapPrac.insert(make_pair(pesel, wskNewPrac));
+		cout << "Dodano nowego pracownika. Aby zmiana byla trwala zapisz zmiany." << endl;
+	}
+	catch (string e)
+	{
+		cout << e;
+	}
+}
+
+void KontenerKierow::delRecord(string pesel) {
+	bool exist = false;
+	for (auto i : mapPrac) {
+		if (i.first == pesel) exist = true;
+	}
+	if (exist) {
+		mapPrac.erase(pesel);
+		cout << "Pracownik o peselu:" << pesel << " zostal usuniety" << endl;
+	}
+	else {
+		string e = "Pracownik o podanym numerze PESEL nie istnieje! ";
+		throw e;
+	}
+}
+
+void KontenerKierow::saveChanges() {
+	ifstream f(this->getPathToFile());
+	if (f.good()) {
+		fstream plik(this->getPathToFile(), ios::out | ios::trunc);
+		stringstream ss;
+		for (auto i = mapPrac.begin(); i != mapPrac.end(); ++i) {
+			ss << i->first << ";" << i->second->formatDataToString() << "\n";
+		}
+		plik << ss.str();
+		plik.close();
+		cout << "Zapisano zmiany" << endl;
+	}
+}

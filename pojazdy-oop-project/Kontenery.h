@@ -24,10 +24,28 @@ public:
 	//get'ery
 	Car* getCar(string c) { return mapCar.at(c); };
 
+	bool vinIstnieje(string vin);
 };
 
 class KontenerKierow:Kontener {
-
+	map<string, Pracownik*> mapPrac; // <nr pesel, wskaznik na Pracownik>
+	string pathToFile = "";
+public:
+	KontenerKierow() {};
+	KontenerKierow(string s) : pathToFile(s) {};
+	string getPathToFile() { return pathToFile; }
+	void createMapFromFile(vector<string> wiersze);
+	void info() override { // tymczasowo
+		cout << "Dane z pliku: " << getPathToFile() << " :" << endl;
+		for (auto i = mapPrac.begin(); i != mapPrac.end(); ++i) {
+			cout << i->first << ";";
+			cout << i->second->formatDataToString() << endl;
+		}
+	}
+	void addRecord(KontenerCar& k);
+	void delRecord(string pesel);
+	void saveChanges();
+	bool vinWolny(string vin);
 };
 
 class KontenerStacjiPaliw:Kontener {

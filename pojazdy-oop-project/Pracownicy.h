@@ -1,30 +1,24 @@
 #pragma once
 #include <iostream>
 
-class Pesel { // klasa która by by³a odpowiedzialna za poprawne wprowadzenie peselu
-	int nr;
+class Pesel { // klasa sprawdzajaca poprawne wprowadzenie peselu
+	string nr;
 public:
-	Pesel(int n) {
-		if (n < 99999999999 && n>0) {
-			nr = n;
-		}
-		else {
-			throw "Nie poprawny pesel";
-		}
-	}
+	Pesel(string n);
 };
 
 class Pracownik {
-	string imie, nazwisko;
+	string imie, nazwisko, vinPojazdu;
 	Pesel pesel;
+	double dystans{}; // jeszcze niemodyfikowalne
 public:
-	Pracownik(string i, string n, Pesel p) : imie(i), nazwisko(n), pesel(p) {}
-
+	Pracownik(string i, string n, Pesel p, string poj) : imie(i), nazwisko(n), pesel(p), vinPojazdu(poj) {}
+	string formatDataToString();
 };
 
-class Kierowca: Pracownik {
-	double dystans{};
-public:
-	Kierowca(string i, string n, int p, double d) :Pracownik(i, n, p),dystans(d){
-	}
+class Stanowisko
+{
+	string nazwa;
+	double znizka; // chyba w procentach? w sensie 0.15 to bedzie 15%
+	int iloscPracownikow;
 };
