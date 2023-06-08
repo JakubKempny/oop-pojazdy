@@ -24,10 +24,11 @@ public:
 			rodzajPaliwa = rpaliwa;
 		}
 		else {
-			// wywal wyj¹tek
+			// wywal wyj¹tek ???
 		}
 	}
 	Silnik() {}; // konstruktor do testów
+	//virtual ~Silnik();
 
 	string formatDataToString();
 
@@ -41,10 +42,9 @@ public:
 		}
 		else {
 			// wywal wyj¹tek !!! 
-			// tutaj mo¿na zainicjowaæ tankowanie pojazdu
+			// tutaj mo¿na zainicjowaæ tankowanie pojazdu 
 		}
 	}
-	
 	
 	void tankowanie(double p) {
 		if (paliwo.first + p <= paliwo.second) {
@@ -63,12 +63,12 @@ class Pojazd{
 public:
 	Pojazd(string marka_, string model_, unsigned int rok): marka(marka_), model(model_), rocznik(rok){} 
 	Pojazd() {}; // konstruktor do testu:
+	//virtual ~Pojazd();
 	// get'ery
 	string formatDataToString();
 	string getMarka() { return marka; }
 	string getModel() { return model; }
 	// set'ery
-	
 	
 };
 

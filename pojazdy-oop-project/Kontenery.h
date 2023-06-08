@@ -10,18 +10,20 @@ class KontenerCar:Kontener {
 public:
 	KontenerCar() {};
 	KontenerCar(string s):pathToFile(s) {};
-	string getPathToFile() { return pathToFile; }
-	void createMapFromFile(vector<string> wiersze);
-	void info() override { // tymczasowo
-		cout << "Dane z pliku: " << getPathToFile() << " :" << endl;
-		for (auto i = mapCar.begin(); i != mapCar.end();++i) {
-			cout << i->first <<";";
-			cout << i->second->formatDataToString()<<endl;
+	~KontenerCar() {
+		for (auto i:mapCar) {
+			delete i.second;
 		}
 	}
+	string getPathToFile() { return pathToFile; }
+	void createMapFromFile(vector<string> wiersze);
+	void info() override;
 	void addRecord();
 	void delRecord(string vin);
 	void saveChanges(); // nadpisuje dane z pliku
+	//get'ery
+	Car* getCar(string c) { return mapCar.at(c); };
+
 };
 
 class KontenerKierow:Kontener {

@@ -17,6 +17,7 @@ int main(){
         // 1) Nie udało się otworzyć pliku
         // 2) Jeden z wierszy z pliku jest źle zapisany(jest za dużo danych)
         cerr<<e.what()<<endl;
+
     }
     konCar.info();
 
