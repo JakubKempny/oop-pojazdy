@@ -58,7 +58,7 @@ void KontenerCar::addRecord() {
 		}
 	}
 	catch(CustomException &e){
-		cout << e.what() << endl;
+		cout << e.what() << endl; 
 		addRecord(); // Ponownie uruchamiay funkcje
 	}
 	cout << "Podaj marke auta:";
@@ -170,12 +170,8 @@ bool containsOnlyLetters(string const& str) {
 Pesel::Pesel(string n) //Funkcja sprawdzajaca czy PESEL jest poprawny
 {
 	if ((is_digits(n)) && (n.length() == 11)) {
-		nr = n;
-	}
-	else {
-		string e = "Niepoprawny pesel";
-		throw e;
-	}
+			nr = n;
+	} else throw CustomException("PESEL jest niepoprawny! ");
 }
 
 string Pracownik::formatDataToString() {
@@ -247,44 +243,25 @@ void KontenerKierow::addRecord(KontenerCar& k) {
 	{
 		cin >> pesel;
 		for (auto i = mapPrac.begin(); i != mapPrac.end(); ++i) {
-			if (pesel == i->first) {
-				e = "W bazie znajduje sie juz uzytkownik o podanym numerze Pesel! ";
-				throw e;
-			}
+			if (pesel == i->first) throw CustomException("W bazie znajduje sie juz uzytkownik o podanym numerze Pesel! ");
 		}
 		cout << "Podaj imie pracownika:";
 		cin >> imie;
-		if (containsOnlyLetters(imie) == false)
-		{
-			e = "Imie zawiera niedozwolone znaki! ";
-			throw e;
-		}
+		if (containsOnlyLetters(imie) == false) throw CustomException("Imie zawiera niedozwolone znaki! ");
 		cout << "Podaj nazwisko pracownika:";
 		cin >> nazwisko;
-		if (containsOnlyLetters(nazwisko) == false)
-		{
-			e = "Nazwisko zawiera niedozwolone znaki! ";
-			throw e;
-		}
+		if (containsOnlyLetters(nazwisko) == false) throw CustomException("Nazwisko zawiera niedozwolone znaki! ");
 		cout << "Podaj vin pojazdu pracownika:";
 		cin >> vin;
-		if (!k.vinIstnieje(vin))
-		{
-			e = "Podany samochod nie istnieje! ";
-			throw e;
-		}
-		if (vinWolny(vin))
-		{
-			e = "Podany samochod jest juz przypisany do innego kierowcy! ";
-			throw e;
-		}
+		if (!k.vinIstnieje(vin)) throw CustomException("Podany samochod nie istnieje! ");
+		if (vinWolny(vin)) throw CustomException("Podany samochod jest juz przypisany do innego kierowcy! ");
 		Pracownik* wskNewPrac = new Pracownik(imie, nazwisko, pesel, vin);
 		mapPrac.insert(make_pair(pesel, wskNewPrac));
 		cout << "Dodano nowego pracownika. Aby zmiana byla trwala zapisz zmiany." << endl;
 	}
-	catch (string e)
+	catch (CustomException& e)
 	{
-		cout << e;
+		cout << e.what() << endl;
 	}
 }
 
@@ -293,13 +270,14 @@ void KontenerKierow::delRecord(string pesel) {
 	for (auto i : mapPrac) {
 		if (i.first == pesel) exist = true;
 	}
-	if (exist) {
-		mapPrac.erase(pesel);
-		cout << "Pracownik o peselu:" << pesel << " zostal usuniety" << endl;
+	try {
+	if (!exist) throw CustomException("Pracownik o takim numerze PESEL nie istnieje w bazie.");
+	mapPrac.erase(pesel);
+	cout << "Pracownik o peselu:" << pesel << " zostal usuniety" << endl;
+	string e = "Pracownik o podanym numerze PESEL nie istnieje! ";
 	}
-	else {
-		string e = "Pracownik o podanym numerze PESEL nie istnieje! ";
-		throw e;
+	catch (CustomException& e) {
+		cout << e.what() << endl;
 	}
 }
 

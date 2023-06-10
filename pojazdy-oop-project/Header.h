@@ -4,6 +4,7 @@
 #include "Budynki.h"
 #include "Pracownicy.h"
 #include "Kontenery.h"
+#include "Menu.h"
 
 #include <vector>
 #include <exception>

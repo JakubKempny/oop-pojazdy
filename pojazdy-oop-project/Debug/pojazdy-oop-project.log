@@ -1,6 +1,2 @@
-﻿  Funkcje.cpp
-D:\Repo\pojazdy-oop-project\Funkcje.cpp(27,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-D:\Repo\pojazdy-oop-project\Funkcje.cpp(231,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  pojazdy-oop-project.cpp
-  Generowanie kodu...
-  pojazdy-oop-project.vcxproj -> D:\Repo\Debug\pojazdy-oop-project.exe
+﻿  Menu_funkcje.cpp
+  pojazdy-oop-project.vcxproj -> F:\projekt\Repo\Debug\pojazdy-oop-project.exe

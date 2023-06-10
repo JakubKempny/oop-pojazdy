@@ -1,3 +1,7 @@
 1;Volvo;S90;2022;5.5;benzyna;50.0
 2;Volvo;S95;2023;5.8;benzyna;50.0
 4;Volvo;G69 420;2000;6.9;ropa;69.0
+5;Audi;A4;1998;6.0;ropa;70.0
+6;BMW;X5;2018;7.0;benzyna;60.0
+7;audi;dsa;123;32.0;;32.0
+testowy123;Audi;A4;1999;34.0;gaz;3.0

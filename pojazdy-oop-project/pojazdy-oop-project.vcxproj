@@ -140,12 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Funkcje.cpp" />
+    <ClCompile Include="Menu_funkcje.cpp" />
     <ClCompile Include="pojazdy-oop-project.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Budynki.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="Kontenery.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Pojazdy.h" />
     <ClInclude Include="Pracownicy.h" />
   </ItemGroup>
