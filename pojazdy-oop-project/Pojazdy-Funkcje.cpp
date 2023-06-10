@@ -40,7 +40,9 @@ void KontenerCar::addRecord() {
 	}
 	catch (CustomException& e) {
 		cout << e.what() << endl;
-		addRecord(); // Ponownie uruchamiay funkcje
+		cout << "123" << endl;
+		if(e.getErrorCode()==200)addRecord(); // Ponownie uruchamiay funkcje
+		
 	}
 	cout << "Podaj marke auta:";
 	cin >> marka;
