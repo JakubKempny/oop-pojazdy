@@ -3,7 +3,7 @@
 void KontenerCar::createMapFromFile(vector<string> wiersze) {
 	string marka, model, rpaliwa, vin;
 	unsigned int rok;
-	double spalanie, maxP;
+	double spalanie, maxP=0;
 	mapCar.clear(); // tak na wypadek jabyœmy chcieli wywo³aæ t¹ funkcjê drugi raz
 	for (int i = 0; i < wiersze.size(); ++i) {
 		stringstream ss(wiersze[i]);
@@ -26,7 +26,7 @@ void KontenerCar::createMapFromFile(vector<string> wiersze) {
 void KontenerCar::addRecord() {
 	string marka, model, rpaliwa, vim;
 	unsigned int rok;
-	double spalanie, maxP;
+	double spalanie, maxP=0;
 	cout << "Podaj Vim auta:";
 	cin >> vim;
 	try {
@@ -41,7 +41,7 @@ void KontenerCar::addRecord() {
 	catch (CustomException& e) {
 		cout << e.what() << endl;
 		cout << "123" << endl;
-		if(e.getErrorCode()==200)addRecord(); // Ponownie uruchamiay funkcje
+		//if(e.getErrorCode()==200)addRecord(); // Ponownie uruchamiay funkcje
 		
 	}
 	cout << "Podaj marke auta:";
@@ -55,8 +55,6 @@ void KontenerCar::addRecord() {
 	cin >> spalanie;
 	cout << "Podaj rodzaj paliwa auta:";
 	cin >> rpaliwa;
-	cout << "Podaj maksymalnosc ilosc paliwa w aucie:";
-	cin >> maxP;
 	Car* wskNewCar = new Car(marka, model, rok, spalanie, rpaliwa, maxP);
 	mapCar.insert(make_pair(vim, wskNewCar));
 	cout << "Dodano nowe auto. Aby zmiana byla trwala zapisz zmiany." << endl;
@@ -95,11 +93,11 @@ void KontenerCar::info() {
 	cout << "Dane z pliku: " << getPathToFile() << " :" << endl;
 	int spaceValue = 16;
 	// wstawianie nazw kategorii
-	cout << setw(spaceValue / 2) << "nrVin" << setw(2) << "|" << setw(spaceValue) << "Marka" << setw(2) << "|" << setw(spaceValue) << "Model" << setw(2) << "|" << setw(spaceValue) << "Rocznik" << setw(2) << "|" << setw(spaceValue) << "Spalanie" << setw(2) << "|" << setw(spaceValue) << "Paliwo" << setw(2) << "|" << setw(spaceValue) << "Pojemnosc paliwa" << setw(2) << "|" << endl;
+	cout << setw(spaceValue / 2) << "nrVin" << setw(2) << "|" << setw(spaceValue) << "Marka" << setw(2) << "|" << setw(spaceValue) << "Model" << setw(2) << "|" << setw(spaceValue) << "Rocznik" << setw(2) << "|" << setw(spaceValue) << "Spalanie" << setw(2) << "|" << setw(spaceValue) << "Paliwo" << setw(2) << "|"<<endl;
 
 	// wstawianie lini
 	char z = '-';
-	cout << setfill(z) << setw(spaceValue * 6 + 7 * 2 + spaceValue / 2) << z << endl;
+	cout << setfill(z) << setw(spaceValue * 5 + 6 * 2 + spaceValue / 2) << z << endl;
 	cout.fill(' ');
 
 	for (auto i : mapCar) {
@@ -137,13 +135,11 @@ string Pojazd::formatDataToString() {
 	return marka + ";" + model + ";" + to_string(rocznik);
 }
 
-string Silnik::formatDataToString() {
-	string sTmp, pTmp;
+string Silnik::formatDataToString() { // gites
+	string sTmp;
 	stringstream ss;
 	ss << fixed << setprecision(1);
-	double s = spalanie,
-		p = paliwo.second;
-	ss << s << " " << p;
-	ss >> sTmp >> pTmp;
-	return sTmp + ";" + rodzajPaliwa + ";" + pTmp;
+	ss << spalanie;
+	ss >> sTmp;
+	return sTmp + ";" + rodzajPaliwa;
 }
