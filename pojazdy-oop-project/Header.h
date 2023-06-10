@@ -22,6 +22,7 @@ bool containsOnlyLetters(string const& str);
 bool containsDigitsANDLetters(string const& str);
 bool check(int zmienna);
 bool check(double zmienna);
+bool is_digits2(const string& str);
 
 class CustomException : public exception {
     string message;

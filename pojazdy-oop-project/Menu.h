@@ -12,10 +12,11 @@ public:
 	void showMenu();
 	void baseCars();
 	void baseDrivers();
-	string addCar();
-	string delCar();
-	string addDriver();
-	string delDriver();
-	string addPetrol();
-	string delPetrol();
+	bool createMaps();
+	void addCar();
+	void delCar();
+	void addDriver();
+	void delDriver();
+	//string addPetrol();
+	//string delPetrol();
 };

@@ -1,5 +1,4 @@
 #include "Header.h"
-#include "Funkcje.cpp"
 
 void KontenerStacji::delRecord(string adres) {
 	bool exist = false;
@@ -30,27 +29,23 @@ void KontenerStacji::addRecord()
 		}
 		cout << "Podaj nazw\251 stacji:";
 		cin >> nazwa;
-		if (containsDigitsANDLetters(nazwa) == false) throw CustomException("Nazwa zawiera niedozwolone znaki! ");
+		
 
 		cout << "Podaj wysoko\230\206 ceny benzyny:";
 		cin >> cenaBenzynyStr;
-		if (is_digits2(cenaBenzynyStr) == false) throw CustomException("Cena zawiera niedozwolone znaki! ");
-		double cenaBenzyny = stod(cenaBenzynyStr);
+		
 		cout << "Podaj wysoko\230\206 ceny oleju nap\251dowego:";
 		cin >> cenaRopyStr;
-		if (is_digits2(cenaRopyStr) == false) throw CustomException("Cena zawiera niedozwolone znaki! ");
-		double cenaRopy = stod(cenaRopyStr);
+		
 		cout << "Podaj wysoko\230\206 ceny gazu:";
 		cin >> cenaGazuStr;
-		if (is_digits2(cenaGazuStr) == false) throw CustomException("Cena zawiera niedozwolone znaki! ");
-		double cenaGazu = stod(cenaGazuStr);
+		
 		cout << "Podaj wysoko\230\206 zni\276ki:";
 		cin >> znizkaStr;
-		if (is_digits2(znizkaStr) == false) throw CustomException("Zni\276ka zawiera niedozwolone znaki! ");
-		double znizka = stod(znizkaStr);
+		
 
-		Ceny* newCeny = new Ceny(cenaBenzyny, cenaRopy, cenaGazu);
-		StacjaPaliw* wskStacji = new StacjaPaliw(nazwa, adres, newCeny, znizka);
+		Ceny* newCeny = new Ceny(stod(cenaBenzynyStr), stod(cenaRopyStr), stod(cenaGazuStr));
+		StacjaPaliw* wskStacji = new StacjaPaliw(nazwa, adres, newCeny, stod(znizkaStr));
 		mapStacji.insert(make_pair(adres, wskStacji));
 		cout << "Dodano now\245 stacj\251. Aby zmiana byla trwala zapisz zmiany." << endl;
 	}

@@ -48,10 +48,6 @@ public:
 	bool vinWolny(string vin);
 };
 
-class KontenerStacjiPaliw:Kontener {
-
-};
-
 class KontenerStacji :Kontener {
 
 	map<string, StacjaPaliw*> mapStacji; // adres, wskaünik na Stacje
@@ -71,5 +67,5 @@ public:
 
 	void addRecord();
 	void delRecord(string adres);
-	void saveChanges();
+	//void saveChanges();
 };
