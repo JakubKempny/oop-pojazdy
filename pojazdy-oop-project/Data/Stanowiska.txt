@@ -1,0 +1,3 @@
+HR;0.200000;
+menadzer;0.500000;
+sprzataczka;0.100000;

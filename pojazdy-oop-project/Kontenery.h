@@ -69,3 +69,23 @@ public:
 	void delRecord(string adres);
 	//void saveChanges();
 };
+
+class KontenerStanow :Kontener {
+	map<string, Stanowisko*> mapStan; // <nazwaStanowiska, wskaznik na Stanowisko>
+	string pathToFile = "";
+public:
+	KontenerStanow() {};
+	KontenerStanow(string s) : pathToFile(s) {};
+	string getPathToFile() { return pathToFile; }
+	void createMapFromFile(vector<string> wiersze);
+	void info() override { // tymczasowo
+		cout << "Dane z pliku: " << getPathToFile() << " :" << endl;
+		for (auto i = mapStan.begin(); i != mapStan.end(); ++i) {
+			cout << i->first << ";";
+			cout << i->second->formatDataToString() << endl;
+		}
+	}
+	void addRecord();
+	void delRecord(string nazwaStanow, KontenerKierow &k);
+	void saveChanges();
+};

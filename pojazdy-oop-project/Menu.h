@@ -6,17 +6,21 @@ class Menu
 	KontenerCar konCar;
 	KontenerKierow konKier;
 	KontenerStacji konStacji;
+	KontenerStanow konStanow;
 public:
-	Menu(KontenerCar& konCar, KontenerKierow& konKier);
+	Menu(KontenerCar& konCar, KontenerKierow& konKier, KontenerStacji &konStacji, KontenerStanow &konStanow);
 	void showText();
 	void showMenu();
 	void baseCars();
 	void baseDrivers();
+	void baseLevels();
 	bool createMaps();
 	void addCar();
 	void delCar();
 	void addDriver();
 	void delDriver();
+	void addLevel();
+	void delLevel();
 	//string addPetrol();
 	//string delPetrol();
 };

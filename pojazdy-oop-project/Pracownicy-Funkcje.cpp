@@ -1,5 +1,7 @@
 #include "Header.h"
 
+//Ponizsze fukcje odnosza sie do Pracownika
+
 Pesel::Pesel(string n) //Funkcja sprawdzajaca czy PESEL jest poprawny
 {
 	if ((is_digits(n)) && (n.length() == 11)) {
@@ -123,30 +125,89 @@ void KontenerKierow::saveChanges() {
 	} 
 }
 
+//Ponizsze funkcje odnosza sie do stanowiska
+
 Stanowisko::Stanowisko(string nazwaStanowiska)
 {
-	if (nazwaStanowiska == "stazysta")
-	{
-		this->nazwaStanowiska = nazwaStanowiska;
-		znizka = 0.05;
+	this->nazwaStanowiska = nazwaStanowiska;
+}
+
+Stanowisko::Stanowisko(string nazwaStanowiska, double proc_pokrycia)
+{
+	this->nazwaStanowiska = nazwaStanowiska;
+	this->proc_pokrycia = proc_pokrycia;
+}
+
+string Stanowisko::formatDataToString() {
+	return  to_string(proc_pokrycia) + ";";
+}
+
+void KontenerStanow::createMapFromFile(vector<string> wiersze) {
+	string nazwa;
+	double proc_pokrycia;
+	mapStan.clear();
+	for (int i = 0; i < wiersze.size(); ++i) {
+		stringstream ss(wiersze[i]);
+		getline(ss, nazwa, ';');
+		ss >> proc_pokrycia;
+		ss.ignore();
+		Stanowisko* wskStan = new Stanowisko(nazwa, proc_pokrycia);
+		mapStan.insert(make_pair(nazwa, wskStan));
 	}
-	else if (nazwaStanowiska == "junior")
+}
+
+void KontenerStanow::addRecord() {
+	string nazwa;
+	double proc_pokrycia;
+	string e;
+	cout << "Podaj nazwe stanowiska:";
+	try
 	{
-		this->nazwaStanowiska = nazwaStanowiska;
-		znizka = 0.1;
+		cin >> nazwa;
+		//for (auto& c : nazwa){ //zmiana wszystkich znakow w stringu na male aby potem uniknac problemow typu: Menadzer vs menadzer
+		//	nazwa = tolower(c);
+		//}
+		for (auto i = mapStan.begin(); i != mapStan.end(); ++i) {
+			if (nazwa == i->first) throw CustomException("W bazie znajduje sie juz stanowisko o podanej nazwie! ");
+		}
+		cout << "Podaj procent pokrycia kosztow paliwa(np. 0.40 to 40% kosztow ktore pokrywa firma):";
+		cin >> proc_pokrycia;
+
+		Stanowisko* wskNewStan = new Stanowisko(nazwa, proc_pokrycia);
+		mapStan.insert(make_pair(nazwa, wskNewStan));
+		cout << "Dodano nowe stanowisko. Aby zmiana byla trwala zapisz zmiany." << endl;
 	}
-	else if (nazwaStanowiska == "mid")
+	catch (CustomException& e)
 	{
-		this->nazwaStanowiska = nazwaStanowiska;
-		znizka = 0.2;
+		cout << e.what() << endl;
 	}
-	else if (nazwaStanowiska == "senior")
-	{
-		this->nazwaStanowiska = nazwaStanowiska;
-		znizka = 0.3;
+}
+
+void KontenerStanow::delRecord(string nazwa, KontenerKierow& k) {
+	bool exist = false;
+	for (auto i : mapStan) {
+		if (i.first == nazwa) exist = true;
 	}
-	else
-	{
-		//tutaj bedzie wyjatek
+	try {
+		if (!exist) throw CustomException("Stanowisko o takiej nazwie nie istnieje w bazie.");
+		//if(!k.czyPrzypStan(nazwa)) // sprawdzi czy stanowisko przypadkiem nie jest juz przypisane do jakiegos pracownika
+		mapStan.erase(nazwa);
+		cout << "Stanowisko:" << nazwa << " zostalo usuniete" << endl;
+	}
+	catch (CustomException& e) {
+		cout << e.what() << endl;
+	}
+}
+
+void KontenerStanow::saveChanges() {
+	ifstream f(this->getPathToFile());
+	if (f.good()) {
+		fstream plik(this->getPathToFile(), ios::out | ios::trunc);
+		stringstream ss;
+		for (auto i = mapStan.begin(); i != mapStan.end(); ++i) {
+			ss << i->first << ";" << i->second->formatDataToString() << "\n";
+		}
+		plik << ss.str();
+		plik.close();
 	}
 }
