@@ -17,8 +17,11 @@
 using namespace std;
 
 vector<string> wczytajPlik(const string nazwaP);
-
-
+bool is_digits(const string& str); // Funkcja do sprawdzania czy string zawiera same cyfry
+bool containsOnlyLetters(string const& str);
+bool containsDigitsANDLetters(string const& str);
+bool check(int zmienna);
+bool check(double zmienna);
 
 class CustomException : public exception {
     string message;
