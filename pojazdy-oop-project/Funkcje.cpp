@@ -18,10 +18,9 @@ vector<string> wczytajPlik(const string nazwaP){
 	}
 }
 
-//Imo chyba lepiej bedzie to rozdzielic na osobne pliki typu: funkcje_glowne, funkcje_pracownik, funkcje_pojazdy, funkcje_budynki
-//ale na razie wrzuce wszystko dla pracownika tutaj ponizej
+// Funkcje sprawdzajace znaki w stringu
 
-bool is_digits(const string& str) // Funkcja do sprawdzania czy string zawiera same cyfry
+bool is_digits(const string& str) 
 {
 	return str.find_first_not_of("0123456789") == std::string::npos;
 }
@@ -33,6 +32,7 @@ bool containsOnlyLetters(string const& str) {
 bool containsDigitsANDLetters(string const& str) {
 	return str.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") == std::string::npos;
 }
+
 bool check(int zmienna)
 {
 	if (zmienna < 0)
