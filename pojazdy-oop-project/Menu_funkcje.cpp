@@ -171,3 +171,21 @@ void Menu::baseDrivers()
 		break;
 	}
 }
+string Menu::addPetrol()
+{
+	cout << endl << "Dodawanie nowej stacji: " << endl;
+	konStacji.addRecord();
+	konStacji.saveChanges();
+
+	return "Zmiany zosta\210y zapisane!\n";
+}
+
+string Menu::delPetrol()
+{
+	string adres{};
+	cout << endl << "Usuwanie stacji, podaj adres: " << endl;
+	cin >> adres;
+	konKier.delRecord(adres);
+	konKier.saveChanges();
+
+	return "Zmiany zosta\210y zapisane!\n";

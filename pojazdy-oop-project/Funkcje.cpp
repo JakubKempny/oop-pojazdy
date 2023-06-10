@@ -49,4 +49,7 @@ bool check(double zmienna)
 		return true;
 }
 
-
+bool is_digits2(const string& str) // Funkcja do sprawdzania czy string zawiera same cyfry
+{
+	return str.find_first_not_of("0123456789. ") == std::string::npos;
+}
