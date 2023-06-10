@@ -1,12 +1,12 @@
 ﻿  Budynki-Funkcje.cpp
-D:\Programowanie\GitHub Repo\oop-pojazdy\pojazdy-oop-project\Budynki-Funkcje.cpp(35,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+D:\Repo\pojazdy-oop-project\Budynki-Funkcje.cpp(35,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
   Funkcje.cpp
   Kontenery-Funkcje.cpp
   Menu_funkcje.cpp
   Pojazdy-Funkcje.cpp
-D:\Programowanie\GitHub Repo\oop-pojazdy\pojazdy-oop-project\Pojazdy-Funkcje.cpp(8,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+D:\Repo\pojazdy-oop-project\Pojazdy-Funkcje.cpp(8,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
   Pracownicy-Funkcje.cpp
-D:\Programowanie\GitHub Repo\oop-pojazdy\pojazdy-oop-project\Pracownicy-Funkcje.cpp(51,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+D:\Repo\pojazdy-oop-project\Pracownicy-Funkcje.cpp(51,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
   pojazdy-oop-project.cpp
   Generowanie kodu...
-  pojazdy-oop-project.vcxproj -> D:\Programowanie\GitHub Repo\oop-pojazdy\Debug\pojazdy-oop-project.exe
+  pojazdy-oop-project.vcxproj -> D:\Repo\Debug\pojazdy-oop-project.exe

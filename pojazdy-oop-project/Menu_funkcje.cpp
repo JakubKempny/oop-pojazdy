@@ -9,6 +9,7 @@ Menu::Menu(KontenerCar &konCar, KontenerKierow &konKier)
 
 void Menu::showMenu()
 {
+	createMaps();
 	showText();
 	do
 	{
@@ -51,9 +52,13 @@ string Menu::addCar()
 {
 	cout << endl << "Dodawanie nowego samochodu: " << endl;
 	konCar.addRecord();
-	konCar.saveChanges();
-
-	return "Zapisano zmiany w bazie!";
+	cout <<  "Czy chcesz zapisac zmiany? y/n: ";
+	cin >> input;
+	if (input == 'y') {
+		konCar.saveChanges();
+		return "Zapisano zmiany w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
+	}
+	return "Nie zapisano zmian w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
 }
 
 string Menu::delCar()
@@ -61,19 +66,27 @@ string Menu::delCar()
 	string vin{};
 	cout << endl << "Usuwanie samochodu, podaj jego numer VIN: " << endl;
 	cin >> vin;
-	konCar.delRecord(vin);
-	konCar.saveChanges();
-
-	return "Zapisano zmiany w bazie!";
+	cout << "Czy napewno chcesz usunac pojazd o numerze VIN: " << vin << "? y/n: ";
+	cin >> input;
+	if (input == 'y') {
+		konCar.delRecord(vin);
+		konCar.saveChanges();
+		return "Zapisano zmiany w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
+	}
+	return "Uzytkownik nie zostal usuniety";
 }
 
 string Menu::addDriver()
 {
-	cout << endl << "Dodawanie nowego samochodu: " << endl;
+	cout << endl << "Dodawanie nowego pracownika: " << endl;
 	konKier.addRecord(konCar);
-	konKier.saveChanges();
-
-	return "Zapisano zmiany w bazie!";
+	cout << "Czy chcesz zapisac zmiany? y/n: ";
+	cin >> input;
+	if (input == 'y') {
+		konKier.saveChanges();
+		return "Zapisano zmiany w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
+	} 
+	return "Nie zapisano zmian w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
 }
 
 string Menu::delDriver()
@@ -81,21 +94,33 @@ string Menu::delDriver()
 	string pesel{};
 	cout << endl << "Usuwanie pracownika, podaj jego pesel: " << endl;
 	cin >> pesel;
-	konKier.delRecord(pesel);
-	konKier.saveChanges();
+	cout << "Czy napewno chcesz usunac pracownika o numerze PESEL: " << pesel << "? y/n: ";
+	cin >> input;
+	if (input == 'y') {
+		konKier.delRecord(pesel);
+		konKier.saveChanges();
+		return "Zapisano zmiany w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
+	}
+	return "Uzytkownik nie zostal usuniety";
+}
 
-	return "Zapisano zmiany w bazie!";
+bool Menu::createMaps() 
+{
+	try {
+		vector<string> lineCars = wczytajPlik(konCar.getPathToFile());
+		konCar.createMapFromFile(lineCars);
+		vector<string> lineDrivers = wczytajPlik(konKier.getPathToFile());
+		konKier.createMapFromFile(lineDrivers);
+	}
+	catch (CustomException& e) {
+		cerr << e.what() << endl;
+	}
+	return true;
 }
 
 void Menu::baseCars()
 {
 	system("CLS");
-	try {
-	    vector<string> wiersze = wczytajPlik(konCar.getPathToFile());
-	    konCar.createMapFromFile(wiersze);
-	}catch(CustomException &e){
-	    cerr<<e.what()<<endl;
-	}
 	konCar.info();
 	cout << "Dodaj/usun auto (a/d/q)";
 	do
@@ -105,12 +130,12 @@ void Menu::baseCars()
 	switch (input)
 	{
 	case 'a':
-		addCar();
+		cout << addCar();
 		system("pause > nul"); // czeka na dowolny przycisk od uzytkownika zeby kontynuwac
 		baseCars(); //uruchamia sie jeszcze raz zeby aktualizowac baze
 		break;
 	case 'd':
-		delCar();
+		cout << delCar();
 		system("pause > nul"); 
 		baseCars();
 		break;
@@ -123,13 +148,6 @@ void Menu::baseCars()
 void Menu::baseDrivers()
 {
 	system("CLS");
-	try {
-	    vector<string> wiersze = wczytajPlik(konKier.getPathToFile());
-		konKier.createMapFromFile(wiersze);
-	}
-	catch (CustomException& e) {
-	    cerr << e.what() << endl;
-	}
 	konKier.info();
 	cout << "Dodaj/usun pracownika (a/d/q)";
 	do
@@ -139,12 +157,12 @@ void Menu::baseDrivers()
 	switch (input)
 	{
 	case 'a':
-		addDriver();
+		cout << addDriver();
 		system("pause > nul");
 		baseDrivers(); 
 		break;
 	case 'd':
-		delDriver();
+		cout << delDriver();
 		system("pause > nul");
 		baseDrivers();
 		break;

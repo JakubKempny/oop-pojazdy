@@ -11,6 +11,7 @@ public:
 	void showMenu();
 	void baseCars();
 	void baseDrivers();
+	bool createMaps();
 	string addCar();
 	string delCar();
 	string addDriver();

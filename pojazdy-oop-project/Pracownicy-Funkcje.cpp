@@ -120,8 +120,7 @@ void KontenerKierow::saveChanges() {
 		}
 		plik << ss.str();
 		plik.close();
-		cout << "Zapisano zmiany" << endl;
-	}
+	} 
 }
 
 Stanowisko::Stanowisko(string nazwaStanowiska)

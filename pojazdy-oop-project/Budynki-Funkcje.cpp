@@ -58,6 +58,7 @@ void KontenerStacji::saveChanges() {
 		fstream plik(this->getPathToFile(), ios::out | ios::trunc);
 		stringstream ss;
 		for (auto i = mapStacji.begin(); i != mapStacji.end(); ++i) {
+			//TO DO ODKOMENTOWANIA POTEM< BO NIE MA NAPISANEJ FUNKCJI ZWRACAJACEJ WIERSZE formatDataTostring()
 			//ss << i->first << ";" << i->second->formatDataToString() << "\n";
 		}
 		plik << ss.str();

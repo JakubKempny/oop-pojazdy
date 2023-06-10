@@ -85,7 +85,6 @@ void KontenerCar::saveChanges() {
 		}
 		plik << ss.str();
 		plik.close();
-		cout << "Zapisano zmiany" << endl;
 	}
 }
 
