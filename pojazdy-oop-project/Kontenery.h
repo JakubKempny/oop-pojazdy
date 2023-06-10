@@ -65,7 +65,7 @@ public:
 		cout << "Dane z pliku: " << getPathToFile() << " : \n";
 		for (auto i = mapStacji.begin(); i != mapStacji.end(); ++i) {
 			cout << i->first << ";";
-			cout << i->second->formatDataToString() << endl;
+			//cout << i->second->formatDataToString() << endl;
 		}
 	}
 

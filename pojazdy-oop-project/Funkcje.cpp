@@ -194,7 +194,7 @@ Pesel::Pesel(string n) //Funkcja sprawdzajaca czy PESEL jest poprawny
 }
 
 string Pracownik::formatDataToString() {
-	return  imie + ";" + nazwisko + ";" + vinPojazdu + ";";
+	return  imie + ";" + nazwisko + ";" + vinPojazdu + ";" + to_string(dystans) + ";";
 }
 
 bool KontenerKierow::vinWolny(string vin) //Sprawdza czy numer VIN nie jest juz przypadkie zajety przez innego kierowce
@@ -242,6 +242,7 @@ bool KontenerCar::vinIstnieje(string vin) //Sprawdza czy numer VIN istnieje w ba
 
 void KontenerKierow::createMapFromFile(vector<string> wiersze) {
 	string imie, nazwisko, pesel, vin;
+	double dystans;
 	mapPrac.clear();
 	for (int i = 0; i < wiersze.size(); ++i) {
 		stringstream ss(wiersze[i]);
@@ -249,13 +250,16 @@ void KontenerKierow::createMapFromFile(vector<string> wiersze) {
 		getline(ss, imie, ';');
 		getline(ss, nazwisko, ';');
 		getline(ss, vin, ';');
-		Pracownik* wskPrac = new Pracownik(imie, nazwisko, pesel, vin);
+		ss >> dystans;
+		ss.ignore();
+		Pracownik* wskPrac = new Pracownik(imie, nazwisko, pesel, vin, dystans);
 		mapPrac.insert(make_pair(pesel, wskPrac));
 	}
 }
 
 void KontenerKierow::addRecord(KontenerCar& k) {
 	string imie, nazwisko, pesel, vin;
+	double dystans;
 	string e;
 	cout << "Podaj Pesel pracownika:";
 	try
@@ -274,7 +278,9 @@ void KontenerKierow::addRecord(KontenerCar& k) {
 		cin >> vin;
 		if (!k.vinIstnieje(vin)) throw CustomException("Podany samochod nie istnieje! ");
 		if (vinWolny(vin)) throw CustomException("Podany samochod jest juz przypisany do innego kierowcy! ");
-		Pracownik* wskNewPrac = new Pracownik(imie, nazwisko, pesel, vin);
+		cout << "Podaj sredni dystans jaki pokonuje pracownik km/dzien:";
+		cin >> dystans;
+		Pracownik* wskNewPrac = new Pracownik(imie, nazwisko, pesel, vin, dystans);
 		mapPrac.insert(make_pair(pesel, wskNewPrac));
 		cout << "Dodano nowego pracownika. Aby zmiana byla trwala zapisz zmiany." << endl;
 	}
@@ -313,6 +319,36 @@ void KontenerKierow::saveChanges() {
 		cout << "Zapisano zmiany" << endl;
 	}
 }
+
+Stanowisko::Stanowisko(string nazwaStanowiska)
+{
+	if (nazwaStanowiska == "stazysta")
+	{
+		this->nazwaStanowiska = nazwaStanowiska;
+		znizka = 0.05;
+	} 
+	else if (nazwaStanowiska == "junior")
+	{
+		this->nazwaStanowiska = nazwaStanowiska;
+		znizka = 0.1;
+	}
+	else if (nazwaStanowiska == "mid")
+	{
+		this->nazwaStanowiska = nazwaStanowiska;
+		znizka = 0.2;
+	}
+	else if (nazwaStanowiska == "senior")
+	{
+		this->nazwaStanowiska = nazwaStanowiska;
+		znizka = 0.3;
+	} 
+	else
+	{
+		//tutaj bedzie wyjatek
+	}
+}
+
+//Stacje Paliw
 
 void KontenerStacji::delRecord(string adres)
 {
@@ -376,7 +412,7 @@ void KontenerStacji::saveChanges() {
 		fstream plik(this->getPathToFile(), ios::out | ios::trunc);
 		stringstream ss;
 		for (auto i = mapStacji.begin(); i != mapStacji.end(); ++i) {
-			ss << i->first << ";" << i->second->formatDataToString() << "\n";
+			//ss << i->first << ";" << i->second->formatDataToString() << "\n";
 		}
 		plik << ss.str();
 		plik.close();

@@ -7,18 +7,22 @@ public:
 	Pesel(string n);
 };
 
-class Pracownik {
+class Stanowisko
+{
+	string nazwaStanowiska;
+	double znizka{};
+	//int iloscPracownikow;
+public:
+	Stanowisko() {}
+	Stanowisko(string nazwaStanowiska);
+};
+
+class Pracownik: Stanowisko {
 	string imie, nazwisko, vinPojazdu;
 	Pesel pesel;
 	double dystans{}; // jeszcze niemodyfikowalne
 public:
-	Pracownik(string i, string n, Pesel p, string poj) : imie(i), nazwisko(n), pesel(p), vinPojazdu(poj) {}
+	Pracownik(string i, string n, Pesel p, string poj, double dys) : imie(i), nazwisko(n), pesel(p), vinPojazdu(poj), dystans(dys) {}
 	string formatDataToString();
 };
 
-class Stanowisko
-{
-	string nazwa;
-	double znizka; // chyba w procentach? w sensie 0.15 to bedzie 15%
-	int iloscPracownikow;
-};
