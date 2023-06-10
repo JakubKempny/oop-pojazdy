@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 PlatformToolSet=v143:VCToolArchitecture=Native32Bit:VCToolsVersion=14.35.32215:TargetPlatformVersion=10.0.22000.0:
 Debug|Win32|D:\Repo\|
+=======
+PlatformToolSet=v142:VCToolArchitecture=Native32Bit:VCToolsVersion=14.29.30133:TargetPlatformVersion=10.0.19041.0:
+Debug|Win32|D:\Programowanie\GitHub Repo\oop-pojazdy\|
+>>>>>>> d8c1d492d301d1e2f35f0f9695d04b1d5566b8f4

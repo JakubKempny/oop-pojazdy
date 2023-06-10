@@ -2,7 +2,11 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
+<<<<<<< HEAD
       <FullPath>D:\Repo\Debug\pojazdy-oop-project.exe</FullPath>
+=======
+      <FullPath>D:\Programowanie\GitHub Repo\oop-pojazdy\Debug\pojazdy-oop-project.exe</FullPath>
+>>>>>>> d8c1d492d301d1e2f35f0f9695d04b1d5566b8f4
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
