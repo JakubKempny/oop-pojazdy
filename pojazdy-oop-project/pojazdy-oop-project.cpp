@@ -6,6 +6,7 @@ using namespace std;
 int main(){
     KontenerCar konCar("Data/Pojazdy.txt");
     KontenerKierow konKier("Data/Pracownicy.txt");
+    KontenerStacji konStacji("Data / Stacje.txt");
     Menu menu1(konCar,konKier);
     menu1.showMenu();
 
