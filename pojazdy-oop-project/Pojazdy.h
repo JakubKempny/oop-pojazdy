@@ -6,15 +6,12 @@ using namespace std;
 class Silnik {
 	double spalanie; // np 7,2 na 100 km
 	string rodzajPaliwa; // benzyna,lpg,ropa,prad
-	pair<double, double> paliwo;  // <akutalne,max>
 public:
-	Silnik(double s, string rpaliwa, double maxP) :spalanie(s) { // konstruktor
-		paliwo.first = maxP;
-		paliwo.second = maxP;
+	Silnik(double s, string rpaliwa) :spalanie(s) { // konstruktor
 		if (rpaliwa == "benzyna") {
 			rodzajPaliwa = rpaliwa;
 		}
-		else if (rpaliwa == "gaz") {
+		else if (rpaliwa == "lpg") {
 			rodzajPaliwa = rpaliwa;
 		}
 		else if (rpaliwa == "ropa") {
@@ -24,35 +21,15 @@ public:
 			rodzajPaliwa = rpaliwa;
 		}
 		else {
-			// wywal wyj¹tek ???
+			rodzajPaliwa = "#####";  // Jak siê poda z³¹ nazwe paliwa trzeba podaæ kolejny raz
 		}
 	}
 	Silnik() {}; // konstruktor do testów
-	//virtual ~Silnik();
 
 	string formatDataToString();
 
 	double oblZurzycie(double odl) {
 		return (spalanie * odl) / 100;
-	}
-	void spalPaliwo(double odl) {
-		double tmp = oblZurzycie(odl);
-		if (paliwo.first - tmp >= 0) {
-			paliwo.first -= tmp;
-		}
-		else {
-			// wywal wyj¹tek !!! 
-			// tutaj mo¿na zainicjowaæ tankowanie pojazdu 
-		}
-	}
-	
-	void tankowanie(double p) {
-		if (paliwo.first + p <= paliwo.second) {
-			paliwo.first += p;
-		}
-		else {
-			// wywal wyj¹tek !!!!! 
-		}
 	}
 };
 
@@ -75,7 +52,7 @@ public:
 class Car: Pojazd, Silnik {
 	int nrVin;
 public:
-	Car(string marka_, string model_, unsigned int rok_, double s, string rpaliwa, double maxP): Pojazd(marka_,model_,rok_),Silnik(s,rpaliwa,maxP){
+	Car(string marka_, string model_, unsigned int rok_, double s, string rpaliwa): Pojazd(marka_,model_,rok_),Silnik(s,rpaliwa){
 	}
 	Car() {}; // konstruktor do testów
 	string formatDataToString();

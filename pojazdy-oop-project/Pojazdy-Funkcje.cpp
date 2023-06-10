@@ -3,7 +3,7 @@
 void KontenerCar::createMapFromFile(vector<string> wiersze) {
 	string marka, model, rpaliwa, vin;
 	unsigned int rok;
-	double spalanie, maxP=0;
+	double spalanie;
 	mapCar.clear(); // tak na wypadek jabyœmy chcieli wywo³aæ t¹ funkcjê drugi raz
 	for (int i = 0; i < wiersze.size(); ++i) {
 		stringstream ss(wiersze[i]);
@@ -15,18 +15,17 @@ void KontenerCar::createMapFromFile(vector<string> wiersze) {
 		ss >> setprecision(2) >> spalanie;
 		ss.ignore(); // Ignorowanie œrednika
 		getline(ss, rpaliwa, ';');
-		ss >> setprecision(2) >> maxP;
 		if (!ss.eof()) {
 			throw CustomException("Blad odczytu danych z pliku. Blad wystapil dla auta o numerze Vin: " + vin, 102);
 		}
-		Car* wskCar = new Car(marka, model, rok, spalanie, rpaliwa, maxP);
+		Car* wskCar = new Car(marka, model, rok, spalanie, rpaliwa);
 		mapCar.insert(make_pair(vin, wskCar));
 	}
 }
 void KontenerCar::addRecord() {
 	string marka, model, rpaliwa, vim;
 	unsigned int rok;
-	double spalanie, maxP=0;
+	double spalanie;
 	cout << "Podaj Vim auta:";
 	cin >> vim;
 	try {
@@ -55,7 +54,7 @@ void KontenerCar::addRecord() {
 	cin >> spalanie;
 	cout << "Podaj rodzaj paliwa auta:";
 	cin >> rpaliwa;
-	Car* wskNewCar = new Car(marka, model, rok, spalanie, rpaliwa, maxP);
+	Car* wskNewCar = new Car(marka, model, rok, spalanie, rpaliwa);
 	mapCar.insert(make_pair(vim, wskNewCar));
 	cout << "Dodano nowe auto. Aby zmiana byla trwala zapisz zmiany." << endl;
 }
