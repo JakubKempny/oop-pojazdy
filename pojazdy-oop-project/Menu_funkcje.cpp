@@ -83,7 +83,7 @@ void Menu::delCar()
 void Menu::addDriver()
 {
 	cout << endl << "Dodawanie nowego pracownika: " << endl;
-	konKier.addRecord(konCar);
+	konKier.addRecord(konCar, konStanow);
 	cout << "Czy chcesz zapisac zmiany? y/n: ";
 	cin >> input;
 	if (input == 'y') {
@@ -127,7 +127,7 @@ void Menu::delLevel()
 	cout << "Czy napewno chcesz usunac stanowisko o nazwie: " << nazwa << "? y/n: ";
 	cin >> input;
 	if (input == 'y') {
-		konStanow.delRecord(nazwa, konKier);
+		konStanow.delRecord(nazwa);
 		konStanow.saveChanges();
 		cout << "Zapisano zmiany w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
 	}

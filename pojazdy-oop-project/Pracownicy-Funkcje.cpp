@@ -11,7 +11,13 @@ Pesel::Pesel(string n) //Funkcja sprawdzajaca czy PESEL jest poprawny
 }
 
 string Pracownik::formatDataToString() {
-	return  imie + ";" + nazwisko + ";" + vinPojazdu + ";" + to_string(dystans) + ";";
+	string dyst;
+	stringstream ss;
+	ss << fixed << setprecision(1);
+	ss << dystans;
+	ss >> dyst;
+	string stan = Stanowisko::getName();
+	return  imie + ";" + nazwisko + ";" + vinPojazdu + ";" + dyst + ";" + stan + ";";
 }
 
 bool KontenerKierow::vinWolny(string vin) //Sprawdza czy numer VIN nie jest juz przypadkie zajety przez innego kierowce
@@ -29,7 +35,6 @@ bool KontenerKierow::vinWolny(string vin) //Sprawdza czy numer VIN nie jest juz 
 		string separator = ";";
 		for (int i = 0; i < 4; ++i) {
 			if (!getline(iss, kolumny[i], separator[0])) {
-				cout << "Nieprawidlowy format linii." << endl;
 				plik.close();
 				return false;
 			}
@@ -47,7 +52,7 @@ bool KontenerKierow::vinWolny(string vin) //Sprawdza czy numer VIN nie jest juz 
 }
 
 void KontenerKierow::createMapFromFile(vector<string> wiersze) {
-	string imie, nazwisko, pesel, vin;
+	string imie, nazwisko, pesel, vin, stanowisko;
 	double dystans;
 	mapPrac.clear();
 	for (int i = 0; i < wiersze.size(); ++i) {
@@ -58,13 +63,26 @@ void KontenerKierow::createMapFromFile(vector<string> wiersze) {
 		getline(ss, vin, ';');
 		ss >> dystans;
 		ss.ignore();
-		Pracownik* wskPrac = new Pracownik(imie, nazwisko, pesel, vin, dystans);
+		getline(ss, stanowisko, ';');
+		Pracownik* wskPrac = new Pracownik(imie, nazwisko, pesel, vin, dystans, stanowisko);
 		mapPrac.insert(make_pair(pesel, wskPrac));
 	}
 }
 
-void KontenerKierow::addRecord(KontenerCar& k) {
-	string imie, nazwisko, pesel, vin;
+bool KontenerStanow::stanowIstnieje(string nazwa)
+{
+	for (auto i = mapStan.begin(); i != mapStan.end(); ++i) {
+		if (nazwa == i->first)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+
+void KontenerKierow::addRecord(KontenerCar& k, KontenerStanow& s) {
+	string imie, nazwisko, pesel, vin, stanowisko;
 	double dystans;
 	string e;
 	cout << "Podaj Pesel pracownika:";
@@ -86,7 +104,10 @@ void KontenerKierow::addRecord(KontenerCar& k) {
 		if (vinWolny(vin)) throw CustomException("Podany samochod jest juz przypisany do innego kierowcy! ");
 		cout << "Podaj sredni dystans jaki pokonuje pracownik km/dzien:";
 		cin >> dystans;
-		Pracownik* wskNewPrac = new Pracownik(imie, nazwisko, pesel, vin, dystans);
+		cout << "Podaj stanowisko pracownika:";
+		cin >> stanowisko;
+		if (!s.stanowIstnieje(stanowisko)) throw CustomException("Podane stanowisko nie istnieje! ");
+		Pracownik* wskNewPrac = new Pracownik(imie, nazwisko, pesel, vin, dystans, stanowisko);
 		mapPrac.insert(make_pair(pesel, wskNewPrac));
 		cout << "Dodano nowego pracownika. Aby zmiana byla trwala zapisz zmiany." << endl;
 	}
@@ -105,7 +126,6 @@ void KontenerKierow::delRecord(string pesel) {
 		if (!exist) throw CustomException("Pracownik o takim numerze PESEL nie istnieje w bazie.");
 		mapPrac.erase(pesel);
 		cout << "Pracownik o peselu:" << pesel << " zostal usuniety" << endl;
-		string e = "Pracownik o podanym numerze PESEL nie istnieje! ";
 	}
 	catch (CustomException& e) {
 		cout << e.what() << endl;
@@ -138,13 +158,23 @@ Stanowisko::Stanowisko(string nazwaStanowiska, double proc_pokrycia)
 	this->proc_pokrycia = proc_pokrycia;
 }
 
+string Stanowisko::getName()
+{
+	return this->nazwaStanowiska;
+}
+
 string Stanowisko::formatDataToString() {
-	return  to_string(proc_pokrycia) + ";";
+	string proc;
+	stringstream ss;
+	ss << fixed << setprecision(2);
+	ss << proc_pokrycia;
+	ss >> proc;
+	return  proc + ";";
 }
 
 void KontenerStanow::createMapFromFile(vector<string> wiersze) {
 	string nazwa;
-	double proc_pokrycia;
+	double proc_pokrycia{};
 	mapStan.clear();
 	for (int i = 0; i < wiersze.size(); ++i) {
 		stringstream ss(wiersze[i]);
@@ -183,7 +213,7 @@ void KontenerStanow::addRecord() {
 	}
 }
 
-void KontenerStanow::delRecord(string nazwa, KontenerKierow& k) {
+void KontenerStanow::delRecord(string nazwa) {
 	bool exist = false;
 	for (auto i : mapStan) {
 		if (i.first == nazwa) exist = true;

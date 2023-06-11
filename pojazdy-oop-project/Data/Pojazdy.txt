@@ -1,5 +1,10 @@
 1;Volvo;S90;2022;5.5;benzyna
+12;Audi;A3;2012;6.1;lpg
+12345;ewq;qwe;1234;12.6;benzyna
+13;w;e;1234;5.8;#####
 14;Citroen;C4;2014;7.7;lpg
 2;Volvo;S95;2023;5.8;benzyna
+3;as;ds;1234;123.0;benzyna
+32;as;sa;1234;123.0;benzyna
 4;Volvo;G69 420;2000;6.9;ropa
 5;Audi;A4;1998;6.0;ropa

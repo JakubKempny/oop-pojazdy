@@ -11,22 +11,23 @@ public:
 class Stanowisko
 {
 	string nazwaStanowiska;
-	double proc_pokrycia{}; //czyli 0.40 to 40% tyle pokrywa firma pieniedzy pracownikowi
+	double proc_pokrycia; //czyli 0.40 to 40% tyle pokrywa firma pieniedzy pracownikowi
 	//int iloscPracownikow;
 public:
 	Stanowisko() {}
 	Stanowisko(string nazwaStanowiska);
 	Stanowisko(string nazwaStanowiska, double proc_pokrycia);
 	string formatDataToString();
+	string getName();
 };
 
 class Pracownik: Stanowisko,Pesel {
 	string imie, nazwisko, vinPojazdu;
 	Pesel pesel;
+	Stanowisko stanowisko;
 	double dystans{};
 public:
-	Pracownik(string i, string n, Pesel p, string poj, double dys) : imie(i), nazwisko(n), Pesel(p), vinPojazdu(poj), dystans(dys) {}
-	//Pracownik(string i, string n, Pesel p, string poj, double dys, string stan) : imie(i), nazwisko(n), Pesel(p), vinPojazdu(poj), dystans(dys), Stanowisko(stan) {}
+	Pracownik(string i, string n, Pesel p, string poj, double dys, Stanowisko stan) : imie(i), nazwisko(n), Pesel(p), vinPojazdu(poj), dystans(dys), Stanowisko(stan) {}
 	string formatDataToString();
 };
 
