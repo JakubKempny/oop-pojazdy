@@ -36,27 +36,24 @@ void KontenerCar::addRecord() {
 				throw CustomException("Powtarza sie numer Vin auta.", 200);
 			}
 		}
+		cout << "Podaj marke auta:";
+		cin >> marka;
+		cout << "Podaj model auta:";
+		cin.ignore();
+		getline(cin, model);
+		cout << "Podaj rok produkcji auta:";
+		cin >> rok;
+		cout << "Podaj spalanie auta (l/100km):";
+		cin >> spalanie;
+		cout << "Podaj rodzaj paliwa auta:";
+		cin >> rpaliwa;
+		Car* wskNewCar = new Car(marka, model, rok, spalanie, rpaliwa);
+		mapCar.insert(make_pair(vim, wskNewCar));
+		cout << "Dodano nowe auto. Aby zmiana byla trwala zapisz zmiany." << endl;
 	}
 	catch (CustomException& e) {
 		cout << e.what() << endl;
-		cout << "123" << endl;
-		//if(e.getErrorCode()==200)addRecord(); // Ponownie uruchamiay funkcje
-		
 	}
-	cout << "Podaj marke auta:";
-	cin >> marka;
-	cout << "Podaj model auta:";
-	cin.ignore();
-	getline(cin, model);
-	cout << "Podaj rok produkcji auta:";
-	cin >> rok;
-	cout << "Podaj spalanie auta (l/100km):";
-	cin >> spalanie;
-	cout << "Podaj rodzaj paliwa auta:";
-	cin >> rpaliwa;
-	Car* wskNewCar = new Car(marka, model, rok, spalanie, rpaliwa);
-	mapCar.insert(make_pair(vim, wskNewCar));
-	cout << "Dodano nowe auto. Aby zmiana byla trwala zapisz zmiany." << endl;
 }
 
 void KontenerCar::delRecord(string vin) {
@@ -141,4 +138,13 @@ string Silnik::formatDataToString() { // gites
 	ss << spalanie;
 	ss >> sTmp;
 	return sTmp + ";" + rodzajPaliwa;
+}
+
+Silnik::Silnik(double s, string rpaliwa) :spalanie(s) { // konstruktor
+	if (rpaliwa == "benzyna" || rpaliwa == "gaz" || rpaliwa == "ropa" || rpaliwa == "prad") {
+		rodzajPaliwa = rpaliwa;
+	}
+	else {
+		throw CustomException("Niepoprawny rodzaj paliwa.");
+	}
 }

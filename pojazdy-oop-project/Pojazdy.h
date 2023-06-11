@@ -7,23 +7,7 @@ class Silnik {
 	double spalanie; // np 7,2 na 100 km
 	string rodzajPaliwa; // benzyna,lpg,ropa,prad
 public:
-	Silnik(double s, string rpaliwa) :spalanie(s) { // konstruktor
-		if (rpaliwa == "benzyna") {
-			rodzajPaliwa = rpaliwa;
-		}
-		else if (rpaliwa == "lpg") {
-			rodzajPaliwa = rpaliwa;
-		}
-		else if (rpaliwa == "ropa") {
-			rodzajPaliwa = rpaliwa;
-		}
-		else if (rpaliwa == "prad") {
-			rodzajPaliwa = rpaliwa;
-		}
-		else {
-			rodzajPaliwa = "#####";  // Jak siê poda z³¹ nazwe paliwa trzeba podaæ kolejny raz
-		}
-	}
+	Silnik(double s, string rpaliwa);
 	Silnik() {}; // konstruktor do testów
 
 	string formatDataToString();
