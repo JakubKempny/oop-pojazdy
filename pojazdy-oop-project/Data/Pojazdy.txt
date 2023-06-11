@@ -1,3 +1,2 @@
 1;Volvo;S90;2022;5.5;benzyna
 12;Audi;A3;2012;6.1;gaz
-12345;ewq;qwe;1234;12.6;benzyna

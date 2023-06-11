@@ -56,13 +56,14 @@ void KontenerCar::addRecord() {
 	}
 }
 
-void KontenerCar::delRecord(string vin) {
+void KontenerCar::delRecord(string vin, string plikKierowcy) {
 	try {
 		bool exist = false;
 		for (auto i : mapCar) {
 			if (i.first == vin) exist = true;
 		}
 		if (!exist) throw CustomException("Auto o takim numerze Vin nie istnieje w bazie.");
+		if (czyPrzypCar(vin, plikKierowcy)) throw CustomException("Samochod o takim numerze Vin jest juz przypisany do pracownika. Usun najpierw pracownika i sprobuj ponownie! ");
 		mapCar.erase(vin);
 		cout << "Auto o numerze vin:" << vin << " zostalo usuniete" << endl;
 	}
@@ -118,6 +119,36 @@ bool KontenerCar::vinIstnieje(string vin) //Sprawdza czy numer VIN istnieje w ba
 			return true;
 		}
 	}
+	return false;
+}
+
+bool KontenerCar::czyPrzypCar(string vin, string plikKierowcy)
+{
+	string linia;
+	string nazwa = plikKierowcy;
+	ifstream plik(nazwa);
+	if (!plik) {
+		cout << "Nie mozna otworzyc pliku." << endl;
+		return false;
+	}
+	while (getline(plik, linia)) {
+		istringstream iss(linia);
+		string kolumny[6];
+		string separator = ";";
+		for (int i = 0; i < 6; ++i) {
+			if (!getline(iss, kolumny[i], separator[0])) {
+				plik.close();
+				return false;
+			}
+		}
+
+		if (kolumny[3] == vin && kolumny[3].size() == vin.size())
+		{
+			plik.close();
+			return true;
+		}
+	}
+	plik.close();
 	return false;
 }
 

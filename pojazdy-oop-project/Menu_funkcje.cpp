@@ -69,12 +69,14 @@ void Menu::addCar()
 void Menu::delCar()
 {
 	string vin{};
+	string plik{};
 	cout << endl << "Usuwanie samochodu, podaj jego numer VIN: " << endl;
 	cin >> vin;
 	cout << "Czy napewno chcesz usunac pojazd o numerze VIN: " << vin << "? y/n: ";
 	cin >> input;
 	if (input == 'y') {
-		konCar.delRecord(vin);
+		plik = konKier.getPathToFile();
+		konCar.delRecord(vin,plik);
 		konCar.saveChanges();
 		cout << "Zapisano zmiany w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
 	} else cout << "Pojazd nie zostal usuniety";

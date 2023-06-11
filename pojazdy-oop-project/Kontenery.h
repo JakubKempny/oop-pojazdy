@@ -19,12 +19,13 @@ public:
 	void createMapFromFile(vector<string> wiersze);
 	void info() override;
 	void addRecord();
-	void delRecord(string vin);
+	void delRecord(string vin, string plikKierowcy);
 	void saveChanges(); // nadpisuje dane z pliku
 	//get'ery
 	Car* getCar(string c) { return mapCar.at(c); };
 
 	bool vinIstnieje(string vin);
+	bool czyPrzypCar(string vin, string plikKierowcy);
 };
 
 
