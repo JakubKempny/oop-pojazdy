@@ -1,3 +1,2 @@
 12345678901;test;test;2;500.0;sprzataczka;
 12345678906;test;test;1;1234.0;HR;
-12345678908;daru;test;4;43.0;HR;

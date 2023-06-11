@@ -15,11 +15,32 @@ void KontenerStacji::delRecord(string adres) {
 	}
 }
 
+string Ceny::formatDataToString()
+{
+	string benz;
+	string ropa;
+	string gaz;
+	stringstream ss;
+	ss << fixed << setprecision(1);
+	ss << cenaBenzyny << ";" << cenaRopy << ";" << cenaGazu;
+	ss >> benz;
+	return benz;
+}
+
+string StacjaPaliw::formatDataToString()
+{
+	string ceny = Ceny::formatDataToString();
+	string rabat{};
+	stringstream ss;
+	ss << znizka;
+	ss >> rabat;
+	return firma + ";" + ceny + ";" + rabat + ";";
+}
+
 void KontenerStacji::addRecord()
 {
 	string adres, nazwa;
-	string cenaBenzynyStr{}, cenaRopyStr{}, cenaGazuStr{}, znizkaStr;
-	string e;
+	double cenaBenzyny{}, cenaRopy{}, cenaGazu{}, znizka;
 	cout << "Podaj adres stacji:";
 	try
 	{
@@ -32,20 +53,17 @@ void KontenerStacji::addRecord()
 		
 
 		cout << "Podaj wysoko\230\206 ceny benzyny:";
-		cin >> cenaBenzynyStr;
+		cin >> cenaBenzyny;
 		
 		cout << "Podaj wysoko\230\206 ceny oleju nap\251dowego:";
-		cin >> cenaRopyStr;
+		cin >> cenaRopy;
 		
 		cout << "Podaj wysoko\230\206 ceny gazu:";
-		cin >> cenaGazuStr;
+		cin >> cenaGazu;
 		
 		cout << "Podaj wysoko\230\206 zni\276ki:";
-		cin >> znizkaStr;
-		
-
-		Ceny* newCeny = new Ceny(stod(cenaBenzynyStr), stod(cenaRopyStr), stod(cenaGazuStr));
-		StacjaPaliw* wskStacji = new StacjaPaliw(nazwa, adres, newCeny, stod(znizkaStr));
+		cin >> znizka;
+		StacjaPaliw* wskStacji = new StacjaPaliw(nazwa, adres, cenaBenzyny, cenaRopy, cenaGazu, znizka);
 		mapStacji.insert(make_pair(adres, wskStacji));
 		cout << "Dodano now\245 stacj\251. Aby zmiana byla trwala zapisz zmiany." << endl;
 	}
@@ -56,27 +74,36 @@ void KontenerStacji::addRecord()
 }
 
 void KontenerStacji::createMapFromFile(vector<string> wiersze) {
-	string nazwa, adres, cenaBenzynyStr, cenaGazuStr, cenaRopyStr, znizkaStr;
-
-
+	string nazwa, adres;
+	double cenaBenzyny, cenaGazu, cenaRopy, znizka;
 	mapStacji.clear();
 	for (int i = 0; i < wiersze.size(); ++i) {
 		stringstream ss(wiersze[i]);
-		getline(ss, nazwa, ';');
 		getline(ss, adres, ';');
-		getline(ss, cenaBenzynyStr, ';');
-		double cenaBenzyny = stod(znizkaStr);  //zmiana stringa na doubla
-		getline(ss, cenaRopyStr, ';');
-		double cenaRopy = stod(cenaRopyStr);
-		getline(ss, cenaGazuStr, ';');
-		double cenaGazu = stod(cenaGazuStr);
-		getline(ss, znizkaStr, ';');
-		double znizka = stod(znizkaStr);
-
-		Ceny* cena1 = new Ceny(cenaBenzyny, cenaRopy, cenaGazu);
-		// tu jescze ten wektor na pesel ale to nw jak siê tym ob³ugiwaæ
-
-		StacjaPaliw* wskStacji = new StacjaPaliw(nazwa, adres, cena1, znizka);
+		getline(ss, nazwa, ';');
+		ss >> cenaBenzyny;
+		ss.ignore();
+		ss >> cenaGazu;
+		ss.ignore();
+		ss >> cenaRopy;
+		ss.ignore();
+		ss >> znizka;
+		ss.ignore();
+		StacjaPaliw* wskStacji = new StacjaPaliw(nazwa, adres, cenaBenzyny, cenaRopy, cenaGazu, znizka);
 		mapStacji.insert(make_pair(adres, wskStacji));
+	}
+}
+
+void KontenerStacji::saveChanges()
+{
+	ifstream f(this->getPathToFile());
+	if (f.good()) {
+		fstream plik(this->getPathToFile(), ios::out | ios::trunc);
+		stringstream ss;
+		for (auto i = mapStacji.begin(); i != mapStacji.end(); ++i) {
+			ss << i->first << ";" << i->second->formatDataToString() << "\n";
+		}
+		plik << ss.str();
+		plik.close();
 	}
 }

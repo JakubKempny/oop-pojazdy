@@ -37,23 +37,16 @@ class Ceny {
 public:
 	Ceny() = default;  // Konstruktor domyœlny
 	Ceny(double b, double r, double g) : cenaBenzyny(b), cenaRopy(r), cenaGazu(g) {};
+	string formatDataToString();
 };
 
 class StacjaPaliw : public Budynek, public Ceny {
 	string firma;
 	double znizka = 0;
-	Ceny* ceny;
-	vector<int> pesel;
-
 public:
-	StacjaPaliw(string f, string a, Ceny* c, double z) :firma(f), Budynek(a), ceny(c), znizka(z) {}
+	StacjaPaliw(string f, string a, double benzyna, double ropa, double gaz, double z) :firma(f), Budynek(a), Ceny(benzyna, ropa, gaz), znizka(z) {}
 
 	void setDiscount(double x) { znizka = x; }
 	double getDiscount() { return znizka; }
-	//string formatDataToString();
-
-	~StacjaPaliw()
-	{
-		delete ceny;  // Zwolnienie zaalokowanej pamiêci
-	}
+	string formatDataToString();
 };

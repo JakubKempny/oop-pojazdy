@@ -14,6 +14,7 @@ public:
 	void baseCars();
 	void baseDrivers();
 	void baseLevels();
+	void baseGasStations();
 	bool createMaps();
 	void addCar();
 	void delCar();
@@ -21,6 +22,6 @@ public:
 	void delDriver();
 	void addLevel();
 	void delLevel();
-	//string addPetrol();
-	//string delPetrol();
+	void addPetrol();
+	void delPetrol();
 };

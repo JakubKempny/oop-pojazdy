@@ -30,7 +30,7 @@ void Menu::showMenu()
 		baseCars();
 		break;
 	case 4:
-		cout << "Wybrales 4";
+		baseGasStations();
 		break;
 	case 5:
 		baseLevels();
@@ -136,6 +136,35 @@ void Menu::delLevel()
 	else cout << "Stanowisko nie zostalo usuniete";
 }
 
+
+void Menu::addPetrol()
+{
+	cout << endl << "Dodawanie nowej stacji: " << endl;
+	konStacji.addRecord();
+	cout << "Czy chcesz zapisac zmiany? y/n: ";
+	cin >> input;
+	if (input == 'y') {
+		konStacji.saveChanges();
+		cout << "Zapisano zmiany w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
+	}
+	else cout << "Nie zapisano zmian w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
+}
+
+void Menu::delPetrol()
+{
+	string adres;
+	cout << endl << "Usuwanie stacji, podaj adres: ";
+	cin >> adres;
+	cout << "Czy napewno chcesz usunac stacje paliw o nazwie: " << adres << "? y/n: ";
+	cin >> input;
+	if (input == 'y') {
+		konStacji.delRecord(adres);
+		konStacji.saveChanges();
+		cout << "Zapisano zmiany w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
+	}
+	else cout << "Stacja nie zostala usunieta";
+}
+
 bool Menu::createMaps() 
 {
 	try {
@@ -143,8 +172,8 @@ bool Menu::createMaps()
 		konCar.createMapFromFile(lineCars);
 		vector<string> lineDrivers = wczytajPlik(konKier.getPathToFile());
 		konKier.createMapFromFile(lineDrivers);
-		/*vector<string> lineGasStations = wczytajPlik(konStacji.getPathToFile()); //Na razie nie dzialaja te stacje paliw 
-		konStacji.createMapFromFile(lineGasStations);*/ 
+		vector<string> lineGasStations = wczytajPlik(konStacji.getPathToFile());
+		konStacji.createMapFromFile(lineGasStations);
 		vector<string> lineLevel = wczytajPlik(konStanow.getPathToFile());
 		konStanow.createMapFromFile(lineLevel);
 	}
@@ -234,22 +263,30 @@ void Menu::baseLevels()
 		break;
 	}
 }
-//string Menu::addPetrol()
-//{
-//	cout << endl << "Dodawanie nowej stacji: " << endl;
-//	konStacji.addRecord();
-//	konStacji.saveChanges();
-//
-//	return "Zmiany zosta\210y zapisane!\n";
-//}
-//
-//string Menu::delPetrol()
-//{
-//	string adres{};
-//	cout << endl << "Usuwanie stacji, podaj adres: " << endl;
-//	cin >> adres;
-//	konKier.delRecord(adres);
-//	konKier.saveChanges();
-//
-//	return "Zmiany zosta\210y zapisane!\n";
-//}
+
+void Menu::baseGasStations()
+{
+	system("CLS");
+	konStacji.info();
+	cout << "Dodaj/usun stacje paliw (a/d/q)";
+	do
+	{
+		this->input = _getch();
+	} while ((input != 'a') && (input != 'd') && (input != 'q'));
+	switch (input)
+	{
+	case 'a':
+		addPetrol();
+		system("pause > nul");
+		baseGasStations();
+		break;
+	case 'd':
+		delPetrol();
+		system("pause > nul");
+		baseGasStations();
+		break;
+	case 'q':
+		showMenu();
+		break;
+	}
+}
