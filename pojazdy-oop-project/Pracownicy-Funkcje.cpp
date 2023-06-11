@@ -213,14 +213,44 @@ void KontenerStanow::addRecord() {
 	}
 }
 
-void KontenerStanow::delRecord(string nazwa) {
+bool KontenerStanow::czyPrzypStan(string nazwaStanow, string plikKierowcy)
+{
+	string linia;
+	string nazwa = plikKierowcy;
+	ifstream plik(nazwa);
+	if (!plik) {
+		cout << "Nie mozna otworzyc pliku." << endl;
+		return false;
+	}
+	while (getline(plik, linia)) {
+		istringstream iss(linia);
+		string kolumny[6];
+		string separator = ";";
+		for (int i = 0; i < 6; ++i) {
+			if (!getline(iss, kolumny[i], separator[0])) {
+				plik.close();
+				return false;
+			}
+		}
+
+		if (kolumny[5] == nazwaStanow && kolumny[5].size() == nazwaStanow.size())
+		{
+			plik.close();
+			return true;
+		}
+	}
+	plik.close();
+	return false;
+}
+
+void KontenerStanow::delRecord(string nazwa, string plikKierowcy) {
 	bool exist = false;
 	for (auto i : mapStan) {
 		if (i.first == nazwa) exist = true;
 	}
 	try {
 		if (!exist) throw CustomException("Stanowisko o takiej nazwie nie istnieje w bazie.");
-		//if(!k.czyPrzypStan(nazwa)) // sprawdzi czy stanowisko przypadkiem nie jest juz przypisane do jakiegos pracownika
+		if (czyPrzypStan(nazwa, plikKierowcy)) throw CustomException("Stanowisko o takiej nazwie jest juz przypisane do pracownika. Nie mozna usunac stanowiska! "); // sprawdzi czy stanowisko przypadkiem nie jest juz przypisane do jakiegos pracownika
 		mapStan.erase(nazwa);
 		cout << "Stanowisko:" << nazwa << " zostalo usuniete" << endl;
 	}

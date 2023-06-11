@@ -122,12 +122,14 @@ void Menu::addLevel()
 void Menu::delLevel()
 {
 	string nazwa{};
+	string plik{};
 	cout << endl << "Usuwanie stanowiska, podaj jego nazwe: " << endl;
 	cin >> nazwa;
 	cout << "Czy napewno chcesz usunac stanowisko o nazwie: " << nazwa << "? y/n: ";
 	cin >> input;
 	if (input == 'y') {
-		konStanow.delRecord(nazwa);
+		plik = konKier.getPathToFile();
+		konStanow.delRecord(nazwa, plik);
 		konStanow.saveChanges();
 		cout << "Zapisano zmiany w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
 	}
