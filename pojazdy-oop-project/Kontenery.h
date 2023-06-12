@@ -100,6 +100,9 @@ public:
 	string getPathToFile() { return pathToFile; }
 	void createMapFromFile(vector<string> wiersze);
 
+	map<string, StacjaPaliw*> getMap() { return mapStacji; }
+	StacjaPaliw* getWorker(string c) { return mapStacji.at(c); };
+
 	void info() override;
 	void addRecord();
 	void delRecord();
