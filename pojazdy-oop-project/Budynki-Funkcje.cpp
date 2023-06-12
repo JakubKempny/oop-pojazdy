@@ -6,7 +6,7 @@ void KontenerStacji::delRecord(string numer) {
 	for (auto i : mapStacji) {
 		if (i.first == numer) exist = true;
 	}
-	if (!exist) throw CustomException("Stacja o takim id nie istnieje w bazie.");
+	if (!exist) throw CustomException("Stacja o takim ID nie istnieje w bazie.");
 		mapStacji.erase(numer);
 		cout << "Stacja benzynowa z adresem: " << numer << " zosta\210a usuni\251ta\n";
 	}
@@ -49,9 +49,9 @@ void KontenerStacji::addRecord()
 		for (auto i = mapStacji.begin(); i != mapStacji.end(); ++i) {
 			if (numer == i->first) throw CustomException("W bazie znajduje si\251 ju\276 Stacja o podanym numerze! ");
 		}
-		/*cout << "Podaj adres stacji:";
+		cout << "Podaj adres stacji:";
 		cin.ignore();
-		getline(cin, adres);*/
+		getline(cin, adres);
 
 		cout << "Podaj nazw\251 stacji:";
 		cin.ignore();

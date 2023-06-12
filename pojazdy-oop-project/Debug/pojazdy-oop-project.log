@@ -1,1 +1,5 @@
-﻿  pojazdy-oop-project.vcxproj -> C:\Users\lenovo\Desktop\project\Debug\pojazdy-oop-project.exe
+﻿  Menu_funkcje.cpp
+  Pojazdy-Funkcje.cpp
+C:\Users\lenovo\Desktop\project\pojazdy-oop-project\Pojazdy-Funkcje.cpp(8,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+  Generowanie kodu...
+  pojazdy-oop-project.vcxproj -> C:\Users\lenovo\Desktop\project\Debug\pojazdy-oop-project.exe

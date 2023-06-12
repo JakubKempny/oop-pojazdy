@@ -16,7 +16,7 @@ void KontenerCar::createMapFromFile(vector<string> wiersze) {
 		ss.ignore(); // Ignorowanie œrednika
 		getline(ss, rpaliwa, ';');
 		if (!ss.eof()) {
-			throw CustomException("Blad odczytu danych z pliku. Blad wystapil dla auta o numerze Vin: " + vin, 102);
+			throw CustomException("B\210ad odczytu danych z pliku. B\201ad wystapi\210 dla auta o numerze Vin: " + vin, 102);
 		}
 		Car* wskCar = new Car(marka, model, rok, spalanie, rpaliwa);
 		mapCar.insert(make_pair(vin, wskCar));
@@ -36,20 +36,20 @@ void KontenerCar::addRecord() {
 				throw CustomException("Powtarza sie numer Vin auta.", 200);
 			}
 		}
-		cout << "Podaj marke auta:";
+		cout << "Podaj marke samochodu:";
 		cin >> marka;
-		cout << "Podaj model auta:";
+		cout << "Podaj model samochodu:";
 		cin.ignore();
 		getline(cin, model);
-		cout << "Podaj rok produkcji auta:";
+		cout << "Podaj rok produkcji samochodu:";
 		cin >> rok;
-		cout << "Podaj spalanie auta (l/100km):";
+		cout << "Podaj spalanie samochodu (l/100km):";
 		cin >> spalanie;
-		cout << "Podaj rodzaj paliwa auta:";
+		cout << "Podaj rodzaj paliwa samochodu:";
 		cin >> rpaliwa;
 		Car* wskNewCar = new Car(marka, model, rok, spalanie, rpaliwa);
 		mapCar.insert(make_pair(vim, wskNewCar));
-		cout << "Dodano nowe auto. Aby zmiana byla trwala zapisz zmiany." << endl;
+		cout << "Dodano nowy samoch\242d. Aby zmiana by\210a trwa\210a zapisz zmiany." << endl;
 	}
 	catch (CustomException& e) {
 		cout << e.what() << endl;
@@ -62,10 +62,10 @@ void KontenerCar::delRecord(string vin, string plikKierowcy) {
 		for (auto i : mapCar) {
 			if (i.first == vin) exist = true;
 		}
-		if (!exist) throw CustomException("Auto o takim numerze Vin nie istnieje w bazie.");
-		if (czyPrzypCar(vin, plikKierowcy)) throw CustomException("Samochod o takim numerze Vin jest juz przypisany do pracownika. Usun najpierw pracownika i sprobuj ponownie! ");
+		if (!exist) throw CustomException("Smoch\242d o takim numerze Vin nie istnieje w bazie.");
+		if (czyPrzypCar(vin, plikKierowcy)) throw CustomException("Samoch\242d o takim numerze Vin jest ju\276 przypisany do pracownika. Usu\241 najpierw pracownika i spr\242buj ponownie! ");
 		mapCar.erase(vin);
-		cout << "Auto o numerze vin:" << vin << " zostalo usuniete" << endl;
+		cout << "Smoch\242d o numerze vin:" << vin << " zosta\210 usuni\251ty" << endl;
 	}
 	catch (CustomException& e) {
 		cout << e.what() << endl;
@@ -128,7 +128,7 @@ bool KontenerCar::czyPrzypCar(string vin, string plikKierowcy)
 	string nazwa = plikKierowcy;
 	ifstream plik(nazwa);
 	if (!plik) {
-		cout << "Nie mozna otworzyc pliku." << endl;
+		cout << "Nie mo\276na otworzy\206 pliku." << endl;
 		return false;
 	}
 	while (getline(plik, linia)) {
@@ -172,7 +172,7 @@ string Silnik::formatDataToString() { // gites
 }
 
 Silnik::Silnik(double s, string rpaliwa) :spalanie(s) { // konstruktor
-	if (rpaliwa == "benzyna" || rpaliwa == "gaz" || rpaliwa == "ropa" || rpaliwa == "prad") {
+	if (rpaliwa == "benzyna" || rpaliwa == "gaz" || rpaliwa == "ropa" || rpaliwa == "pr\245d") {
 		rodzajPaliwa = rpaliwa;
 	}
 	else {
