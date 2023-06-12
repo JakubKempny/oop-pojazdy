@@ -1,4 +1,5 @@
 #include "Header.h"
+#include<Windows.h>
 
 void KontenerStacji::delRecord(string numer) {
 	bool exist = false;
@@ -35,9 +36,10 @@ string StacjaPaliw::formatDataToString()
 	ss << znizka;
 	ss >> rabat;
 	string adres = Budynek::getName();
-	return adres + ";" + firma + ";" + ceny + ";" + rabat + ";";  /// a adres?
+	return adres + ";" + firma + ";" + ceny + ";" + rabat + ";";  
 }
 
+//trzeba dodaæ zapbespieczenia
 void KontenerStacji::addRecord()
 {
 	string adres, nazwa,numer;
@@ -54,7 +56,7 @@ void KontenerStacji::addRecord()
 		getline(cin, adres);
 
 		cout << "Podaj nazw\251 stacji:";
-		cin.ignore();
+		
 		getline(cin, nazwa);
 		
 
@@ -113,4 +115,31 @@ void KontenerStacji::saveChanges()
 		plik << ss.str();
 		plik.close();
 	}
+}
+
+void KontenerStacji:: info() {
+	
+	cout << "Dane z pliku: " << getPathToFile() << " : \n";
+
+	int spaceValue = 25;
+	// wstawianie nazw kategorii
+	cout <<"\174"<< setw(spaceValue/4) << "Numer" << setw(2) << "|" << setw(spaceValue) << "Adres" << setw(2) << "|" << setw(spaceValue) << "Nazwa" << setw(2) << "|" << setw(spaceValue) << "Cena benzyny" << setw(2) << "|" << setw(spaceValue) << "Cena diesla" << setw(2) << "|" << setw(spaceValue) << "Cena gazu" << setw(2) << "|" << setw(spaceValue) << "Wysoko\230\206 zni\276ki" << setw(2) << "|" << endl;
+	char z = '_';
+	cout << setfill(z) << setw(spaceValue * 6 + 7 * 2 + spaceValue/4+1) << z << endl;
+	cout.fill(' ');
+	
+		for (auto i : mapStacji) {
+			stringstream ss;
+			ss << (i.second->formatDataToString());
+			string tmp;
+			cout <<"|"<< setw(spaceValue / 4) << i.first << setw(2);
+			;
+			while ((getline(ss, tmp, ';'))) {
+				cout << "|" << setw(spaceValue) << tmp << setw(2);
+				;
+			}
+			cout << "|" << endl;
+			cout << setfill(z) << setw(spaceValue * 6 + 7 * 2 + spaceValue / 4 + 1) << z << endl;
+			cout.fill(' ');
+		}
 }

@@ -99,14 +99,8 @@ public:
 	}
 	string getPathToFile() { return pathToFile; }
 	void createMapFromFile(vector<string> wiersze);
-	void info() override {
-		cout << "Dane z pliku: " << getPathToFile() << " : \n";
-		for (auto i = mapStacji.begin(); i != mapStacji.end(); ++i) {
-			cout << i->first << ";";
-			cout << i->second->formatDataToString() << endl;
-		}
-	}
 
+	void info() override;
 	void addRecord();
 	void delRecord(string adres);
 	void saveChanges();
