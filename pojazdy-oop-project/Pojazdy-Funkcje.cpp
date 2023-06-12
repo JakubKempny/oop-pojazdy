@@ -26,6 +26,9 @@ void KontenerCar::addRecord() {
 	string marka, model, rpaliwa, vim;
 	unsigned int rok;
 	double spalanie;
+	char input{};
+
+	cout << endl << "Dodawanie nowego samochodu." << endl;
 	cout << "Podaj Vim samochodu:";
 	cin >> vim;
 	try {
@@ -48,24 +51,43 @@ void KontenerCar::addRecord() {
 		cout << "Podaj rodzaj paliwa samochodu:";
 		cin >> rpaliwa;
 		Car* wskNewCar = new Car(marka, model, rok, spalanie, rpaliwa);
-		mapCar.insert(make_pair(vim, wskNewCar));
-		cout << "Dodano nowy samoch\242d. Aby zmiana by\210a trwa\210a zapisz zmiany." << endl;
+
+		cout << "Czy chcesz zapisa\206 zmiany? y/n: ";
+		cin >> input;
+		if (input == 'y') {
+			mapCar.insert(make_pair(vim, wskNewCar));
+			saveChanges();
+			cout << "Dodano nowy samoch\242d. Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+		}
+		else cout << "Nie zapisano zmian w bazie! Naci\230nij dowolny klawisz, aby kontynuowa\206...";
 	}
 	catch (CustomException& e) {
 		cout << e.what() << endl;
 	}
 }
 
-void KontenerCar::delRecord(string vin, string plikKierowcy) {
+void KontenerCar::delRecord(string plikKierowcy) {
+
+	string vin{};
+	char input{};
+
 	try {
 		bool exist = false;
+		cout << endl << "Usuwanie samochodu, podaj jego numer VIN: " << endl;
+		cin >> vin;
 		for (auto i : mapCar) {
 			if (i.first == vin) exist = true;
 		}
 		if (!exist) throw CustomException("Smoch\242d o takim numerze Vin nie istnieje w bazie.");
 		if (czyPrzypCar(vin, plikKierowcy)) throw CustomException("Samoch\242d o takim numerze Vin jest ju\276 przypisany do pracownika. Usu\241 najpierw pracownika i spr\242buj ponownie! ");
-		mapCar.erase(vin);
-		cout << "Smoch\242d o numerze vin:" << vin << " zosta\210 usuni\251ty" << endl;
+		cout << "Czy napewno chcesz usun\245\206 pojazd o numerze VIN: " << vin << "? y/n: ";
+		cin >> input;
+		if (input == 'y') {
+			mapCar.erase(vin);
+			saveChanges();
+			cout << "Smoch\242d o numerze vin:" << vin << " zosta\210 usuni\251ty." << " Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+		}
+		else cout << "Pojazd nie zosta\210 usuni\251ty";
 	}
 	catch (CustomException& e) {
 		cout << e.what() << endl;

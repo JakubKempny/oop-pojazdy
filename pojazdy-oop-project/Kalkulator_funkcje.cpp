@@ -13,7 +13,6 @@ double Kalkulator::fuelConsumption(string VIN, double dystans)
 	Car* car1;
 	car1 = car.getCar(VIN);
 	return car1->oblZurzycie(dystans);
-
 }
 
 void Kalkulator::computeEngine()

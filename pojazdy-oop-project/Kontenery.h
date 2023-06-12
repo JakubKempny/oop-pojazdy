@@ -19,7 +19,7 @@ public:
 	void createMapFromFile(vector<string> wiersze);
 	void info() override;
 	void addRecord();
-	void delRecord(string vin, string plikKierowcy);
+	void delRecord(string plikKierowcy);
 	void saveChanges(); // nadpisuje dane z pliku
 	//get'ery
 	Car* getCar(string c) { return mapCar.at(c); };
@@ -77,7 +77,7 @@ public:
 		}
 	}
 	void addRecord(KontenerCar& k, KontenerStanow& stan);
-	void delRecord(string pesel);
+	void delRecord();
 	void saveChanges();
 	bool vinWolny(string vin);
 	map<string, Pracownik*> getMap() { return mapPrac; }
@@ -102,6 +102,6 @@ public:
 
 	void info() override;
 	void addRecord();
-	void delRecord(string adres);
+	void delRecord();
 	void saveChanges();
 };

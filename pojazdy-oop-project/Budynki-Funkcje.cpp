@@ -1,15 +1,24 @@
 #include "Header.h"
 #include<Windows.h>
 
-void KontenerStacji::delRecord(string numer) {
+void KontenerStacji::delRecord() {
+	string id;
+	char input{};
+	cout << endl << "Usuwanie stacji, podaj ID: ";
+	cin >> id;
 	bool exist = false;
 	try{
 	for (auto i : mapStacji) {
-		if (i.first == numer) exist = true;
+		if (i.first == id) exist = true;
 	}
 	if (!exist) throw CustomException("Stacja o takim ID nie istnieje w bazie.");
-		mapStacji.erase(numer);
-		cout << "Stacja benzynowa z adresem: " << numer << " zosta\210a usuni\251ta\n";
+	cout << "Czy napewno chcesz usun\245\206 stacje paliw z ID: " << id << "? y/n: ";
+	cin >> input;
+	if (input == 'y') {
+		mapStacji.erase(id);
+		saveChanges();
+		cout <<"Stacja benzynowa z id: " << id << " zosta\210a usuni\251ta\n." << "Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+	} else cout << "Stacja nie zosta\210a usuni\251ta";
 	}
 	catch (CustomException& e) {
 		cout << e.what() << endl;
@@ -44,7 +53,9 @@ void KontenerStacji::addRecord()
 {
 	string adres, nazwa,numer;
 	double cenaBenzyny{}, cenaRopy{}, cenaGazu{}, znizka;
-	cout << "Podaj numer stacji:";
+	char input{};
+	cout << endl << "Dodawanie nowej stacji." << endl;
+	cout << "Podaj numer stacji: ";
 	try
 	{
 		cin >> numer;
@@ -72,8 +83,15 @@ void KontenerStacji::addRecord()
 		cout << "Podaj wysoko\230\206 zni\276ki:";
 		cin >> znizka;
 		StacjaPaliw* wskStacji = new StacjaPaliw(numer,nazwa, adres, cenaBenzyny, cenaRopy, cenaGazu, znizka);
-		mapStacji.insert(make_pair(numer, wskStacji));
-		cout << "Dodano now\245 stacj\251. Aby zmiana by\210a trwa\210a zapisz zmiany." << endl;
+
+		cout << "Czy chcesz zapisa\206 zmiany? y/n: ";
+		cin >> input;
+		if (input == 'y') {
+			mapStacji.insert(make_pair(numer, wskStacji));
+			saveChanges();
+			cout << "Dodano nowa stacje paliw. Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+		}
+		else cout << "Nie zapisano zmian w bazie! Naci\230nij dowolny klawisz, aby kontynuowa\206...";
 	}
 	catch (CustomException& e)
 	{

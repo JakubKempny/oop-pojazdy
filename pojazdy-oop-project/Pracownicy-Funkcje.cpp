@@ -84,7 +84,9 @@ bool KontenerStanow::stanowIstnieje(string nazwa)
 void KontenerKierow::addRecord(KontenerCar& k, KontenerStanow& s) {
 	string imie, nazwisko, pesel, vin, stanowisko;
 	double dystans;
-	string e;
+	char input{};	
+
+	cout << endl << "Dodawanie nowego pracownika." << endl;
 	cout << "Podaj Pesel pracownika:";
 	try
 	{
@@ -108,8 +110,14 @@ void KontenerKierow::addRecord(KontenerCar& k, KontenerStanow& s) {
 		cin >> stanowisko;
 		if (!s.stanowIstnieje(stanowisko)) throw CustomException("Podane stanowisko nie istnieje! ");
 		Pracownik* wskNewPrac = new Pracownik(imie, nazwisko, pesel, vin, dystans, stanowisko);
-		mapPrac.insert(make_pair(pesel, wskNewPrac));
-		cout << "Dodano nowego pracownika. Aby zmiana by\210a trwa\210a zapisz zmiany." << endl;
+		cout << "Czy chcesz zapisa\206 zmiany? y/n: ";
+		cin >> input;
+		if (input == 'y') {
+			mapPrac.insert(make_pair(pesel, wskNewPrac));
+			saveChanges();
+			cout << "Dodano nowego pracownika. Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+		}
+		else cout << "Nie zapisano zmian w bazie! Naci\230nij dowolny klawisz, aby kontynuowa\206...";
 	}
 	catch (CustomException& e)
 	{
@@ -117,15 +125,27 @@ void KontenerKierow::addRecord(KontenerCar& k, KontenerStanow& s) {
 	}
 }
 
-void KontenerKierow::delRecord(string pesel) {
+void KontenerKierow::delRecord() {
+
+	string pesel{};
 	bool exist = false;
+	cout << endl << "Usuwanie pracownika, podaj jego pesel: " << endl;
+	cin >> pesel;
+	char input{};
 	for (auto i : mapPrac) {
 		if (i.first == pesel) exist = true;
 	}
 	try {
 		if (!exist) throw CustomException("Pracownik o takim numerze PESEL nie istnieje w bazie.");
-		mapPrac.erase(pesel);
-		cout << "Pracownik o peselu:" << pesel << " zosta\210 usuni\251ty" << endl;
+
+		cout << "Czy napewno chcesz usun\245\206 pracownika o numerze PESEL: " << pesel << "? y/n: ";
+		cin >> input;
+		if (input == 'y') {
+			mapPrac.erase(pesel);
+			saveChanges();
+			cout << "Pracownik o peselu:" << pesel << " zosta\210 usuni\251ty." << "Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+		}
+		else cout << "Pracownik nie zosta\210 usuni\251ty";
 	}
 	catch (CustomException& e) {
 		cout << e.what() << endl;
@@ -191,14 +211,14 @@ void KontenerStanow::addRecord() {
 	double proc_pokrycia;
 	char input;
 
-	cout << endl << "Dodawanie nowego stanowiska: " << endl;
+	cout << endl << "Dodawanie nowego stanowiska." << endl;
 	cout << "Podaj nazw\251 stanowiska: " << endl;
 	try
 	{
 		cin >> nazwa; //trzeba dodac potem wyjatek i sprawdzic czy nazwa nie ma spacji
-		//for (auto& c : nazwa){ //zmiana wszystkich znakow w stringu na male aby potem uniknac problemow typu: Menadzer vs menadzer
-		//	nazwa = tolower(c);
-		//}
+		for (auto& c : nazwa){ //zmiana wszystkich znakow w stringu na male aby potem uniknac problemow typu: Menadzer vs menadzer
+			nazwa = tolower(c);
+		}
 		for (auto i = mapStan.begin(); i != mapStan.end(); ++i) {
 			if (nazwa == i->first) throw CustomException("W bazie znajduje si\251 ju\276 stanowisko o podanej nazwie! ");
 		}
@@ -206,10 +226,10 @@ void KontenerStanow::addRecord() {
 		cin >> proc_pokrycia;
 
 		Stanowisko* wskNewStan = new Stanowisko(nazwa, proc_pokrycia);
-		cout << "Pomyslnie utworzono nowe stanowisko. Czy chcesz zapisa\206 zmiany? y/n: ";
+		cout << "Czy chcesz zapisa\206 zmiany? y/n: ";
 		cin >> input;
 		if (input == 'y') {
-			cout << "Zapisano zmiany w bazie! Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+			cout << "Pomyslnie utworzono nowe stanowisko. Naci\230nij dowolny klawisz, aby kontynuowa\206...";
 			mapStan.insert(make_pair(nazwa, wskNewStan));
 			saveChanges();
 		} else cout << "Nie zapisano zmian w bazie! Naci\230nij dowolny klawisz, aby kontynuowa\206...";
@@ -268,8 +288,7 @@ void KontenerStanow::delRecord(string plikKierowcy) {
 		if (input == 'y') {
 			mapStan.erase(nazwa);
 			saveChanges();
-			cout << "Stanowisko:" << nazwa << " zosta\210o usuni\251te" << endl;
-			cout << "Zapisano zmiany w bazie! Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+			cout << "Stanowisko:" << nazwa << " zosta\210o usuni\251te." << "Naci\230nij dowolny klawisz, aby kontynuowa\206...";
 		}
 		else cout << "Nie zapisano zmian w bazie";
 	}

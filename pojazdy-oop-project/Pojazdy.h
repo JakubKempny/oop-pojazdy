@@ -21,7 +21,6 @@ public:
 class Pojazd{
 	string marka, model;
 	unsigned int rocznik{};
-	
 public:
 	Pojazd(string marka_, string model_, unsigned int rok): marka(marka_), model(model_), rocznik(rok){} 
 	Pojazd() {}; // konstruktor do testu:
