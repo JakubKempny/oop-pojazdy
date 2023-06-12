@@ -1,2 +1,2 @@
-Gliwice ul, testowa 2;BP;12.3;4.3;3.5;0.132;
-Gliwice ul.Senna 2;Lotos;5.4;4.2;4.2;0.05;
+2;Gliwice ul, testowa 2;12.3;4.30;0.13;3.50;0.01;
+3;Gliwice ul.Senna 2;5.4;4.20;0.05;4.20;0.04;

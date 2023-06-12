@@ -164,13 +164,13 @@ void Menu::addPetrol()
 
 void Menu::delPetrol()
 {
-	string adres;
-	cout << endl << "Usuwanie stacji, podaj adres: ";
-	cin >> adres;
-	cout << "Czy napewno chcesz usunac stacje paliw o nazwie: " << adres << "? y/n: ";
+	string id;
+	cout << endl << "Usuwanie stacji, podaj id: ";
+	cin >> id;
+	cout << "Czy napewno chcesz usunac stacje paliw o id: " << id << "? y/n: ";
 	cin >> input;
 	if (input == 'y') {
-		konStacji.delRecord(adres);
+		konStacji.delRecord(id);
 		konStacji.saveChanges();
 		cout << "Zapisano zmiany w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
 	}

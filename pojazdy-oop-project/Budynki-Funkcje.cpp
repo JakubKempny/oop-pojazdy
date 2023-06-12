@@ -1,17 +1,17 @@
 #include "Header.h"
 
-void KontenerStacji::delRecord(string adres) {
+void KontenerStacji::delRecord(string numer) {
 	bool exist = false;
+	try{
 	for (auto i : mapStacji) {
-		if (i.first == adres) exist = true;
+		if (i.first == numer) exist = true;
 	}
-	if (exist) {
-		mapStacji.erase(adres);
-		cout << "Stacja benzynowa z adresem: " << adres << " zosta\210a usuni\251ta\n";
+	if (!exist) throw CustomException("Stacja o takim id nie istnieje w bazie.");
+		mapStacji.erase(numer);
+		cout << "Stacja benzynowa z adresem: " << numer << " zosta\210a usuni\251ta\n";
 	}
-	else {
-		string e = "Stacja benzynowa o podanym adresie nie istnieje!\n";
-		throw e;
+	catch (CustomException& e) {
+		cout << e.what() << endl;
 	}
 }
 
@@ -21,7 +21,7 @@ string Ceny::formatDataToString()
 	string ropa;
 	string gaz;
 	stringstream ss;
-	ss << fixed << setprecision(1);
+	ss << fixed << setprecision(2);
 	ss << cenaBenzyny << ";" << cenaRopy << ";" << cenaGazu;
 	ss >> benz;
 	return benz;
@@ -34,22 +34,28 @@ string StacjaPaliw::formatDataToString()
 	stringstream ss;
 	ss << znizka;
 	ss >> rabat;
-	return firma + ";" + ceny + ";" + rabat + ";";
+	string adres = Budynek::getName();
+	return adres + ";" + firma + ";" + ceny + ";" + rabat + ";";  /// a adres?
 }
 
 void KontenerStacji::addRecord()
 {
-	string adres, nazwa;
+	string adres, nazwa,numer;
 	double cenaBenzyny{}, cenaRopy{}, cenaGazu{}, znizka;
-	cout << "Podaj adres stacji:";
+	cout << "Podaj numer stacji:";
 	try
 	{
-		getline(cin, adres);
+		cin >> numer;
 		for (auto i = mapStacji.begin(); i != mapStacji.end(); ++i) {
-			if (adres == i->first) throw CustomException("W bazie znajduje si\251 ju\276 Stacja o podanym adresie! ");
+			if (numer == i->first) throw CustomException("W bazie znajduje si\251 ju\276 Stacja o podanym numerze! ");
 		}
+		/*cout << "Podaj adres stacji:";
+		cin.ignore();
+		getline(cin, adres);*/
+
 		cout << "Podaj nazw\251 stacji:";
-		cin >> nazwa;
+		cin.ignore();
+		getline(cin, nazwa);
 		
 
 		cout << "Podaj wysoko\230\206 ceny benzyny:";
@@ -63,9 +69,9 @@ void KontenerStacji::addRecord()
 		
 		cout << "Podaj wysoko\230\206 zni\276ki:";
 		cin >> znizka;
-		StacjaPaliw* wskStacji = new StacjaPaliw(nazwa, adres, cenaBenzyny, cenaRopy, cenaGazu, znizka);
-		mapStacji.insert(make_pair(adres, wskStacji));
-		cout << "Dodano now\245 stacj\251. Aby zmiana byla trwala zapisz zmiany." << endl;
+		StacjaPaliw* wskStacji = new StacjaPaliw(numer,nazwa, adres, cenaBenzyny, cenaRopy, cenaGazu, znizka);
+		mapStacji.insert(make_pair(numer, wskStacji));
+		cout << "Dodano now\245 stacj\251. Aby zmiana by\210a trwa\210a zapisz zmiany." << endl;
 	}
 	catch (CustomException& e)
 	{
@@ -74,11 +80,12 @@ void KontenerStacji::addRecord()
 }
 
 void KontenerStacji::createMapFromFile(vector<string> wiersze) {
-	string nazwa, adres;
+	string nazwa, adres,numer;
 	double cenaBenzyny, cenaGazu, cenaRopy, znizka;
 	mapStacji.clear();
 	for (int i = 0; i < wiersze.size(); ++i) {
 		stringstream ss(wiersze[i]);
+		getline(ss, numer, ';');
 		getline(ss, adres, ';');
 		getline(ss, nazwa, ';');
 		ss >> cenaBenzyny;
@@ -89,8 +96,8 @@ void KontenerStacji::createMapFromFile(vector<string> wiersze) {
 		ss.ignore();
 		ss >> znizka;
 		ss.ignore();
-		StacjaPaliw* wskStacji = new StacjaPaliw(nazwa, adres, cenaBenzyny, cenaRopy, cenaGazu, znizka);
-		mapStacji.insert(make_pair(adres, wskStacji));
+		StacjaPaliw* wskStacji = new StacjaPaliw(numer ,nazwa, adres, cenaBenzyny, cenaRopy, cenaGazu, znizka);
+		mapStacji.insert(make_pair(numer, wskStacji));
 	}
 }
 

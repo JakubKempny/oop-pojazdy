@@ -30,6 +30,7 @@ class Budynek {
 
 public:
 	Budynek(string a) : adres(a) {}
+	string getName() { return adres; }
 };
 
 class Ceny {
@@ -41,10 +42,10 @@ public:
 };
 
 class StacjaPaliw : public Budynek, public Ceny {
-	string firma;
+	string firma, id;
 	double znizka = 0;
 public:
-	StacjaPaliw(string f, string a, double benzyna, double ropa, double gaz, double z) :firma(f), Budynek(a), Ceny(benzyna, ropa, gaz), znizka(z) {}
+	StacjaPaliw(string i,string f, string a, double benzyna, double ropa, double gaz, double z) :id(i), firma(f), Budynek(a), Ceny(benzyna, ropa, gaz), znizka(z) {}
 
 	void setDiscount(double x) { znizka = x; }
 	double getDiscount() { return znizka; }
