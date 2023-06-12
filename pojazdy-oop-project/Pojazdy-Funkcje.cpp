@@ -16,7 +16,7 @@ void KontenerCar::createMapFromFile(vector<string> wiersze) {
 		ss.ignore(); // Ignorowanie œrednika
 		getline(ss, rpaliwa, ';');
 		if (!ss.eof()) {
-			throw CustomException("B\210ad odczytu danych z pliku. B\201ad wystapi\210 dla auta o numerze Vin: " + vin, 102);
+			throw CustomException("B\210ad odczytu danych z pliku. B\201ad wystapi\210 dla samochodu o numerze Vin: " + vin, 102);
 		}
 		Car* wskCar = new Car(marka, model, rok, spalanie, rpaliwa);
 		mapCar.insert(make_pair(vin, wskCar));
@@ -26,14 +26,14 @@ void KontenerCar::addRecord() {
 	string marka, model, rpaliwa, vim;
 	unsigned int rok;
 	double spalanie;
-	cout << "Podaj Vim auta:";
+	cout << "Podaj Vim samochodu:";
 	cin >> vim;
 	try {
 		for (auto i = mapCar.begin(); i != mapCar.end(); ++i) {
 			if (vim == i->first) {
 				// wywal wyj¹tek !!!!!
 				// powtarza siê klucz unikalny
-				throw CustomException("Powtarza sie numer Vin auta.", 200);
+				throw CustomException("Powtarza sie numer Vin samochodu.", 200);
 			}
 		}
 		cout << "Podaj marke samochodu:";

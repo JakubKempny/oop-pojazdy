@@ -14,7 +14,7 @@ vector<string> wczytajPlik(const string nazwaP){
 		return wektor;
 	}
 	else {
-		throw CustomException("Nie udalo sie otworzyc pliku: "+nazwaP);
+		throw CustomException("Nie uda\210o si\251 otworzy\210 pliku: "+nazwaP);
 	}
 }
 

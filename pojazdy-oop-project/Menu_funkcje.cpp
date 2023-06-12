@@ -66,7 +66,7 @@ void Menu::showText()
 
 void Menu::addCar()
 {
-	cout << endl << "Dodawanie nowego samoch\242du: " << endl;
+	cout << endl << "Dodawanie nowego samochodu: " << endl;
 	konCar.addRecord();
 	cout <<  "Czy chcesz zapisa\206 zmiany? y/n: ";
 	cin >> input;
