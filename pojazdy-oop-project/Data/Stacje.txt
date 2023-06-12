@@ -1,2 +1,4 @@
-1;Gliwice ul.Bema 17;P;6.50;3.18;6.19;0.01;
-2;Gliwice ul, testowa 2;12.3;4.30;3.50;0.13;0.01;
+1;Gliwice ul.Bema 17;Orlen;6.50;3.18;6.19;0.01;
+4;Gliwice ul.Jasna 65;Circle K;6.48;3.14;6.22;0;
+5;Gliwice ul.Stara 3;Orlen;6.50;3.18;3.55;0.01;
+6;Gliwice ul.Moja 4;Orlen;2.00;3.00;1.00;0;
