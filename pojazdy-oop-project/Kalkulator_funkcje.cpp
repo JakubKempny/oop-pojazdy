@@ -8,7 +8,7 @@ Kalkulator::Kalkulator(KontenerCar car, KontenerKierow driver, KontenerStacji ga
 	this->level = level;
 }
 
-double Kalkulator::fuelConsumption(string idPrac)
+double Kalkulator::fuelConsumption(string VIN)
 {
 	return 0;
 }
@@ -26,9 +26,11 @@ void Kalkulator::computeEngine()
 		drivers.push_back(keyMap.first);
 	}
 	string idPrac{};
+	string vin{};
 	for (int i = 0; i < map.size(); i++)
 	{
 		idPrac = drivers.at(i);
-		cout << "Dla pracownika: " << idPrac << " spalanie wynosi: " << fuelConsumption(idPrac) << endl;
+		//tutaj trzeba uzyskac jego vin
+		cout << "Dla pracownika: " << idPrac << " spalanie wynosi: " << fuelConsumption(vin) << endl;
 	}
 }

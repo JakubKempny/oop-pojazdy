@@ -11,5 +11,5 @@ class Kalkulator
 public:
 	Kalkulator(KontenerCar car, KontenerKierow driver, KontenerStacji gasStation, KontenerStanow level);
 	void computeEngine(); // glowna funkcja do liczenia tego wszystkiego i polaczenia w calosc 
-	double fuelConsumption(string idPrac); // funkcja poboczna do obliczania spalania (20 dni) dla konkretnego pracownika (podajemy pesel jako argument)
+	double fuelConsumption(string VIN); // funkcja poboczna do obliczania spalania (20 dni) dla konkretnego pracownika (podajemy VIN jego samochodu jako argument)
 };
