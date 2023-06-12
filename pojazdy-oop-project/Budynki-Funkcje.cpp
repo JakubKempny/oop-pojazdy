@@ -60,11 +60,18 @@ void KontenerStacji::addRecord()
 	{
 		cin >> numer;
 		for (auto i = mapStacji.begin(); i != mapStacji.end(); ++i) {
+			if (is_digits(numer) == false)
+			{
+				throw CustomException("Numer zawiera niedozwolone znaki! ");
+				
+
+			}
 			if (numer == i->first) throw CustomException("W bazie znajduje si\251 ju\276 Stacja o podanym numerze! ");
 		}
 		cout << "Podaj adres stacji:";
 		cin.ignore();
 		getline(cin, adres);
+		
 
 		cout << "Podaj nazw\251 stacji:";
 		

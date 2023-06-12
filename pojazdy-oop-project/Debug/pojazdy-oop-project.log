@@ -1,4 +1,5 @@
 ﻿  Budynki-Funkcje.cpp
+<<<<<<< HEAD
 C:\Users\Daru2\Desktop\Repo projektu\oop-pojazdy\pojazdy-oop-project\Budynki-Funkcje.cpp(106,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
   Funkcje.cpp
   Kalkulator_funkcje.cpp
@@ -13,3 +14,7 @@ C:\Users\Daru2\Desktop\Repo projektu\oop-pojazdy\pojazdy-oop-project\Pracownicy-
   pojazdy-oop-project.cpp
   Generowanie kodu...
   pojazdy-oop-project.vcxproj -> C:\Users\Daru2\Desktop\Repo projektu\oop-pojazdy\Debug\pojazdy-oop-project.exe
+=======
+C:\Users\lenovo\Desktop\project\pojazdy-oop-project\Budynki-Funkcje.cpp(95,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+  pojazdy-oop-project.vcxproj -> C:\Users\lenovo\Desktop\project\Debug\pojazdy-oop-project.exe
+>>>>>>> 29a3006 (coś tam)
