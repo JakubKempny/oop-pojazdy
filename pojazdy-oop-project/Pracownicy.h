@@ -29,5 +29,7 @@ class Pracownik: Stanowisko,Pesel {
 public:
 	Pracownik(string i, string n, Pesel p, string poj, double dys, Stanowisko stan) : imie(i), nazwisko(n), Pesel(p), vinPojazdu(poj), dystans(dys), Stanowisko(stan) {}
 	string formatDataToString();
+	string getDriverVin() { return vinPojazdu; }
+	double getDystans() { return dystans; }
 };
 

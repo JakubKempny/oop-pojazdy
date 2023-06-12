@@ -50,7 +50,7 @@ public:
 		}
 	}
 	void addRecord();
-	void delRecord(string nazwaStanow, string plikKierowcy);
+	void delRecord(string plikKierowcy);
 	void saveChanges();
 	bool stanowIstnieje(string nazwa);
 	bool czyPrzypStan(string nazwaStanow, string plikKierowcy);

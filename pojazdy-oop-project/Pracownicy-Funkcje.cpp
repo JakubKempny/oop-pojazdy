@@ -189,11 +189,13 @@ void KontenerStanow::createMapFromFile(vector<string> wiersze) {
 void KontenerStanow::addRecord() {
 	string nazwa;
 	double proc_pokrycia;
-	string e;
-	cout << "Podaj nazw\251 stanowiska:";
+	char input;
+
+	cout << endl << "Dodawanie nowego stanowiska: " << endl;
+	cout << "Podaj nazw\251 stanowiska: " << endl;
 	try
 	{
-		cin >> nazwa;
+		cin >> nazwa; //trzeba dodac potem wyjatek i sprawdzic czy nazwa nie ma spacji
 		//for (auto& c : nazwa){ //zmiana wszystkich znakow w stringu na male aby potem uniknac problemow typu: Menadzer vs menadzer
 		//	nazwa = tolower(c);
 		//}
@@ -204,8 +206,13 @@ void KontenerStanow::addRecord() {
 		cin >> proc_pokrycia;
 
 		Stanowisko* wskNewStan = new Stanowisko(nazwa, proc_pokrycia);
-		mapStan.insert(make_pair(nazwa, wskNewStan));
-		cout << "Dodano nowe stanowisko. Aby zmiana byla trwa\210a zapisz zmiany." << endl;
+		cout << "Pomyslnie utworzono nowe stanowisko. Czy chcesz zapisa\206 zmiany? y/n: ";
+		cin >> input;
+		if (input == 'y') {
+			cout << "Zapisano zmiany w bazie! Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+			mapStan.insert(make_pair(nazwa, wskNewStan));
+			saveChanges();
+		} else cout << "Nie zapisano zmian w bazie! Naci\230nij dowolny klawisz, aby kontynuowa\206...";
 	}
 	catch (CustomException& e)
 	{
@@ -243,7 +250,12 @@ bool KontenerStanow::czyPrzypStan(string nazwaStanow, string plikKierowcy)
 	return false;
 }
 
-void KontenerStanow::delRecord(string nazwa, string plikKierowcy) {
+void KontenerStanow::delRecord(string plikKierowcy) {
+	string nazwa{};
+	string plik{};
+	char input;
+	cout << endl << "Usuwanie stanowiska, podaj jego nazwe\251: " << endl;
+	cin >> nazwa;
 	bool exist = false;
 	for (auto i : mapStan) {
 		if (i.first == nazwa) exist = true;
@@ -251,8 +263,15 @@ void KontenerStanow::delRecord(string nazwa, string plikKierowcy) {
 	try {
 		if (!exist) throw CustomException("Stanowisko o takiej nazwie nie istnieje w bazie.");
 		if (czyPrzypStan(nazwa, plikKierowcy)) throw CustomException("Stanowisko o takiej nazwie jest ju\276 przypisane do pracownika. Nie mo\276na usun\245\206 stanowiska! "); // sprawdzi czy stanowisko przypadkiem nie jest juz przypisane do jakiegos pracownika
-		mapStan.erase(nazwa);
-		cout << "Stanowisko:" << nazwa << " zosta\210o usuni\251te" << endl;
+		cout << "Czy napewno chcesz usun\245\206 stanowisko o nazwie: " << nazwa << "? y/n: ";
+		cin >> input;
+		if (input == 'y') {
+			mapStan.erase(nazwa);
+			saveChanges();
+			cout << "Stanowisko:" << nazwa << " zosta\210o usuni\251te" << endl;
+			cout << "Zapisano zmiany w bazie! Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+		}
+		else cout << "Nie zapisano zmian w bazie";
 	}
 	catch (CustomException& e) {
 		cout << e.what() << endl;

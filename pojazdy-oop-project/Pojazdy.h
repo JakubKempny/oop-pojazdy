@@ -15,6 +15,7 @@ public:
 	double oblZurzycie(double odl) {
 		return (spalanie * odl) / 100;
 	}
+	double getSpalanie() { return spalanie; }
 };
 
 class Pojazd{
@@ -33,14 +34,13 @@ public:
 	
 };
 
-class Car: Pojazd, Silnik {
+class Car: public Pojazd, public Silnik {
 	int nrVin;
 public:
 	Car(string marka_, string model_, unsigned int rok_, double s, string rpaliwa): Pojazd(marka_,model_,rok_),Silnik(s,rpaliwa){
 	}
 	Car() {}; // konstruktor do testów
 	string formatDataToString();
-
 };
 
 

@@ -23,8 +23,8 @@ public:
 	void delCar();
 	void addDriver();
 	void delDriver();
-	void addLevel();
-	void delLevel();
+	//void addLevel();
+	//void delLevel();
 	void addPetrol();
 	void delPetrol();
 

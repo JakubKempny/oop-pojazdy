@@ -1,6 +1,6 @@
 #include "Header.h"
 
-Kalkulator::Kalkulator(KontenerCar car, KontenerKierow driver, KontenerStacji gasStation, KontenerStanow level)
+Kalkulator::Kalkulator(KontenerCar& car, KontenerKierow& driver, KontenerStacji& gasStation, KontenerStanow& level)
 {
 	this->car = car;
 	this->driver = driver;
@@ -8,15 +8,18 @@ Kalkulator::Kalkulator(KontenerCar car, KontenerKierow driver, KontenerStacji ga
 	this->level = level;
 }
 
-double Kalkulator::fuelConsumption(string VIN)
+double Kalkulator::fuelConsumption(string VIN, double dystans)
 {
-	return 0;
+	Car* car1;
+	car1 = car.getCar(VIN);
+	return car1->oblZurzycie(dystans);
+
 }
 
 void Kalkulator::computeEngine()
 {
 	// potem nalezy tez sprawdzic czy plik z pracownikami lub stacjami nie jest pusty
-
+	Pracownik* prac;
 
 	//wrzucam pesele pracownikow do wektorka
 	map<string, Pracownik*> map = driver.getMap();
@@ -27,10 +30,14 @@ void Kalkulator::computeEngine()
 	}
 	string idPrac{};
 	string vin{};
+	double dystans{};
 	for (int i = 0; i < map.size(); i++)
 	{
+
 		idPrac = drivers.at(i);
-		//tutaj trzeba uzyskac jego vin
-		cout << "Dla pracownika: " << idPrac << " spalanie wynosi: " << fuelConsumption(vin) << endl;
+		prac = driver.getWorker(idPrac);
+		vin = prac->getDriverVin();
+		dystans = prac->getDystans();
+		cout << "Dla pracownika: " << idPrac << " spalanie wynosi: " << fuelConsumption(vin, dystans) << endl;
 	}
 }

@@ -1,6 +1,16 @@
 #include "Header.h"
 #include <conio.h>
 
+void Menu::calc()
+{
+	system("CLS");
+	Kalkulator kalk1(konCar, konKier, konStacji, konStanow);
+	kalk1.computeEngine();
+	cout << endl << "Kliknij dowolny klawisz, aby wr\242ci\206 do menu... ";
+	system("pause > nul");
+	showMenu();
+}
+
 Menu::Menu(KontenerCar& konCar, KontenerKierow& konKier, KontenerStacji& konStacji, KontenerStanow& konStanow)
 {
 	this->konCar = konCar;
@@ -39,16 +49,6 @@ void Menu::showMenu()
 		exit(0);
 		break;
 	}
-}
-
-void Menu::calc()
-{
-	system("CLS");
-	Kalkulator kalk1(konCar,konKier,konStacji,konStanow);
-	kalk1.computeEngine();
-	cout << endl << "Kliknij dowolny klawisz, aby wr\242ci\206 do menu... ";
-	system("pause > nul");
-	showMenu();
 }
 
 void Menu::showText()
@@ -117,37 +117,6 @@ void Menu::delDriver()
 		cout << "Zapisano zmiany w bazie! Naci\230nij dowolny klawisz, aby kontynuowa\206...";
 	} else cout << "Uzytkownik nie zosta\210 usuni\251ty";
 }
-
-void Menu::addLevel()
-{
-	cout << endl << "Dodawanie nowego stanowiska: " << endl;
-	konStanow.addRecord();
-	cout << "Czy chcesz zapisa\206 zmiany? y/n: ";
-	cin >> input;
-	if (input == 'y') {
-		konStanow.saveChanges();
-		cout << "Zapisano zmiany w bazie! Naci\230nij dowolny klawisz, aby kontynuowa\206...";
-	}
-	else cout << "Nie zapisano zmian w bazie! Naci\230nij dowolny klawisz, aby kontynuowa\206...";
-}
-
-void Menu::delLevel()
-{
-	string nazwa{};
-	string plik{};
-	cout << endl << "Usuwanie stanowiska, podaj jego nazwe\251: " << endl;
-	cin >> nazwa;
-	cout << "Czy napewno chcesz usun\245\206 stanowisko o nazwie: " << nazwa << "? y/n: ";
-	cin >> input;
-	if (input == 'y') {
-		plik = konKier.getPathToFile();
-		konStanow.delRecord(nazwa, plik);
-		konStanow.saveChanges();
-		cout << "Zapisano zmiany w bazie! Naci\230nij dowolny klawisz, aby kontynuowa\206...";
-	}
-	else cout << "Stanowisko nie zostalo usuni\251te";
-}
-
 
 void Menu::addPetrol()
 {
@@ -261,12 +230,12 @@ void Menu::baseLevels()
 	switch (input)
 	{
 	case 'a':
-		addLevel();
+		konStanow.addRecord();
 		system("pause > nul");
 		baseLevels();
 		break;
 	case 'd':
-		delLevel();
+		konStanow.delRecord(konKier.getPathToFile());
 		system("pause > nul");
 		baseLevels();
 		break;
