@@ -36,7 +36,6 @@ string Kalkulator::bestStation(double consumption, string fuelType)
 
 		idStacji = gasStations.at(i);
 		gas = gasStation.getWorker(idStacji);
-		cout << gas->getFuelCost(fuelType);
 		//cout << "ID STACIJ: " << idStacji << "; " << gas->getFuelCost(fuelType) * consumption << ": ";
 		prices.push_back(make_pair((gas->getFuelCost(fuelType) * consumption), idStacji));
 	}

@@ -110,9 +110,9 @@ void KontenerStacji::createMapFromFile(vector<string> wiersze) {
 		getline(ss, nazwa, ';');
 		ss >> cenaBenzyny;
 		ss.ignore();
-		ss >> cenaGazu;
-		ss.ignore();
 		ss >> cenaRopy;
+		ss.ignore();
+		ss >> cenaGazu;
 		ss.ignore();
 		ss >> znizka;
 		ss.ignore();
@@ -168,9 +168,9 @@ double StacjaPaliw::getFuelCost(string fuelType)
 		return getBenz();
 	}
 	else if (fuelType == "ropa") {
-		return getGaz();
+		return getRopa();
 	}
 	else if (fuelType == "gaz") {
-		return getRopa();
+		return getGaz();
 	}
 }
