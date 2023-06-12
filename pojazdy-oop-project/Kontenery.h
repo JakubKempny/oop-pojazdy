@@ -35,6 +35,11 @@ class KontenerStanow :Kontener {
 public:
 	KontenerStanow() {};
 	KontenerStanow(string s) : pathToFile(s) {};
+	~KontenerStanow() {
+		for (auto i : mapStan) {
+			delete i.second;
+		}
+	}
 	string getPathToFile() { return pathToFile; }
 	void createMapFromFile(vector<string> wiersze);
 	void info() override { // tymczasowo
@@ -57,6 +62,11 @@ class KontenerKierow:Kontener {
 public:
 	KontenerKierow() {};
 	KontenerKierow(string s) : pathToFile(s) {};
+	~KontenerKierow() {
+		for (auto i : mapPrac) {
+			delete i.second;
+		}
+	}
 	string getPathToFile() { return pathToFile; }
 	void createMapFromFile(vector<string> wiersze);
 	void info() override { // tymczasowo
@@ -70,6 +80,8 @@ public:
 	void delRecord(string pesel);
 	void saveChanges();
 	bool vinWolny(string vin);
+	map<string, Pracownik*> getMap() { return mapPrac; }
+	Pracownik* getWorker(string c) { return mapPrac.at(c); };
 };
 
 
@@ -80,6 +92,11 @@ class KontenerStacji :Kontener {
 public:
 	KontenerStacji() {};
 	KontenerStacji(string s) : pathToFile(s) {};
+	~KontenerStacji() {
+		for (auto i : mapStacji) {
+			delete i.second;
+		}
+	}
 	string getPathToFile() { return pathToFile; }
 	void createMapFromFile(vector<string> wiersze);
 	void info() override {

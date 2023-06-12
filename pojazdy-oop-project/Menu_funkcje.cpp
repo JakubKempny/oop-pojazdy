@@ -21,7 +21,7 @@ void Menu::showMenu()
 	switch ((int)input - 48)
 	{
 	case 1:
-		cout << "Wybrales 1";
+		calc();
 		break;
 	case 2:
 		baseDrivers();
@@ -39,6 +39,16 @@ void Menu::showMenu()
 		exit(0);
 		break;
 	}
+}
+
+void Menu::calc()
+{
+	system("CLS");
+	Kalkulator kalk1(konCar,konKier,konStacji,konStanow);
+	kalk1.computeEngine();
+	cout << endl << "Kliknij dowolny klawisz, aby wrocic do menu... ";
+	system("pause > nul");
+	showMenu();
 }
 
 void Menu::showText()

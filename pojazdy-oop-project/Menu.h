@@ -2,12 +2,15 @@
 
 class Menu
 {
+private:
 	char input{}; //zmienna do wybierania opcji w menu 1-5 i a/d/q
+protected:
 	KontenerCar konCar;
 	KontenerKierow konKier;
 	KontenerStacji konStacji;
 	KontenerStanow konStanow;
 public:
+	Menu() {};
 	Menu(KontenerCar& konCar, KontenerKierow& konKier, KontenerStacji &konStacji, KontenerStanow &konStanow);
 	void showText();
 	void showMenu();
@@ -24,4 +27,7 @@ public:
 	void delLevel();
 	void addPetrol();
 	void delPetrol();
+
+	void calc();
 };
+

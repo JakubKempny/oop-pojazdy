@@ -4,12 +4,13 @@
 using namespace std;
 
 int main(){
-    KontenerCar konCar("Data/Pojazdy.txt");
+    KontenerCar* konCar = new KontenerCar("Data/Pojazdy.txt");
     KontenerKierow konKier("Data/Pracownicy.txt");
     KontenerStacji konStacji("Data/Stacje.txt");
     KontenerStanow konStanow("Data/Stanowiska.txt");
-    Menu menu1(konCar,konKier, konStacji, konStanow);
+    Menu menu1(*konCar,konKier, konStacji, konStanow);
     menu1.showMenu();
+
 
 
     //Demonstracyjna zmian commita:

@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Budynki-Funkcje.cpp" />
     <ClCompile Include="Funkcje.cpp" />
+    <ClCompile Include="Kalkulator_funkcje.cpp" />
     <ClCompile Include="Kontenery-Funkcje.cpp" />
     <ClCompile Include="Menu_funkcje.cpp" />
     <ClCompile Include="Pojazdy-Funkcje.cpp" />
@@ -150,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="Budynki.h" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="Kalkulator.h" />
     <ClInclude Include="Kontenery.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Pojazdy.h" />
