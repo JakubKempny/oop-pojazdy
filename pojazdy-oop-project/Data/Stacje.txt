@@ -1,4 +1,6 @@
 1;Gliwice ul.Bema 17;Orlen;6.50;6.19;3.18;0.01;
+2;Zabrze ul.Kocia 3;BP;6.44;3.15;6.23;0.666;
+3;Zabrze ul.Chmielna 1;Lotos;10.00;12.00;11.00;0.5;
 4;Gliwice ul.Jasna 65;Circle K;6.48;6.22;3.14;0;
 5;Gliwice ul.Stara 3;Orlen;6.50;3.55;3.18;0.01;
 6;Gliwice ul.Moja 4;Orlen;2.00;1.00;3.00;0;

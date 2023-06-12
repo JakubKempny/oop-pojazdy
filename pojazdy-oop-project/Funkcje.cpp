@@ -30,26 +30,22 @@ bool containsOnlyLetters(string const& str) {
 }
 
 bool containsDigitsANDLetters(string const& str) {
-	return str.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") == std::string::npos;
+	return str.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789., ") == std::string::npos;
 }
 
-bool check(int zmienna)
-{
-	if (zmienna < 0)
-		return false;
-	else
-		return true;
-}
 
-bool check(double zmienna)
-{
-	if (zmienna < 0)
-		return false;
-	else
-		return true;
-}
 
 bool is_digits2(const string& str) // Funkcja do sprawdzania czy string zawiera same cyfry
 {
-	return str.find_first_not_of("0123456789. ") == std::string::npos;
+	return str.find_first_not_of("0123456789., ") == std::string::npos;
+}
+
+void CommaWithDot(string& str) // zamiana przecinka na kropke
+{
+	for (char& c : str) {
+		if (c == ',') {
+			c = '.';
+		}
+	}
+	
 }
