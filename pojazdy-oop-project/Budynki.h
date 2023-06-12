@@ -39,6 +39,9 @@ public:
 	Ceny() = default;  // Konstruktor domyœlny
 	Ceny(double b, double r, double g) : cenaBenzyny(b), cenaRopy(r), cenaGazu(g) {};
 	string formatDataToString();
+	double getBenz() { return cenaBenzyny; }
+	double getRopa() { return cenaRopy; }
+	double getGaz() { return cenaGazu; }
 };
 
 class StacjaPaliw : public Budynek, public Ceny {
@@ -49,5 +52,6 @@ public:
 
 	void setDiscount(double x) { znizka = x; }
 	double getDiscount() { return znizka; }
+	double getFuelCost(string fuelType);
 	string formatDataToString();
 };

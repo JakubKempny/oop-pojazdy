@@ -1,15 +1,8 @@
 ﻿  Budynki-Funkcje.cpp
 C:\Users\Daru2\Desktop\Repo projektu\oop-pojazdy\pojazdy-oop-project\Budynki-Funkcje.cpp(106,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  Funkcje.cpp
   Kalkulator_funkcje.cpp
-C:\Users\Daru2\Desktop\Repo projektu\oop-pojazdy\pojazdy-oop-project\Kalkulator_funkcje.cpp(33,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  Kontenery-Funkcje.cpp
-  Menu_funkcje.cpp
-  Pojazdy-Funkcje.cpp
-C:\Users\Daru2\Desktop\Repo projektu\oop-pojazdy\pojazdy-oop-project\Pojazdy-Funkcje.cpp(8,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  Pracownicy-Funkcje.cpp
-C:\Users\Daru2\Desktop\Repo projektu\oop-pojazdy\pojazdy-oop-project\Pracownicy-Funkcje.cpp(58,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\Daru2\Desktop\Repo projektu\oop-pojazdy\pojazdy-oop-project\Pracownicy-Funkcje.cpp(199,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  pojazdy-oop-project.cpp
+C:\Users\Daru2\Desktop\Repo projektu\oop-pojazdy\pojazdy-oop-project\Kalkulator_funkcje.cpp(34,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Daru2\Desktop\Repo projektu\oop-pojazdy\pojazdy-oop-project\Kalkulator_funkcje.cpp(66,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
   Generowanie kodu...
+C:\Users\Daru2\Desktop\Repo projektu\oop-pojazdy\pojazdy-oop-project\Budynki-Funkcje.cpp(176): warning C4715: "StacjaPaliw::getFuelCost”: niewszystkie ścieżki kodu zwracają wartość
   pojazdy-oop-project.vcxproj -> C:\Users\Daru2\Desktop\Repo projektu\oop-pojazdy\Debug\pojazdy-oop-project.exe

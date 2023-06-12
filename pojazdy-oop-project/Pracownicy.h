@@ -31,5 +31,6 @@ public:
 	string formatDataToString();
 	string getDriverVin() { return vinPojazdu; }
 	double getDystans() { return dystans; }
+	string getNameSurname() { return imie + " " + nazwisko; }
 };
 

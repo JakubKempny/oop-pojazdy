@@ -16,6 +16,7 @@ public:
 		return (spalanie * odl) / 100;
 	}
 	double getSpalanie() { return spalanie; }
+	string getRodzPaliwa() { return rodzajPaliwa; }
 };
 
 class Pojazd{

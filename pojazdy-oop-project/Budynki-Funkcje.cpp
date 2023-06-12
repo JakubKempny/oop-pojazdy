@@ -161,3 +161,16 @@ void KontenerStacji:: info() {
 			cout.fill(' ');
 		}
 }
+
+double StacjaPaliw::getFuelCost(string fuelType)
+{
+	if (fuelType == "benzyna") {
+		return getBenz();
+	}
+	else if (fuelType == "ropa") {
+		return getGaz();
+	}
+	else if (fuelType == "gaz") {
+		return getRopa();
+	}
+}
