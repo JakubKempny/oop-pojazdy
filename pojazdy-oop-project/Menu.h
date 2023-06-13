@@ -13,6 +13,7 @@ public:
 	Menu() {};
 	Menu(KontenerCar& konCar, KontenerKierow& konKier, KontenerStacji &konStacji, KontenerStanow &konStanow);
 	void showText();
+	void showHeader();
 	void showMenu();
 	void baseCars();
 	void baseDrivers();

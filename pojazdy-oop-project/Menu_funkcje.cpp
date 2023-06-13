@@ -54,14 +54,30 @@ void Menu::showMenu()
 void Menu::showText()
 {
 	system("CLS");
-	cout << "Witaj w kalkulatorze paliw! \n";
-	cout << "1: Kalkulator paliwa" << endl;
-	cout << "2: Baza pracownicy" << endl;
-	cout << "3: Baza pojazdy" << endl;
-	cout << "4: Baza stacje paliw" << endl;
-	cout << "5: Baza stanowiska" << endl;
-	cout << "6: Wyjdz z programu" << endl;
-	cout << "Twoj wybor: ";
+	showHeader();
+
+	cout << " Witaj w kalkulatorze paliw! \n";
+	cout << " 1: Kalkulator paliwa" << endl;
+	cout << " 2: Baza pracownicy" << endl;
+	cout << " 3: Baza pojazdy" << endl;
+	cout << " 4: Baza stacje paliw" << endl;
+	cout << " 5: Baza stanowiska" << endl;
+	cout << " 6: Wyjdz z programu" << endl;
+	cout << " Twoj wybor: ";
+}
+
+void Menu::showHeader()
+{
+	//change color of text to red
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(h, 10);
+	cout << endl;
+	cout << "  PPPPPP      AAAA     LL         II   WW      WW    EEEEEEE   XX    XX " << endl;
+	cout << " PP    PP    AA  AA    LL         II   WW  WW  WW   EE          XX  XX  " << endl;
+	cout << " PPPPPPP    AAAAAAAA   LL         II   WW WWWW WW   EEEEEEEE      XX    " << endl;
+	cout << " PP         AA    AA   LL         II   WWWW  WWWW   EE          XX  XX  " << endl;
+	cout << " PP         AA    AA   LLLLLLLL   II   WW      WW    EEEEEEE   XX    XX " << endl << endl << endl;
+	SetConsoleTextAttribute(h, 15);
 }
 
 bool Menu::createMaps() 
