@@ -7,6 +7,7 @@
 #include "Menu.h"
 #include "Kalkulator.h"
 
+
 #include <vector>
 #include <exception>
 #include <string>
@@ -14,16 +15,20 @@
 #include <sstream>
 #include <map>
 #include <iomanip>
+#include<Windows.h>
 
 using namespace std;
+
+
 
 vector<string> wczytajPlik(const string nazwaP);
 bool is_digits(const string& str); // Funkcja do sprawdzania czy string zawiera same cyfry
 bool containsOnlyLetters(string const& str);
 bool containsDigitsANDLetters(string const& str);
-bool check(int zmienna);
-bool check(double zmienna);
 bool is_digits2(const string& str);
+void CommaWithDot(string& str);
+string ignoreAfterSpace(const string& input);
+
 
 class CustomException : public exception {
     string message;

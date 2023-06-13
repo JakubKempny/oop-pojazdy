@@ -4,6 +4,10 @@
 using namespace std;
 
 int main(){
+    HWND console = GetConsoleWindow();    // maksymalizacja widoku konsli, tabaelki będą ładniejsze
+    ShowWindow(console, SW_MAXIMIZE);
+    
+
     KontenerCar* konCar = new KontenerCar("Data/Pojazdy.txt");
     KontenerKierow konKier("Data/Pracownicy.txt");
     KontenerStacji konStacji("Data/Stacje.txt");

@@ -26,7 +26,7 @@ bool KontenerKierow::vinWolny(string vin) //Sprawdza czy numer VIN nie jest juz 
 	string nazwa = this->getPathToFile();
 	ifstream plik(nazwa);
 	if (!plik) {
-		cout << "Nie mo\276na otworzy\206 pliku." << endl;
+		cout << "Nie mozna otworzyc pliku." << endl;
 		return false;
 	}
 	while (getline(plik, linia)) {
@@ -84,15 +84,17 @@ bool KontenerStanow::stanowIstnieje(string nazwa)
 void KontenerKierow::addRecord(KontenerCar& k, KontenerStanow& s) {
 	string imie, nazwisko, pesel, vin, stanowisko;
 	double dystans;
-	string e;
+	char input{};	
+
+	cout << endl << "Dodawanie nowego pracownika." << endl;
 	cout << "Podaj Pesel pracownika:";
 	try
 	{
 		cin >> pesel;
 		for (auto i = mapPrac.begin(); i != mapPrac.end(); ++i) {
-			if (pesel == i->first) throw CustomException("W bazie znajduje si\251 ju\276 u\276ytkownik o podanym numerze Pesel! ");
+			if (pesel == i->first) throw CustomException("W bazie znajduje sie juz uzytkownik o podanym numerze Pesel! ");
 		}
-		cout << "Podaj imi\251 pracownika:";
+		cout << "Podaj imie pracownika:";
 		cin >> imie;
 		if (containsOnlyLetters(imie) == false) throw CustomException("Imie zawiera niedozwolone znaki! ");
 		cout << "Podaj nazwisko pracownika:";
@@ -100,16 +102,22 @@ void KontenerKierow::addRecord(KontenerCar& k, KontenerStanow& s) {
 		if (containsOnlyLetters(nazwisko) == false) throw CustomException("Nazwisko zawiera niedozwolone znaki! ");
 		cout << "Podaj vin pojazdu pracownika:";
 		cin >> vin;
-		if (!k.vinIstnieje(vin)) throw CustomException("Podany samoch\242d nie istnieje! ");
-		if (vinWolny(vin)) throw CustomException("Podany samoch\242d jest ju\276 przypisany do innego kierowcy! ");
-		cout << "Podaj \230redni dystans jaki pokonuje pracownik km/dzie\344:";
+		if (!k.vinIstnieje(vin)) throw CustomException("Podany samochod nie istnieje! ");
+		if (vinWolny(vin)) throw CustomException("Podany samochod jest juz przypisany do innego kierowcy! ");
+		cout << "Podaj sredni dystans jaki pokonuje pracownik km/dzien:";
 		cin >> dystans;
 		cout << "Podaj stanowisko pracownika:";
 		cin >> stanowisko;
 		if (!s.stanowIstnieje(stanowisko)) throw CustomException("Podane stanowisko nie istnieje! ");
 		Pracownik* wskNewPrac = new Pracownik(imie, nazwisko, pesel, vin, dystans, stanowisko);
-		mapPrac.insert(make_pair(pesel, wskNewPrac));
-		cout << "Dodano nowego pracownika. Aby zmiana by\210a trwa\210a zapisz zmiany." << endl;
+		cout << "Czy chcesz zapisac zmiany? y/n: ";
+		cin >> input;
+		if (input == 'y') {
+			mapPrac.insert(make_pair(pesel, wskNewPrac));
+			saveChanges();
+			cout << "Dodano nowego pracownika. Nacisnij dowolny klawisz, aby kontynuowac...";
+		}
+		else cout << "Nie zapisano zmian w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
 	}
 	catch (CustomException& e)
 	{
@@ -117,15 +125,27 @@ void KontenerKierow::addRecord(KontenerCar& k, KontenerStanow& s) {
 	}
 }
 
-void KontenerKierow::delRecord(string pesel) {
+void KontenerKierow::delRecord() {
+
+	string pesel{};
 	bool exist = false;
+	cout << endl << "Usuwanie pracownika, podaj jego pesel: " << endl;
+	cin >> pesel;
+	char input{};
 	for (auto i : mapPrac) {
 		if (i.first == pesel) exist = true;
 	}
 	try {
 		if (!exist) throw CustomException("Pracownik o takim numerze PESEL nie istnieje w bazie.");
-		mapPrac.erase(pesel);
-		cout << "Pracownik o peselu:" << pesel << " zosta\210 usuni\251ty" << endl;
+
+		cout << "Czy napewno chcesz usunac pracownika o numerze PESEL: " << pesel << "? y/n: ";
+		cin >> input;
+		if (input == 'y') {
+			mapPrac.erase(pesel);
+			saveChanges();
+			cout << "Pracownik o peselu:" << pesel << " zostal usuniety." << "Nacisnij dowolny klawisz, aby kontynuowac...";
+		}
+		else cout << "Pracownik nie zostal usuniety";
 	}
 	catch (CustomException& e) {
 		cout << e.what() << endl;
@@ -145,7 +165,39 @@ void KontenerKierow::saveChanges() {
 	} 
 }
 
+void KontenerKierow::info() {
+	char z = '_';
+	int spaceValue = 25;
+
+	cout << "Dane z pliku: " << getPathToFile() << " : \n\n";
+
+	cout << setfill(z) << setw(6 * spaceValue + 6 * 2 + 1) << z << endl;
+	cout.fill(' ');
+	// wstawianie nazw kategorii
+	cout << "\174" << setw(spaceValue ) << "PESEL" << setw(2) << "|" << setw(spaceValue) << "Imie" << setw(2) << "|" << setw(spaceValue) << "Nazwisko" << setw(2) << "|" << setw(spaceValue) << "Vin pojazu" << setw(2) << "|" << setw(spaceValue) << "Pokonany dystans [km]" << setw(2) << "|" << setw(spaceValue) << "Stanowisko" << setw(2) << "|"<<endl;
+
+	cout << setfill(z) << setw(6 *spaceValue+6*2+ 1) << z << endl;
+	cout.fill(' ');
+
+	for (auto i : mapPrac) {
+		stringstream ss;
+		ss << (i.second->formatDataToString());
+		string tmp;
+		cout << "|" << setw(spaceValue ) << i.first << setw(2);
+		;
+		while ((getline(ss, tmp, ';'))) {
+			cout << "|" << setw(spaceValue) << tmp << setw(2);
+			;
+		}
+		cout << "|" << endl;
+		cout << setfill(z) << setw(6*spaceValue + 2 *6 + 1) << z << endl;
+		cout.fill(' ');
+	}
+}
+
+
 //Ponizsze funkcje odnosza sie do stanowiska
+
 
 Stanowisko::Stanowisko(string nazwaStanowiska)
 {
@@ -189,23 +241,30 @@ void KontenerStanow::createMapFromFile(vector<string> wiersze) {
 void KontenerStanow::addRecord() {
 	string nazwa;
 	double proc_pokrycia;
-	string e;
-	cout << "Podaj nazw\251 stanowiska:";
+	char input;
+
+	cout << endl << "Dodawanie nowego stanowiska." << endl;
+	cout << "Podaj nazwe stanowiska: " << endl;
 	try
 	{
-		cin >> nazwa;
-		//for (auto& c : nazwa){ //zmiana wszystkich znakow w stringu na male aby potem uniknac problemow typu: Menadzer vs menadzer
-		//	nazwa = tolower(c);
-		//}
-		for (auto i = mapStan.begin(); i != mapStan.end(); ++i) {
-			if (nazwa == i->first) throw CustomException("W bazie znajduje si\251 ju\276 stanowisko o podanej nazwie! ");
+		cin >> nazwa; //trzeba dodac potem wyjatek i sprawdzic czy nazwa nie ma spacji
+		for (auto& c : nazwa){ //zmiana wszystkich znakow w stringu na male aby potem uniknac problemow typu: Menadzer vs menadzer
+			nazwa = tolower(c);
 		}
-		cout << "Podaj procent pokrycia koszt\242w paliwa(np. 0.40 to 40% koszt\242w kt\242re pokrywa firma):";
+		for (auto i = mapStan.begin(); i != mapStan.end(); ++i) {
+			if (nazwa == i->first) throw CustomException("W bazie znajduje sie juz stanowisko o podanej nazwie! ");
+		}
+		cout << "Podaj procent pokrycia kosztow paliwa(np. 0.40 to 40% kosztow ktore pokrywa firma):";
 		cin >> proc_pokrycia;
 
 		Stanowisko* wskNewStan = new Stanowisko(nazwa, proc_pokrycia);
-		mapStan.insert(make_pair(nazwa, wskNewStan));
-		cout << "Dodano nowe stanowisko. Aby zmiana byla trwa\210a zapisz zmiany." << endl;
+		cout << "Czy chcesz zapisac zmiany? y/n: ";
+		cin >> input;
+		if (input == 'y') {
+			cout << "Pomyslnie utworzono nowe stanowisko. Nacisnij dowolny klawisz, aby kontynuowac...";
+			mapStan.insert(make_pair(nazwa, wskNewStan));
+			saveChanges();
+		} else cout << "Nie zapisano zmian w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
 	}
 	catch (CustomException& e)
 	{
@@ -219,7 +278,7 @@ bool KontenerStanow::czyPrzypStan(string nazwaStanow, string plikKierowcy)
 	string nazwa = plikKierowcy;
 	ifstream plik(nazwa);
 	if (!plik) {
-		cout << "Nie mo\276na otworzy\206 pliku." << endl;
+		cout << "Nie mozna otworzyc pliku." << endl;
 		return false;
 	}
 	while (getline(plik, linia)) {
@@ -243,16 +302,27 @@ bool KontenerStanow::czyPrzypStan(string nazwaStanow, string plikKierowcy)
 	return false;
 }
 
-void KontenerStanow::delRecord(string nazwa, string plikKierowcy) {
+void KontenerStanow::delRecord(string plikKierowcy) {
+	string nazwa{};
+	string plik{};
+	char input;
+	cout << endl << "Usuwanie stanowiska, podaj jego nazwe: " << endl;
+	cin >> nazwa;
 	bool exist = false;
 	for (auto i : mapStan) {
 		if (i.first == nazwa) exist = true;
 	}
 	try {
 		if (!exist) throw CustomException("Stanowisko o takiej nazwie nie istnieje w bazie.");
-		if (czyPrzypStan(nazwa, plikKierowcy)) throw CustomException("Stanowisko o takiej nazwie jest ju\276 przypisane do pracownika. Nie mo\276na usun\245\206 stanowiska! "); // sprawdzi czy stanowisko przypadkiem nie jest juz przypisane do jakiegos pracownika
-		mapStan.erase(nazwa);
-		cout << "Stanowisko:" << nazwa << " zosta\210o usuni\251te" << endl;
+		if (czyPrzypStan(nazwa, plikKierowcy)) throw CustomException("Stanowisko o takiej nazwie jest juz przypisane do pracownika. Nie mozna usunac stanowiska! "); // sprawdzi czy stanowisko przypadkiem nie jest juz przypisane do jakiegos pracownika
+		cout << "Czy napewno chcesz usunac stanowisko o nazwie: " << nazwa << "? y/n: ";
+		cin >> input;
+		if (input == 'y') {
+			mapStan.erase(nazwa);
+			saveChanges();
+			cout << "Stanowisko:" << nazwa << " zostalo usuniete." << "Nacisnij dowolny klawisz, aby kontynuowac...";
+		}
+		else cout << "Nie zapisano zmian w bazie";
 	}
 	catch (CustomException& e) {
 		cout << e.what() << endl;
@@ -269,5 +339,34 @@ void KontenerStanow::saveChanges() {
 		}
 		plik << ss.str();
 		plik.close();
+	}
+}
+
+void KontenerStanow::info() {
+	char z = '_';
+	int spaceValue = 25;
+
+	cout << "Dane z pliku: " << getPathToFile() << " : \n\n";
+
+	cout << setfill(z) << setw(2 * spaceValue + 2 * 2 + 1) << z << endl;
+	cout.fill(' ');
+	// wstawianie nazw kategorii
+	cout << "\174" << setw(spaceValue) << "Stanowisko" << setw(2) << "|" << setw(spaceValue) << "Wysokosc znizki [*100%]"<< setw(2)<<"|" << endl;
+	cout << setfill(z) << setw(2 * spaceValue + 2 * 2 + 1) << z << endl;
+	cout.fill(' ');
+
+	for (auto i : mapStan) {
+		stringstream ss;
+		ss << (i.second->formatDataToString());
+		string tmp;
+		cout << "|" << setw(spaceValue) << i.first << setw(2);
+		;
+		while ((getline(ss, tmp, ';'))) {
+			cout << "|" << setw(spaceValue) << tmp << setw(2);
+			;
+		}
+		cout << "|" << endl;
+		cout << setfill(z) << setw(2 * spaceValue + 2 * 2 + 1) << z << endl;
+		cout.fill(' ');
 	}
 }

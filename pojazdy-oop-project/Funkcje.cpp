@@ -14,7 +14,7 @@ vector<string> wczytajPlik(const string nazwaP){
 		return wektor;
 	}
 	else {
-		throw CustomException("Nie uda\210o si\251 otworzy\210 pliku: "+nazwaP);
+		throw CustomException("Nie udalo sie otworzyc pliku: "+nazwaP);
 	}
 }
 
@@ -30,26 +30,29 @@ bool containsOnlyLetters(string const& str) {
 }
 
 bool containsDigitsANDLetters(string const& str) {
-	return str.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") == std::string::npos;
+	return str.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ") == std::string::npos;
 }
 
-bool check(int zmienna)
+
+bool is_digits2(const string& str) 
 {
-	if (zmienna < 0)
-		return false;
-	else
-		return true;
+	return str.find_first_not_of("0123456789,.") == std::string::npos;
 }
 
-bool check(double zmienna)
+void CommaWithDot(string& str) // zamiana przecinka na kropke
 {
-	if (zmienna < 0)
-		return false;
-	else
-		return true;
+	for (char& c : str) {
+		if (c == ',') {
+			c = '.';
+		}
+	}
+
 }
 
-bool is_digits2(const string& str) // Funkcja do sprawdzania czy string zawiera same cyfry
-{
-	return str.find_first_not_of("0123456789. ") == std::string::npos;
+string ignoreAfterSpace(const string& input) {
+
+	std::stringstream ss(input);
+	std::string result;
+	ss >> result;
+	return result;
 }

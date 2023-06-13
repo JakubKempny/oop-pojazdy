@@ -19,7 +19,7 @@ public:
 	void createMapFromFile(vector<string> wiersze);
 	void info() override;
 	void addRecord();
-	void delRecord(string vin, string plikKierowcy);
+	void delRecord(string plikKierowcy);
 	void saveChanges(); // nadpisuje dane z pliku
 	//get'ery
 	Car* getCar(string c) { return mapCar.at(c); };
@@ -42,18 +42,13 @@ public:
 	}
 	string getPathToFile() { return pathToFile; }
 	void createMapFromFile(vector<string> wiersze);
-	void info() override { // tymczasowo
-		cout << "Dane z pliku: " << getPathToFile() << " :" << endl;
-		for (auto i = mapStan.begin(); i != mapStan.end(); ++i) {
-			cout << i->first << ";";
-			cout << i->second->formatDataToString() << endl;
-		}
-	}
+	void info() override;  
 	void addRecord();
-	void delRecord(string nazwaStanow, string plikKierowcy);
+	void delRecord(string plikKierowcy);
 	void saveChanges();
 	bool stanowIstnieje(string nazwa);
 	bool czyPrzypStan(string nazwaStanow, string plikKierowcy);
+	Stanowisko* getPosition(string c) { return mapStan.at(c); };
 };
 
 class KontenerKierow:Kontener {
@@ -69,15 +64,9 @@ public:
 	}
 	string getPathToFile() { return pathToFile; }
 	void createMapFromFile(vector<string> wiersze);
-	void info() override { // tymczasowo
-		cout << "Dane z pliku: " << getPathToFile() << " :" << endl;
-		for (auto i = mapPrac.begin(); i != mapPrac.end(); ++i) {
-			cout << i->first << ";";
-			cout << i->second->formatDataToString() << endl;
-		}
-	}
+	void info() override; 
 	void addRecord(KontenerCar& k, KontenerStanow& stan);
-	void delRecord(string pesel);
+	void delRecord();
 	void saveChanges();
 	bool vinWolny(string vin);
 	map<string, Pracownik*> getMap() { return mapPrac; }
@@ -87,7 +76,7 @@ public:
 
 class KontenerStacji :Kontener {
 
-	map<string, StacjaPaliw*> mapStacji; // adres, wskaünik na Stacje
+	map<string, StacjaPaliw*> mapStacji; // numer ID, wskaünik na Stacje
 	string pathToFile = "";
 public:
 	KontenerStacji() {};
@@ -99,15 +88,13 @@ public:
 	}
 	string getPathToFile() { return pathToFile; }
 	void createMapFromFile(vector<string> wiersze);
-	void info() override {
-		cout << "Dane z pliku: " << getPathToFile() << " : \n";
-		for (auto i = mapStacji.begin(); i != mapStacji.end(); ++i) {
-			cout << i->first << ";";
-			cout << i->second->formatDataToString() << endl;
-		}
-	}
 
+	map<string, StacjaPaliw*> getMap() { return mapStacji; }
+	StacjaPaliw* getStation(string c) { return mapStacji.at(c); };
+
+	void info() override;
 	void addRecord();
-	void delRecord(string adres);
+	void delRecord();
 	void saveChanges();
+	void changeRecord();
 };
