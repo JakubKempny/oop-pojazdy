@@ -86,7 +86,7 @@ void Menu::baseCars()
 {
 	system("CLS");
 	konCar.info();
-	cout << "Dodaj/usun samochod (a/d/q)";
+	cout << "\nDodaj/usun samochod (a/d/q)";
 	do
 	{
 		this->input = _getch();
@@ -113,7 +113,7 @@ void Menu::baseDrivers()
 {
 	system("CLS");
 	konKier.info();
-	cout << "Dodaj/usun pracownika (a/d/q)";
+	cout << "\nDodaj/usun pracownika (a/d/q)";
 	do
 	{
 		this->input = _getch();
@@ -140,7 +140,7 @@ void Menu::baseLevels()
 {
 	system("CLS");
 	konStanow.info();
-	cout << "Dodaj/usun stanowisko (a/d/q)";
+	cout << "\nDodaj/usun stanowisko (a/d/q)";
 	do
 	{
 		this->input = _getch();
@@ -167,7 +167,7 @@ void Menu::baseGasStations()
 {
 	system("CLS");
 	konStacji.info();
-	cout << "Dodaj/usun stacje paliw (a/d/q)";
+	cout << "\nDodaj/usun stacje paliw (a/d/q)";
 	do
 	{
 		this->input = _getch();

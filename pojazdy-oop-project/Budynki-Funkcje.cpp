@@ -50,9 +50,9 @@ string StacjaPaliw::formatDataToString()
 
 void KontenerStacji::addRecord()
 {
-	string adres, nazwa, numer, miasto, ulica, numerUl;
-	string cenaBenzyny{}, cenaRopy{}, cenaGazu{}, znizka;
+	string adres, nazwa, numer, miasto, ulica, numerUl,cenaBenzyny{}, cenaRopy{}, cenaGazu{}, znizka;
 	char input{};
+
 	cout << endl << "\nDodawanie nowej stacji.\n" << endl;
 	cout << "Podaj numer ID stacji: ";
 	try
@@ -168,7 +168,7 @@ void KontenerStacji::saveChanges()
 
 void KontenerStacji::info() {
 	char z = '_';
-	int spaceValue = 25;
+	int spaceValue = 30;
 
 	cout << "Dane z pliku: " << getPathToFile() << " : \n\n";
 

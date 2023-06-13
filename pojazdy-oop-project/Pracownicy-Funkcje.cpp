@@ -165,7 +165,39 @@ void KontenerKierow::saveChanges() {
 	} 
 }
 
+void KontenerKierow::info() {
+	char z = '_';
+	int spaceValue = 25;
+
+	cout << "Dane z pliku: " << getPathToFile() << " : \n\n";
+
+	cout << setfill(z) << setw(6 * spaceValue + 6 * 2 + 1) << z << endl;
+	cout.fill(' ');
+	// wstawianie nazw kategorii
+	cout << "\174" << setw(spaceValue ) << "PESEL" << setw(2) << "|" << setw(spaceValue) << "Imie" << setw(2) << "|" << setw(spaceValue) << "Nazwisko" << setw(2) << "|" << setw(spaceValue) << "Vin pojazu" << setw(2) << "|" << setw(spaceValue) << "Pokonany dystans [km]" << setw(2) << "|" << setw(spaceValue) << "Stanowisko" << setw(2) << "|"<<endl;
+
+	cout << setfill(z) << setw(6 *spaceValue+6*2+ 1) << z << endl;
+	cout.fill(' ');
+
+	for (auto i : mapPrac) {
+		stringstream ss;
+		ss << (i.second->formatDataToString());
+		string tmp;
+		cout << "|" << setw(spaceValue ) << i.first << setw(2);
+		;
+		while ((getline(ss, tmp, ';'))) {
+			cout << "|" << setw(spaceValue) << tmp << setw(2);
+			;
+		}
+		cout << "|" << endl;
+		cout << setfill(z) << setw(6*spaceValue + 2 *6 + 1) << z << endl;
+		cout.fill(' ');
+	}
+}
+
+
 //Ponizsze funkcje odnosza sie do stanowiska
+
 
 Stanowisko::Stanowisko(string nazwaStanowiska)
 {
@@ -307,5 +339,34 @@ void KontenerStanow::saveChanges() {
 		}
 		plik << ss.str();
 		plik.close();
+	}
+}
+
+void KontenerStanow::info() {
+	char z = '_';
+	int spaceValue = 25;
+
+	cout << "Dane z pliku: " << getPathToFile() << " : \n\n";
+
+	cout << setfill(z) << setw(2 * spaceValue + 2 * 2 + 1) << z << endl;
+	cout.fill(' ');
+	// wstawianie nazw kategorii
+	cout << "\174" << setw(spaceValue) << "Stanowisko" << setw(2) << "|" << setw(spaceValue) << "Wysokosc znizki [*100%]"<< setw(2)<<"|" << endl;
+	cout << setfill(z) << setw(2 * spaceValue + 2 * 2 + 1) << z << endl;
+	cout.fill(' ');
+
+	for (auto i : mapStan) {
+		stringstream ss;
+		ss << (i.second->formatDataToString());
+		string tmp;
+		cout << "|" << setw(spaceValue) << i.first << setw(2);
+		;
+		while ((getline(ss, tmp, ';'))) {
+			cout << "|" << setw(spaceValue) << tmp << setw(2);
+			;
+		}
+		cout << "|" << endl;
+		cout << setfill(z) << setw(2 * spaceValue + 2 * 2 + 1) << z << endl;
+		cout.fill(' ');
 	}
 }

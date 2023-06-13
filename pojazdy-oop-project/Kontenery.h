@@ -42,18 +42,13 @@ public:
 	}
 	string getPathToFile() { return pathToFile; }
 	void createMapFromFile(vector<string> wiersze);
-	void info() override { // tymczasowo
-		cout << "Dane z pliku: " << getPathToFile() << " :" << endl;
-		for (auto i = mapStan.begin(); i != mapStan.end(); ++i) {
-			cout << i->first << ";";
-			cout << i->second->formatDataToString() << endl;
-		}
-	}
+	void info() override;  
 	void addRecord();
 	void delRecord(string plikKierowcy);
 	void saveChanges();
 	bool stanowIstnieje(string nazwa);
 	bool czyPrzypStan(string nazwaStanow, string plikKierowcy);
+	
 };
 
 class KontenerKierow:Kontener {
@@ -69,13 +64,7 @@ public:
 	}
 	string getPathToFile() { return pathToFile; }
 	void createMapFromFile(vector<string> wiersze);
-	void info() override { // tymczasowo
-		cout << "Dane z pliku: " << getPathToFile() << " :" << endl;
-		for (auto i = mapPrac.begin(); i != mapPrac.end(); ++i) {
-			cout << i->first << ";";
-			cout << i->second->formatDataToString() << endl;
-		}
-	}
+	void info() override; 
 	void addRecord(KontenerCar& k, KontenerStanow& stan);
 	void delRecord();
 	void saveChanges();
@@ -87,7 +76,7 @@ public:
 
 class KontenerStacji :Kontener {
 
-	map<string, StacjaPaliw*> mapStacji; // adres, wskaünik na Stacje
+	map<string, StacjaPaliw*> mapStacji; // numer ID, wskaünik na Stacje
 	string pathToFile = "";
 public:
 	KontenerStacji() {};

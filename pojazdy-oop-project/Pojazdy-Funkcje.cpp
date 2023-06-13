@@ -108,15 +108,19 @@ void KontenerCar::saveChanges() {
 }
 
 void KontenerCar::info() {
-	// tymczasowo
-	cout << "Dane z pliku: " << getPathToFile() << " :" << endl;
 	int spaceValue = 16;
+	char z = '_';
+
+	cout << "Dane z pliku: " << getPathToFile() << " :" << endl<<endl;
+
+	cout << setfill(z) << setw(spaceValue * 5 + 6 * 2 + spaceValue / 2+1) << z << endl;
+	cout.fill(' ');
 	// wstawianie nazw kategorii
 	cout <<"|"<< setw(spaceValue / 2) << "nrVin" << setw(2) << "|" << setw(spaceValue) << "Marka" << setw(2) << "|" << setw(spaceValue) << "Model" << setw(2) << "|" << setw(spaceValue) << "Rocznik" << setw(2) << "|" << setw(spaceValue) << "Spalanie" << setw(2) << "|" << setw(spaceValue) << "Paliwo" << setw(2) << "|" << endl;
 
 	// wstawianie lini
-	char z = '_';
-	cout << setfill(z) << setw(spaceValue * 5 + 6 * 2 + spaceValue / 2) << z << endl;
+
+	cout << setfill(z) << setw(spaceValue * 5 + 6 * 2 + spaceValue / 2+1) << z << endl;
 	cout.fill(' ');
 
 	for (auto i : mapCar) {
