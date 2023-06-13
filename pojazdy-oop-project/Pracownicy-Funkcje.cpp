@@ -26,7 +26,7 @@ bool KontenerKierow::vinWolny(string vin) //Sprawdza czy numer VIN nie jest juz 
 	string nazwa = this->getPathToFile();
 	ifstream plik(nazwa);
 	if (!plik) {
-		cout << "Nie mo\276na otworzy\206 pliku." << endl;
+		cout << "Nie mozna otworzyc pliku." << endl;
 		return false;
 	}
 	while (getline(plik, linia)) {
@@ -92,9 +92,9 @@ void KontenerKierow::addRecord(KontenerCar& k, KontenerStanow& s) {
 	{
 		cin >> pesel;
 		for (auto i = mapPrac.begin(); i != mapPrac.end(); ++i) {
-			if (pesel == i->first) throw CustomException("W bazie znajduje si\251 ju\276 u\276ytkownik o podanym numerze Pesel! ");
+			if (pesel == i->first) throw CustomException("W bazie znajduje sie juz uzytkownik o podanym numerze Pesel! ");
 		}
-		cout << "Podaj imi\251 pracownika:";
+		cout << "Podaj imie pracownika:";
 		cin >> imie;
 		if (containsOnlyLetters(imie) == false) throw CustomException("Imie zawiera niedozwolone znaki! ");
 		cout << "Podaj nazwisko pracownika:";
@@ -102,22 +102,22 @@ void KontenerKierow::addRecord(KontenerCar& k, KontenerStanow& s) {
 		if (containsOnlyLetters(nazwisko) == false) throw CustomException("Nazwisko zawiera niedozwolone znaki! ");
 		cout << "Podaj vin pojazdu pracownika:";
 		cin >> vin;
-		if (!k.vinIstnieje(vin)) throw CustomException("Podany samoch\242d nie istnieje! ");
-		if (vinWolny(vin)) throw CustomException("Podany samoch\242d jest ju\276 przypisany do innego kierowcy! ");
-		cout << "Podaj \230redni dystans jaki pokonuje pracownik km/dzie\344:";
+		if (!k.vinIstnieje(vin)) throw CustomException("Podany samochod nie istnieje! ");
+		if (vinWolny(vin)) throw CustomException("Podany samochod jest juz przypisany do innego kierowcy! ");
+		cout << "Podaj sredni dystans jaki pokonuje pracownik km/dzien:";
 		cin >> dystans;
 		cout << "Podaj stanowisko pracownika:";
 		cin >> stanowisko;
 		if (!s.stanowIstnieje(stanowisko)) throw CustomException("Podane stanowisko nie istnieje! ");
 		Pracownik* wskNewPrac = new Pracownik(imie, nazwisko, pesel, vin, dystans, stanowisko);
-		cout << "Czy chcesz zapisa\206 zmiany? y/n: ";
+		cout << "Czy chcesz zapisac zmiany? y/n: ";
 		cin >> input;
 		if (input == 'y') {
 			mapPrac.insert(make_pair(pesel, wskNewPrac));
 			saveChanges();
-			cout << "Dodano nowego pracownika. Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+			cout << "Dodano nowego pracownika. Nacisnij dowolny klawisz, aby kontynuowac...";
 		}
-		else cout << "Nie zapisano zmian w bazie! Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+		else cout << "Nie zapisano zmian w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
 	}
 	catch (CustomException& e)
 	{
@@ -138,14 +138,14 @@ void KontenerKierow::delRecord() {
 	try {
 		if (!exist) throw CustomException("Pracownik o takim numerze PESEL nie istnieje w bazie.");
 
-		cout << "Czy napewno chcesz usun\245\206 pracownika o numerze PESEL: " << pesel << "? y/n: ";
+		cout << "Czy napewno chcesz usunac pracownika o numerze PESEL: " << pesel << "? y/n: ";
 		cin >> input;
 		if (input == 'y') {
 			mapPrac.erase(pesel);
 			saveChanges();
-			cout << "Pracownik o peselu:" << pesel << " zosta\210 usuni\251ty." << "Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+			cout << "Pracownik o peselu:" << pesel << " zostal usuniety." << "Nacisnij dowolny klawisz, aby kontynuowac...";
 		}
-		else cout << "Pracownik nie zosta\210 usuni\251ty";
+		else cout << "Pracownik nie zostal usuniety";
 	}
 	catch (CustomException& e) {
 		cout << e.what() << endl;
@@ -212,7 +212,7 @@ void KontenerStanow::addRecord() {
 	char input;
 
 	cout << endl << "Dodawanie nowego stanowiska." << endl;
-	cout << "Podaj nazw\251 stanowiska: " << endl;
+	cout << "Podaj nazwe stanowiska: " << endl;
 	try
 	{
 		cin >> nazwa; //trzeba dodac potem wyjatek i sprawdzic czy nazwa nie ma spacji
@@ -220,19 +220,19 @@ void KontenerStanow::addRecord() {
 			nazwa = tolower(c);
 		}
 		for (auto i = mapStan.begin(); i != mapStan.end(); ++i) {
-			if (nazwa == i->first) throw CustomException("W bazie znajduje si\251 ju\276 stanowisko o podanej nazwie! ");
+			if (nazwa == i->first) throw CustomException("W bazie znajduje sie juz stanowisko o podanej nazwie! ");
 		}
-		cout << "Podaj procent pokrycia koszt\242w paliwa(np. 0.40 to 40% koszt\242w kt\242re pokrywa firma):";
+		cout << "Podaj procent pokrycia kosztow paliwa(np. 0.40 to 40% kosztow ktore pokrywa firma):";
 		cin >> proc_pokrycia;
 
 		Stanowisko* wskNewStan = new Stanowisko(nazwa, proc_pokrycia);
-		cout << "Czy chcesz zapisa\206 zmiany? y/n: ";
+		cout << "Czy chcesz zapisac zmiany? y/n: ";
 		cin >> input;
 		if (input == 'y') {
-			cout << "Pomyslnie utworzono nowe stanowisko. Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+			cout << "Pomyslnie utworzono nowe stanowisko. Nacisnij dowolny klawisz, aby kontynuowac...";
 			mapStan.insert(make_pair(nazwa, wskNewStan));
 			saveChanges();
-		} else cout << "Nie zapisano zmian w bazie! Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+		} else cout << "Nie zapisano zmian w bazie! Nacisnij dowolny klawisz, aby kontynuowac...";
 	}
 	catch (CustomException& e)
 	{
@@ -246,7 +246,7 @@ bool KontenerStanow::czyPrzypStan(string nazwaStanow, string plikKierowcy)
 	string nazwa = plikKierowcy;
 	ifstream plik(nazwa);
 	if (!plik) {
-		cout << "Nie mo\276na otworzy\206 pliku." << endl;
+		cout << "Nie mozna otworzyc pliku." << endl;
 		return false;
 	}
 	while (getline(plik, linia)) {
@@ -274,7 +274,7 @@ void KontenerStanow::delRecord(string plikKierowcy) {
 	string nazwa{};
 	string plik{};
 	char input;
-	cout << endl << "Usuwanie stanowiska, podaj jego nazwe\251: " << endl;
+	cout << endl << "Usuwanie stanowiska, podaj jego nazwe: " << endl;
 	cin >> nazwa;
 	bool exist = false;
 	for (auto i : mapStan) {
@@ -282,13 +282,13 @@ void KontenerStanow::delRecord(string plikKierowcy) {
 	}
 	try {
 		if (!exist) throw CustomException("Stanowisko o takiej nazwie nie istnieje w bazie.");
-		if (czyPrzypStan(nazwa, plikKierowcy)) throw CustomException("Stanowisko o takiej nazwie jest ju\276 przypisane do pracownika. Nie mo\276na usun\245\206 stanowiska! "); // sprawdzi czy stanowisko przypadkiem nie jest juz przypisane do jakiegos pracownika
-		cout << "Czy napewno chcesz usun\245\206 stanowisko o nazwie: " << nazwa << "? y/n: ";
+		if (czyPrzypStan(nazwa, plikKierowcy)) throw CustomException("Stanowisko o takiej nazwie jest juz przypisane do pracownika. Nie mozna usunac stanowiska! "); // sprawdzi czy stanowisko przypadkiem nie jest juz przypisane do jakiegos pracownika
+		cout << "Czy napewno chcesz usunac stanowisko o nazwie: " << nazwa << "? y/n: ";
 		cin >> input;
 		if (input == 'y') {
 			mapStan.erase(nazwa);
 			saveChanges();
-			cout << "Stanowisko:" << nazwa << " zosta\210o usuni\251te." << "Naci\230nij dowolny klawisz, aby kontynuowa\206...";
+			cout << "Stanowisko:" << nazwa << " zostalo usuniete." << "Nacisnij dowolny klawisz, aby kontynuowac...";
 		}
 		else cout << "Nie zapisano zmian w bazie";
 	}

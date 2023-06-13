@@ -6,7 +6,7 @@ void Menu::calc()
 	system("CLS");
 	Kalkulator kalk1(konCar, konKier, konStacji, konStanow);
 	kalk1.computeEngine();
-	cout << endl << "Kliknij dowolny klawisz, aby wr\242ci\206 do menu... ";
+	cout << endl << "Kliknij dowolny klawisz, aby wrocic do menu... ";
 	system("pause > nul");
 	showMenu();
 }
@@ -54,14 +54,14 @@ void Menu::showMenu()
 void Menu::showText()
 {
 	system("CLS");
-	cout << "Witaj w kalkulatorze paliw v.2137! \n";
+	cout << "Witaj w kalkulatorze paliw! \n";
 	cout << "1: Kalkulator paliwa" << endl;
 	cout << "2: Baza pracownicy" << endl;
 	cout << "3: Baza pojazdy" << endl;
 	cout << "4: Baza stacje paliw" << endl;
 	cout << "5: Baza stanowiska" << endl;
 	cout << "6: Wyjd\253 z programu" << endl;
-	cout << "Tw\242j wyb\242r: ";
+	cout << "Twoj wybor: ";
 }
 
 bool Menu::createMaps() 
@@ -86,7 +86,7 @@ void Menu::baseCars()
 {
 	system("CLS");
 	konCar.info();
-	cout << "Dodaj/usu\344 samoch\242d (a/d/q)";
+	cout << "Dodaj/usun samochod (a/d/q)";
 	do
 	{
 		this->input = _getch();
@@ -113,7 +113,7 @@ void Menu::baseDrivers()
 {
 	system("CLS");
 	konKier.info();
-	cout << "Dodaj/usu\344 pracownika (a/d/q)";
+	cout << "Dodaj/usun pracownika (a/d/q)";
 	do
 	{
 		this->input = _getch();
@@ -140,7 +140,7 @@ void Menu::baseLevels()
 {
 	system("CLS");
 	konStanow.info();
-	cout << "Dodaj/usu\344 stanowisko (a/d/q)";
+	cout << "Dodaj/usun stanowisko (a/d/q)";
 	do
 	{
 		this->input = _getch();
@@ -167,7 +167,7 @@ void Menu::baseGasStations()
 {
 	system("CLS");
 	konStacji.info();
-	cout << "Dodaj/usu\344 stacje paliw (a/d/q)";
+	cout << "Dodaj/usun stacje paliw (a/d/q)";
 	do
 	{
 		this->input = _getch();

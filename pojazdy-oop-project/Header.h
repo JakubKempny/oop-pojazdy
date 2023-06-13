@@ -6,7 +6,7 @@
 #include "Kontenery.h"
 #include "Menu.h"
 #include "Kalkulator.h"
-#include"Funkcje.cpp"
+
 
 #include <vector>
 #include <exception>
@@ -27,6 +27,7 @@ bool containsOnlyLetters(string const& str);
 bool containsDigitsANDLetters(string const& str);
 bool is_digits2(const string& str);
 void CommaWithDot(string& str);
+string ignoreAfterSpace(const string& input);
 
 
 class CustomException : public exception {
