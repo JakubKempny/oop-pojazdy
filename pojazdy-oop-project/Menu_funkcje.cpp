@@ -167,11 +167,11 @@ void Menu::baseGasStations()
 {
 	system("CLS");
 	konStacji.info();
-	cout << "\nDodaj/usun stacje paliw (a/d/q)";
+	cout << "\nDodaj/usun/zmien_ceny/wyjdz (a/d/c/q)";
 	do
 	{
 		this->input = _getch();
-	} while ((input != 'a') && (input != 'd') && (input != 'q'));
+	} while ((input != 'a') && (input != 'd') && (input != 'q') && (input != 'c'));
 	switch (input)
 	{
 	case 'a':
@@ -181,6 +181,11 @@ void Menu::baseGasStations()
 		break;
 	case 'd':
 		konStacji.delRecord();
+		system("pause > nul");
+		baseGasStations();
+		break;
+	case 'c':
+		konStacji.changeRecord();
 		system("pause > nul");
 		baseGasStations();
 		break;

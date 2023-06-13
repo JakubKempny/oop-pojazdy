@@ -96,4 +96,5 @@ public:
 	void addRecord();
 	void delRecord();
 	void saveChanges();
+	void changeRecord();
 };

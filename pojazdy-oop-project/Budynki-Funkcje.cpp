@@ -196,8 +196,7 @@ void KontenerStacji::info() {
 	}
 }
 
-double StacjaPaliw::getFuelCost(string fuelType)
-{
+double StacjaPaliw::getFuelCost(string fuelType){
 	if (fuelType == "benzyna") {
 		return getBenz();
 	}
@@ -209,3 +208,58 @@ double StacjaPaliw::getFuelCost(string fuelType)
 	}
 }
 
+void KontenerStacji::changeRecord() {
+	string id;
+	char input{};
+	string cenaBenzyny{}, cenaRopy{}, cenaGazu{};
+	StacjaPaliw* newGas;
+	cout << endl << "Zmiana cen stacji, podaj ID: ";
+	cin >> id;
+	bool exist = false;
+	try {
+		for (auto i : mapStacji) {
+			if (i.first == id) exist = true;
+		}
+		if (!exist) throw CustomException("Stacja o takim ID nie istnieje w bazie.");
+
+		newGas = getStation(id);
+
+		cout << "Podaj wysokosc ceny benzyny:";
+		cin >> cenaBenzyny;
+		CommaWithDot(cenaBenzyny);
+		if (is_digits2(cenaBenzyny) == false || stod(cenaBenzyny) <= 0 || cenaBenzyny.length() > 10) throw CustomException("Cena zostala niepoprawnie wpisana!");
+
+		cout << "Podaj wysokosc ceny oleju napedowego:";
+		cin >> cenaRopy;
+		CommaWithDot(cenaRopy);
+		if (is_digits2(cenaRopy) == false || stod(cenaRopy) <= 0 || cenaRopy.length() > 10) throw CustomException("Cena zostala niepoprawnie wpisana!");
+
+
+		cout << "Podaj wysokosc ceny gazu:";
+		cin >> cenaGazu;
+		CommaWithDot(cenaGazu);
+		if (is_digits2(cenaGazu) == false || stod(cenaGazu) <= 0 || cenaGazu.length() > 10) throw CustomException("Cena zostala niepoprawnie wpisana!");
+
+
+
+		cout << "Czy napewno chcesz dokonac zmian w stacji paliw o ID: " << id << "? y/n: ";
+		cin >> input;
+		if (input == 'y') {
+			//TUTAJ SOBIE PODMIENIA OBIEKT
+			newGas = new StacjaPaliw(id, newGas->getFirma(), newGas->getName(), stod(cenaBenzyny), stod(cenaRopy), stod(cenaGazu), newGas->getDiscount());
+
+			for (auto i : mapStacji) {
+				if (i.first == id){
+						*i.second = *newGas;
+				}
+			}
+			saveChanges();
+			cout << "Stacja benzynowa z id: " << id << " zaaktualizowala ceny.\n" << "Nacisnij dowolny klawisz, aby kontynuowac...";
+			delete newGas;
+		}
+		else cout << "Nie dokonano zmian.";
+	}
+	catch (CustomException& e) {
+		cout << e.what() << endl;
+	}
+}

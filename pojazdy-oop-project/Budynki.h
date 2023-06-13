@@ -35,4 +35,5 @@ public:
 	double getDiscount() { return znizka; }
 	double getFuelCost(string fuelType);
 	string formatDataToString();
+	string getFirma() { return firma; };
 };
