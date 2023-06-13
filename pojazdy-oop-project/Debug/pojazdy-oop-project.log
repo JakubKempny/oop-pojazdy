@@ -1,18 +1,4 @@
-﻿  Budynki-Funkcje.cpp
-C:\Users\lenovo\Desktop\project1\pojazdy-oop-project\Budynki-Funkcje.cpp(80,53): warning C4804: ">": niebezpieczne użycie typu "bool" w operacji
-C:\Users\lenovo\Desktop\project1\pojazdy-oop-project\Budynki-Funkcje.cpp(137,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  Funkcje.cpp
-  Kalkulator_funkcje.cpp
-C:\Users\lenovo\Desktop\project1\pojazdy-oop-project\Kalkulator_funkcje.cpp(34,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\lenovo\Desktop\project1\pojazdy-oop-project\Kalkulator_funkcje.cpp(65,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  Kontenery-Funkcje.cpp
-  Menu_funkcje.cpp
-  Pojazdy-Funkcje.cpp
-C:\Users\lenovo\Desktop\project1\pojazdy-oop-project\Pojazdy-Funkcje.cpp(8,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  Pracownicy-Funkcje.cpp
-C:\Users\lenovo\Desktop\project1\pojazdy-oop-project\Pracownicy-Funkcje.cpp(58,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\lenovo\Desktop\project1\pojazdy-oop-project\Pracownicy-Funkcje.cpp(231,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  pojazdy-oop-project.cpp
-  Generowanie kodu...
-C:\Users\lenovo\Desktop\project1\pojazdy-oop-project\Budynki-Funkcje.cpp(210): warning C4715: "StacjaPaliw::getFuelCost”: niewszystkie ścieżki kodu zwracają wartość
-  pojazdy-oop-project.vcxproj -> C:\Users\lenovo\Desktop\project1\Debug\pojazdy-oop-project.exe
+﻿  Kalkulator_funkcje.cpp
+C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator_funkcje.cpp(69,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator_funkcje.cpp(111,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+  pojazdy-oop-project.vcxproj -> C:\Users\Daru2\Desktop\Repo\Debug\pojazdy-oop-project.exe

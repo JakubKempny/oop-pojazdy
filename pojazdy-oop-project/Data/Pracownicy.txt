@@ -1,2 +1,2 @@
+12345678901;Grzegorz;Brzeczyszczykiewicz;1;10.8;menadzer;
 12345678902;Marcin;Nowak;12;100.2;HR;
-12345678906;Andrzej;Kowalski;1;54.3;HR;

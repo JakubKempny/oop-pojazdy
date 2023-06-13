@@ -60,7 +60,7 @@ void Menu::showText()
 	cout << "3: Baza pojazdy" << endl;
 	cout << "4: Baza stacje paliw" << endl;
 	cout << "5: Baza stanowiska" << endl;
-	cout << "6: Wyjd\253 z programu" << endl;
+	cout << "6: Wyjdz z programu" << endl;
 	cout << "Twoj wybor: ";
 }
 

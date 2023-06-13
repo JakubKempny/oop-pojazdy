@@ -48,7 +48,7 @@ public:
 	void saveChanges();
 	bool stanowIstnieje(string nazwa);
 	bool czyPrzypStan(string nazwaStanow, string plikKierowcy);
-	
+	Stanowisko* getPosition(string c) { return mapStan.at(c); };
 };
 
 class KontenerKierow:Kontener {
@@ -90,7 +90,7 @@ public:
 	void createMapFromFile(vector<string> wiersze);
 
 	map<string, StacjaPaliw*> getMap() { return mapStacji; }
-	StacjaPaliw* getWorker(string c) { return mapStacji.at(c); };
+	StacjaPaliw* getStation(string c) { return mapStacji.at(c); };
 
 	void info() override;
 	void addRecord();

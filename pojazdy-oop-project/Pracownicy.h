@@ -19,9 +19,11 @@ public:
 	Stanowisko(string nazwaStanowiska, double proc_pokrycia);
 	string formatDataToString();
 	string getName();
+	double getContribution() { return proc_pokrycia; }
+	string getPosition() { return nazwaStanowiska; }
 };
 
-class Pracownik: Stanowisko,Pesel {
+class Pracownik: public Stanowisko,Pesel {
 	string imie, nazwisko, vinPojazdu;
 	Pesel pesel;
 	Stanowisko stanowisko;
