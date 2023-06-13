@@ -23,7 +23,7 @@ void KontenerCar::createMapFromFile(vector<string> wiersze) {
 	}
 }
 void KontenerCar::addRecord() {
-	string marka, model, rpaliwa, vim;
+	string marka, model, rpaliwa, vim, strRok, strSpalanie;
 	unsigned int rok;
 	double spalanie;
 	char input{};
@@ -45,9 +45,13 @@ void KontenerCar::addRecord() {
 		cin.ignore();
 		getline(cin, model);
 		cout << "Podaj rok produkcji samochodu:";
-		cin >> rok;
+		cin >> strRok;
+		if (!is_digits(strRok)) throw CustomException("Podano niedozowlone znaki podczas podawania rocznika.");
+		rok = stoi(strRok);
 		cout << "Podaj spalanie samochodu (l/100km):";
-		cin >> spalanie;
+		cin >> strSpalanie;
+		if (!is_digits2(strSpalanie)) throw CustomException("Podano niedozowlone znaki podczas podawania spalania.");
+		spalanie = stod(strSpalanie);
 		cout << "Podaj rodzaj paliwa samochodu:";
 		cin >> rpaliwa;
 		Car* wskNewCar = new Car(marka, model, rok, spalanie, rpaliwa);

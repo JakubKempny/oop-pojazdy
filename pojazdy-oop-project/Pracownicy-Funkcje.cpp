@@ -82,7 +82,8 @@ bool KontenerStanow::stanowIstnieje(string nazwa)
 
 
 void KontenerKierow::addRecord(KontenerCar& k, KontenerStanow& s) {
-	string imie, nazwisko, pesel, vin, stanowisko;
+	string imie, nazwisko, pesel, vin, stanowisko, strDystans;
+	string komunikat="Przerwano proces dodawania pracownika. ";
 	double dystans;
 	char input{};	
 
@@ -92,23 +93,28 @@ void KontenerKierow::addRecord(KontenerCar& k, KontenerStanow& s) {
 	{
 		cin >> pesel;
 		for (auto i = mapPrac.begin(); i != mapPrac.end(); ++i) {
-			if (pesel == i->first) throw CustomException("W bazie znajduje sie juz uzytkownik o podanym numerze Pesel! ");
+			if (pesel == i->first) throw CustomException(komunikat+"W bazie znajduje sie juz uzytkownik o podanym numerze Pesel! ");
 		}
+		Pesel test(pesel); // sprawdzanie czy pesel jest poprawny
 		cout << "Podaj imie pracownika:";
 		cin >> imie;
-		if (containsOnlyLetters(imie) == false) throw CustomException("Imie zawiera niedozwolone znaki! ");
+		imie[0] = toupper(imie[0]); // zamienia pierwsz¹ literê imienia na du¿¹
+		if (containsOnlyLetters(imie) == false) throw CustomException(komunikat + "Imie zawiera niedozwolone znaki! ");
 		cout << "Podaj nazwisko pracownika:";
 		cin >> nazwisko;
-		if (containsOnlyLetters(nazwisko) == false) throw CustomException("Nazwisko zawiera niedozwolone znaki! ");
+		nazwisko[0] = toupper(nazwisko[0]); // --//-- nazwiska na du¿¹
+		if (containsOnlyLetters(nazwisko) == false) throw CustomException(komunikat + "Nazwisko zawiera niedozwolone znaki! ");
 		cout << "Podaj vin pojazdu pracownika:";
 		cin >> vin;
-		if (!k.vinIstnieje(vin)) throw CustomException("Podany samochod nie istnieje! ");
-		if (vinWolny(vin)) throw CustomException("Podany samochod jest juz przypisany do innego kierowcy! ");
+		if (!k.vinIstnieje(vin)) throw CustomException(komunikat + "Podany samochod nie istnieje! ");
+		if (vinWolny(vin)) throw CustomException(komunikat + "Podany samochod jest juz przypisany do innego kierowcy! ");
 		cout << "Podaj sredni dystans jaki pokonuje pracownik km/dzien:";
-		cin >> dystans;
+		cin >> strDystans;
+		if (!is_digits2(strDystans)) throw CustomException(komunikat + "Podano litery zamiast cyfr.");
+		dystans = stod(strDystans);
 		cout << "Podaj stanowisko pracownika:";
 		cin >> stanowisko;
-		if (!s.stanowIstnieje(stanowisko)) throw CustomException("Podane stanowisko nie istnieje! ");
+		if (!s.stanowIstnieje(stanowisko)) throw CustomException(komunikat + "Podane stanowisko nie istnieje! ");
 		Pracownik* wskNewPrac = new Pracownik(imie, nazwisko, pesel, vin, dystans, stanowisko);
 		cout << "Czy chcesz zapisac zmiany? y/n: ";
 		cin >> input;

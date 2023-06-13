@@ -15,7 +15,8 @@
 #include <sstream>
 #include <map>
 #include <iomanip>
-#include<Windows.h>
+#include <Windows.h>
+#include <cctype> // toupper
 
 using namespace std;
 
