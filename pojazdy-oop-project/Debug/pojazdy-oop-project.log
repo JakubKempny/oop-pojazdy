@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 ﻿  Kalkulator_funkcje.cpp
 C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator_funkcje.cpp(69,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
 C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator_funkcje.cpp(111,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+=======
+﻿  pojazdy-oop-project.cpp
+>>>>>>> Stashed changes
   pojazdy-oop-project.vcxproj -> C:\Users\Daru2\Desktop\Repo\Debug\pojazdy-oop-project.exe
