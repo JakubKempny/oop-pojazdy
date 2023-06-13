@@ -1,5 +1,6 @@
 #include "Header.h"
 #include <algorithm>
+#include <conio.h>
 Kalkulator::Kalkulator(KontenerCar& car, KontenerKierow& driver, KontenerStacji& gasStation, KontenerStanow& level)
 {
 	this->car = car;
@@ -92,8 +93,7 @@ void Kalkulator::bestStation(double consumption, string fuelType, string positio
 
 void Kalkulator::computeEngine()
 {
-	// potem nalezy tez sprawdzic czy plik z pracownikami lub stacjami nie jest pusty
-
+	bool exist = false;
 	//wrzucam pesele pracownikow do wektora
 	map<string, Pracownik*> map = driver.getMap();
 	drivers.reserve(map.size()); //rezerwacja pamieci dla wektora
@@ -101,24 +101,68 @@ void Kalkulator::computeEngine()
 	{
 		drivers.push_back(keyMap.first);
 	}
+
+	cout << "Obliczyc dla wszystkich czy konkretnego pracownika? a/i: ";
+	do
+	{
+		this->input = _getch();
+	} while ((input != 'a') && (input != 'i'));
+	switch (input)
+	{
+	case 'i':
+		cout << endl << "Podaj pesel pracownika dla ktorego chcesz policzyc: ";
+		cin >> pesel;
+		for (auto i : driver.getMap()) {
+			if (i.first == pesel) exist = true;
+		}
+		try {
+			if (!exist) throw CustomException("Pracownik o takim numerze PESEL nie istnieje w bazie.");
+			//TUTAJ SA KOLUMNY
+			cout << "Imie i Nazwisko |  Stanowisko  |  Spalanie (miesieczne)  |  Najtansza stacja  |  Calkowity Koszt  |  Z rabatem stacji  |  Koszt firmy  |" << endl;
+			for (int i = 0; i < map.size(); i++)
+			{
+				if (drivers.at(i) == pesel)
+				{
+					count(i);
+				}
+			}
+		}
+		catch (CustomException& e) {
+			cout << e.what() << endl;
+		}
+		break;
+	case 'a':
+		//TUTAJ SA KOLUMNY
+		cout << "Imie i Nazwisko |  Stanowisko  |  Spalanie (miesieczne)  |  Najtansza stacja  |  Calkowity Koszt  |  Z rabatem stacji  |  Koszt firmy  |" << endl;
+		for (int i = 0; i < map.size(); i++)
+		{
+			count(i);
+		}
+		break;
+	}
+		
+	delete car1;
+	delete prac1;
+	delete gas1;
+	delete pos1;
+}
+
+void Kalkulator::count(int i)
+{
 	string idPrac{};
 	string vin{};
 	double dystans{};
 	string surname{};
 	string position{};
-	//TUTAJ SA KOLUMNY
-	cout << "Imie i Nazwisko |  Stanowisko  |  Spalanie (miesieczne)  |  Najtansza stacja  |  Calkowity Koszt  |  Z rabatem stacji  |  Koszt firmy  |" << endl;
-	for (int i = 0; i < map.size(); i++)
-	{
-		idPrac = drivers.at(i);
-		prac1 = driver.getWorker(idPrac);
 
-		vin = prac1->getDriverVin();
-		dystans = prac1->getDystans();
-		surname = prac1->getNameSurname();
-		position = prac1->getPosition();
-		//TUTAJ WYSWIETLA IMIE, NAZWISKO, POZYCJE I SPALANIE
-		cout << surname << "   " << position << "   " << fuelConsumption(vin, dystans) << "   ";
-		bestStation(fuelConsumption(vin, dystans), fuelType(vin), position);
-	}
+	idPrac = drivers.at(i);
+	prac1 = driver.getWorker(idPrac);
+
+	vin = prac1->getDriverVin();
+	dystans = prac1->getDystans();
+	surname = prac1->getNameSurname();
+	position = prac1->getPosition();
+	//TUTAJ WYSWIETLA IMIE, NAZWISKO, POZYCJE I SPALANIE
+	cout << surname << "   " << position << "   " << fuelConsumption(vin, dystans) << "   ";
+	bestStation(fuelConsumption(vin, dystans), fuelType(vin), position);
 }

@@ -2,6 +2,8 @@
 
 class Kalkulator
 {
+	char input{};
+	string pesel{};
 	vector<pair<double, string>> prices; //ten wektor przechowuje pod double - cene paliwa, pod stringiem id stacji benzynowej na ktorej tylko kosztuje
 	KontenerCar car;
 	KontenerKierow driver;
@@ -24,4 +26,5 @@ public:
 	double workerPositionContribution(string position);
 	double companyCost(double price, double contribution);
 	void discountCheck(double discountPrice, double fullPrice);
+	void count(int i);
 };

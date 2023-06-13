@@ -1,2 +1,5 @@
-﻿  Menu_funkcje.cpp
+﻿  Kalkulator_funkcje.cpp
+C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator_funkcje.cpp(70,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator_funkcje.cpp(122,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator_funkcje.cpp(137,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
   pojazdy-oop-project.vcxproj -> C:\Users\Daru2\Desktop\Repo\Debug\pojazdy-oop-project.exe
