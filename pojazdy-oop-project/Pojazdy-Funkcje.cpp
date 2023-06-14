@@ -9,7 +9,7 @@ string Pojazd::formatDataToString() {
 	return marka + ";" + model + ";" + to_string(rocznik);
 }
 
-string Silnik::formatDataToString() { // gites
+string Silnik::formatDataToString() {
 	string sTmp;
 	stringstream ss;
 	ss << fixed << setprecision(1);
