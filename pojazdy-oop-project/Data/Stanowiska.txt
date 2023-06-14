@@ -1,5 +1,3 @@
-HR;0.20;
+hr;0.20;
 menadzer;0.40;
 sprzataczka;0.50;
-t;0.40;
-test 123;0.50;

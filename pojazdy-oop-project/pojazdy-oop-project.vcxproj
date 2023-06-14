@@ -29,7 +29,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -141,12 +141,16 @@
   <ItemGroup>
     <ClCompile Include="Budynki-Funkcje.cpp" />
     <ClCompile Include="Funkcje.cpp" />
-    <ClCompile Include="Kalkulator_funkcje.cpp" />
-    <ClCompile Include="Kontenery-Funkcje.cpp" />
+    <ClCompile Include="Kalkulator-Funkcje.cpp" />
+    <ClCompile Include="KonteneryBudynk-Funkcje.cpp" />
+    <ClCompile Include="KonteneryCar-Funkcje.cpp" />
+    <ClCompile Include="KonteneryPrac-Funkcje.cpp" />
+    <ClCompile Include="KonteneryStanow-Funkcje.cpp" />
     <ClCompile Include="Menu_funkcje.cpp" />
     <ClCompile Include="Pojazdy-Funkcje.cpp" />
     <ClCompile Include="pojazdy-oop-project.cpp" />
     <ClCompile Include="Pracownicy-Funkcje.cpp" />
+    <ClCompile Include="Stanowiska-Funkcje.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Budynki.h" />

@@ -2,4 +2,3 @@
 11;Seat;Ibiza;2014;3.4;gaz
 12;Audi;A3;2012;6.1;gaz
 13;Volkswagen;Caddy;2007;8.4;gaz
-2s;test;test;2003;12.4;prad

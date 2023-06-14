@@ -27,7 +27,7 @@
     <ClCompile Include="Budynki-Funkcje.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="Kontenery-Funkcje.cpp">
+    <ClCompile Include="KonteneryCar-Funkcje.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="Pojazdy-Funkcje.cpp">
@@ -36,7 +36,19 @@
     <ClCompile Include="Pracownicy-Funkcje.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="Kalkulator_funkcje.cpp">
+    <ClCompile Include="Kalkulator-Funkcje.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="KonteneryPrac-Funkcje.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="KonteneryStanow-Funkcje.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Stanowiska-Funkcje.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="KonteneryBudynk-Funkcje.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>

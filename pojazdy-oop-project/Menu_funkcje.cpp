@@ -1,9 +1,8 @@
 #include "Header.h"
-#include <conio.h>
 
-void Menu::calc()
-{
+void Menu::calc() {
 	system("CLS");
+	showHeader();
 	Kalkulator kalk1(konCar, konKier, konStacji, konStanow);
 	kalk1.computeEngine();
 	cout << endl << "Kliknij dowolny klawisz, aby wrocic do menu... ";
@@ -11,25 +10,21 @@ void Menu::calc()
 	showMenu();
 }
 
-Menu::Menu(KontenerCar& konCar, KontenerKierow& konKier, KontenerStacji& konStacji, KontenerStanow& konStanow)
-{
+Menu::Menu(KontenerCar& konCar, KontenerKierow& konKier, KontenerStacji& konStacji, KontenerStanow& konStanow) {
 	this->konCar = konCar;
 	this->konKier = konKier;
 	this->konStacji = konStacji;
 	this->konStanow = konStanow;
 }
 
-void Menu::showMenu()
-{
+void Menu::showMenu() {
 	createMaps();
 	showText();
-	do
-	{
+	do {
 		this->input = _getch();
 	} while ((input != '1') && (input != '2') && (input != '3') && (input != '4') && (input != '5') && (input != '6'));
 
-	switch ((int)input - 48)
-	{
+	switch ((int)input - 48) {
 	case 1:
 		calc();
 		break;
@@ -51,11 +46,9 @@ void Menu::showMenu()
 	}
 }
 
-void Menu::showText()
-{
+void Menu::showText() {
 	system("CLS");
 	showHeader();
-
 	cout << " Witaj w kalkulatorze paliw! \n";
 	cout << " 1: Kalkulator paliwa" << endl;
 	cout << " 2: Baza pracownicy" << endl;
@@ -66,9 +59,7 @@ void Menu::showText()
 	cout << " Twoj wybor: ";
 }
 
-void Menu::showHeader()
-{
-	//change color of text to red
+void Menu::showHeader() {
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(h, 10);
 	cout << endl;
@@ -80,8 +71,7 @@ void Menu::showHeader()
 	SetConsoleTextAttribute(h, 15);
 }
 
-bool Menu::createMaps() 
-{
+bool Menu::createMaps() {
 	try {
 		vector<string> lineCars = wczytajPlik(konCar.getPathToFile());
 		konCar.createMapFromFile(lineCars);
@@ -98,17 +88,14 @@ bool Menu::createMaps()
 	return true;
 }
 
-void Menu::baseCars()
-{
+void Menu::baseCars() {
 	system("CLS");
 	konCar.info();
 	cout << "\nDodaj/usun samochod (a/d/q)";
-	do
-	{
+	do {
 		this->input = _getch();
 	} while ((input != 'a') && (input != 'd') && (input != 'q'));
-	switch (input)
-	{
+	switch (input) {
 	case 'a':
 		konCar.addRecord();
 		system("pause > nul"); // czeka na dowolny przycisk od uzytkownika zeby kontynuwac
@@ -125,17 +112,14 @@ void Menu::baseCars()
 	}
 }
 
-void Menu::baseDrivers()
-{
+void Menu::baseDrivers() {
 	system("CLS");
 	konKier.info();
 	cout << "\nDodaj/usun pracownika (a/d/q)";
-	do
-	{
+	do {
 		this->input = _getch();
 	} while ((input != 'a') && (input != 'd') && (input != 'q'));
-	switch (input)
-	{
+	switch (input) {
 	case 'a':
 		konKier.addRecord(konCar, konStanow);
 		system("pause > nul");
@@ -152,17 +136,14 @@ void Menu::baseDrivers()
 	}
 }
 
-void Menu::baseLevels()
-{
+void Menu::baseLevels() {
 	system("CLS");
 	konStanow.info();
 	cout << "\nDodaj/usun stanowisko (a/d/q)";
-	do
-	{
+	do {
 		this->input = _getch();
 	} while ((input != 'a') && (input != 'd') && (input != 'q'));
-	switch (input)
-	{
+	switch (input) {
 	case 'a':
 		konStanow.addRecord();
 		system("pause > nul");
@@ -179,17 +160,14 @@ void Menu::baseLevels()
 	}
 }
 
-void Menu::baseGasStations()
-{
+void Menu::baseGasStations() {
 	system("CLS");
 	konStacji.info();
 	cout << "\nDodaj/usun/zmien_ceny/wyjdz (a/d/c/q)";
-	do
-	{
+	do {
 		this->input = _getch();
 	} while ((input != 'a') && (input != 'd') && (input != 'q') && (input != 'c'));
-	switch (input)
-	{
+	switch (input) {
 	case 'a':
 		konStacji.addRecord();
 		system("pause > nul");

@@ -1,5 +1,9 @@
 #pragma once
 
+#include <iostream>
+#include <vector>
+#include <map>
+
 class Kontener {
 	virtual void info() = 0;
 };
@@ -7,6 +11,7 @@ class Kontener {
 class KontenerCar:Kontener {
 	map<string, Car*> mapCar; // <nr Vim, wskaünik na Car>
 	string pathToFile = "";
+	char input{};
 public:
 	KontenerCar() {};
 	KontenerCar(string s):pathToFile(s) {};
@@ -15,23 +20,23 @@ public:
 			delete i.second;
 		}
 	}
-	string getPathToFile() { return pathToFile; }
 	void createMapFromFile(vector<string> wiersze);
 	void info() override;
 	void addRecord();
 	void delRecord(string plikKierowcy);
 	void saveChanges(); // nadpisuje dane z pliku
-	//get'ery
-	Car* getCar(string c) { return mapCar.at(c); };
-
 	bool vinIstnieje(string vin);
 	bool czyPrzypCar(string vin, string plikKierowcy);
+	//get'ery
+	Car* getCar(string c) { return mapCar.at(c); };
+	string getPathToFile() { return pathToFile; }
 };
 
 
 class KontenerStanow :Kontener {
 	map<string, Stanowisko*> mapStan; // <nazwaStanowiska, wskaznik na Stanowisko>
 	string pathToFile = "";
+	char input;
 public:
 	KontenerStanow() {};
 	KontenerStanow(string s) : pathToFile(s) {};
@@ -54,6 +59,7 @@ public:
 class KontenerKierow:Kontener {
 	map<string, Pracownik*> mapPrac; // <nr pesel, wskaznik na Pracownik>
 	string pathToFile = "";
+	char input;
 public:
 	KontenerKierow() {};
 	KontenerKierow(string s) : pathToFile(s) {};
@@ -62,7 +68,6 @@ public:
 			delete i.second;
 		}
 	}
-	string getPathToFile() { return pathToFile; }
 	void createMapFromFile(vector<string> wiersze);
 	void info() override; 
 	void addRecord(KontenerCar& k, KontenerStanow& stan);
@@ -71,13 +76,15 @@ public:
 	bool vinWolny(string vin);
 	map<string, Pracownik*> getMap() { return mapPrac; }
 	Pracownik* getWorker(string c) { return mapPrac.at(c); };
+	string getPathToFile() { return pathToFile; }
 };
 
 
 class KontenerStacji :Kontener {
 
-	map<string, StacjaPaliw*> mapStacji; // numer ID, wskaünik na Stacje
+	map<string, StacjaPaliw*> mapStacji; // numer ID, wskaznik na Stacje
 	string pathToFile = "";
+	char input;
 public:
 	KontenerStacji() {};
 	KontenerStacji(string s) : pathToFile(s) {};
@@ -86,15 +93,13 @@ public:
 			delete i.second;
 		}
 	}
-	string getPathToFile() { return pathToFile; }
 	void createMapFromFile(vector<string> wiersze);
-
-	map<string, StacjaPaliw*> getMap() { return mapStacji; }
-	StacjaPaliw* getStation(string c) { return mapStacji.at(c); };
-
 	void info() override;
 	void addRecord();
 	void delRecord();
 	void saveChanges();
 	void changeRecord();
+	map<string, StacjaPaliw*> getMap() { return mapStacji; }
+	StacjaPaliw* getStation(string c) { return mapStacji.at(c); };
+	string getPathToFile() { return pathToFile; }
 };

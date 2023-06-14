@@ -1,9 +1,8 @@
 #pragma once
 
-class Menu
-{
+class Menu {
 private:
-	char input{}; //zmienna do wybierania opcji w menu 1-5 i a/d/q
+	char input; //zmienna do wybierania opcji w menu 1-5 i a/d/q
 protected:
 	KontenerCar konCar;
 	KontenerKierow konKier;

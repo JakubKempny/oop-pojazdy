@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 
 class Pesel { // klasa sprawdzajaca poprawne wprowadzenie peselu
 	string nr;
@@ -8,11 +7,9 @@ public:
 	Pesel(string n);
 };
 
-class Stanowisko
-{
+class Stanowisko {
 	string nazwaStanowiska;
 	double proc_pokrycia; //czyli 0.40 to 40% tyle pokrywa firma pieniedzy pracownikowi
-	//int iloscPracownikow;
 public:
 	Stanowisko() {}
 	Stanowisko(string nazwaStanowiska);
