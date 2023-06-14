@@ -14,6 +14,7 @@ class Kalkulator {
 	Pracownik* prac1;
 	StacjaPaliw* gas1;
 	Stanowisko* pos1;
+	int days{};
 public:
 	Kalkulator(KontenerCar& car, KontenerKierow& driver, KontenerStacji& gasStation, KontenerStanow& level);
 	void computeEngine(); // wyswietla stosowne komunikaty i obsluguje wyswietlenie dla jednego pracownika

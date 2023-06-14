@@ -9,7 +9,7 @@ Kalkulator::Kalkulator(KontenerCar& car, KontenerKierow& driver, KontenerStacji&
 
 double Kalkulator::fuelConsumption(string VIN, double dystans) {
 	car1 = car.getCar(VIN);
-	return car1->oblZurzycie(dystans)*20;
+	return car1->oblZurzycie(dystans)*days;
 }
 
 string Kalkulator::fuelType(string VIN) {
@@ -76,10 +76,6 @@ void Kalkulator::bestStation(double consumption, string fuelType, string positio
 	double discountPrice = afterDiscount(station, fullPrice);
 	double realPrice = companyCost(discountPrice, workerPositionContribution(position));
 	cout << fixed << setprecision(2);
-
-
-
-
 	//TUTAJ WYSWIETLA CALA RESZTE
 	SetConsoleTextAttribute(hConsole, 3);
 	cout << setw(spaceValue) << gasStationName(station) << setw(2) ;
@@ -129,58 +125,59 @@ void Kalkulator::computeEngine() {
 	bool exist = false;
 	char z = '_';
 	int spaceValue = 25;
+	string daysText;
 	//wrzucam pesele pracownikow do wektora
 	map<string, Pracownik*> map = driver.getMap();
 	drivers.reserve(map.size()); //rezerwacja pamieci dla wektora
 	for (auto const& keyMap : map) {
 		drivers.push_back(keyMap.first);
 	}
-	cout << "Obliczyc dla wszystkich czy konkretnego pracownika? a/i: ";
-	do {
-		this->input = _getch();
-	} while ((input != 'a') && (input != 'i'));
-	switch (input) {
-	case 'i':
-		cout << endl << "Podaj pesel pracownika dla ktorego chcesz policzyc: ";
-		cin >> pesel;
-		for (auto i : driver.getMap()) {
-			if (i.first == pesel) exist = true;
-		}
-		try {
+	try {
+		cout << endl << "Dla ilu dni wykonac obliczenia: ";
+		getlineM(daysText);
+		if (is_digits(daysText) == false || stod(daysText) == 0 || daysText.length() > 5) throw CustomException("Podano nieprawidlowa wartosc. ");
+		days = stod(daysText);
+		cout << "Obliczyc dla wszystkich czy konkretnego pracownika? a/i: ";
+		do {
+			this->input = _getch();
+		} while ((input != 'a') && (input != 'i'));
+		switch (input) {
+		case 'i':
+			cout << endl << "Podaj pesel pracownika dla ktorego chcesz policzyc: ";
+			getlineM(pesel);
+			for (auto i : driver.getMap()) {
+				if (i.first == pesel) exist = true;
+			}
 			if (!exist) throw CustomException("Pracownik o takim numerze PESEL nie istnieje w bazie.");
-			//TUTAJ SA KOLUMNY
-			
-
 			cout << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
 			cout.fill(' ');
 			// wstawianie nazw kategorii
-			cout << "\174" << setw(spaceValue) << "Imie i Nazwisko" << setw(2) << "|" << setw(spaceValue) << "Stanowisko" << setw(2) << "|" << setw(spaceValue) << "Spalanie (miesieczne)" << setw(2) << "|" << setw(spaceValue) << "Najtansza stacja" << setw(2) << "|" << setw(spaceValue) << "Calkowity koszt" << setw(2) << "|" << setw(spaceValue) << "Z rabatem stacji" << setw(2) << "|" << setw(spaceValue) << "Koszt pracownika firmy" << setw(2) << "|" << endl;
+			cout << "\174" << setw(spaceValue) << "Imie i Nazwisko" << setw(2) << "|" << setw(spaceValue) << "Stanowisko" << setw(2) << "|" << setw(spaceValue) << "Spalanie (miesieczne)" << setw(2) << "|" << setw(spaceValue) << "Najtansza stacja" << setw(2) << "|" << setw(spaceValue) << "Calkowity koszt" << setw(2) << "|" << setw(spaceValue) << "Z rabatem stacji" << setw(2) << "|" << setw(spaceValue) << "Koszt dla firmy" << setw(2) << "|" << endl;
 			cout << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
 			cout.fill(' ');
-			
+
 			for (int i = 0; i < map.size(); i++)
 			{
 				if (drivers.at(i) == pesel) {
 					compute(i);
 				}
 			}
+			break;
+		case 'a':
+			//TUTAJ SA KOLUMNY
+			cout << endl << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
+			cout.fill(' ');
+			// wstawianie nazw kategorii
+			cout << "\174" << setw(spaceValue) << "Imie i Nazwisko" << setw(2) << "|" << setw(spaceValue) << "Stanowisko" << setw(2) << "|" << setw(spaceValue) << "Spalanie (miesieczne)" << setw(2) << "|" << setw(spaceValue) << "Najtansza stacja" << setw(2) << "|" << setw(spaceValue) << "Calkowity koszt" << setw(2) << "|" << setw(spaceValue) << "Z rabatem stacji" << setw(2) << "|" << setw(spaceValue) << "Koszt pracownika firmy" << setw(2) << "|" << endl;
+			cout << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
+			cout.fill(' ');
+			for (int i = 0; i < map.size(); i++) {
+				compute(i);
+			}
 		}
-		catch (CustomException& e) {
-			cout << e.what() << endl;
-		}
-		break;
-	case 'a':
-		//TUTAJ SA KOLUMNY
-		cout << endl << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
-		cout.fill(' ');
-		// wstawianie nazw kategorii
-		cout << "\174" << setw(spaceValue) << "Imie i Nazwisko" << setw(2) << "|" << setw(spaceValue) << "Stanowisko" << setw(2) << "|" << setw(spaceValue) << "Spalanie (miesieczne)" << setw(2) << "|" << setw(spaceValue) << "Najtansza stacja" << setw(2) << "|" << setw(spaceValue) << "Calkowity koszt" << setw(2) << "|" << setw(spaceValue) << "Z rabatem stacji" << setw(2) << "|" << setw(spaceValue) << "Koszt pracownika firmy" << setw(2) << "|" << endl;
-		cout << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
-		cout.fill(' ');
-		for (int i = 0; i < map.size(); i++) {
-			compute(i);
-		}
-		break;
+	}
+	catch (CustomException& e) {
+		cout << e.what() << endl;
 	}
 	delete car1;
 	delete prac1;

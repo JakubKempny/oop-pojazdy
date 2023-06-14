@@ -1,5 +1,6 @@
 ﻿  Kalkulator-Funkcje.cpp
 C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator-Funkcje.cpp(68,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator-Funkcje.cpp(161,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator-Funkcje.cpp(180,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator-Funkcje.cpp(139,14): warning C4244: "=": konwersja z "double" do "int", możliwa utrata danych
+C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator-Funkcje.cpp(159,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator-Funkcje.cpp(174,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
   pojazdy-oop-project.vcxproj -> C:\Users\Daru2\Desktop\Repo\Debug\pojazdy-oop-project.exe
