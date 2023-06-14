@@ -168,7 +168,7 @@ void Kalkulator::computeEngine() {
 			cout << endl << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
 			cout.fill(' ');
 			// wstawianie nazw kategorii
-			cout << "\174" << setw(spaceValue) << "Imie i Nazwisko" << setw(2) << "|" << setw(spaceValue) << "Stanowisko" << setw(2) << "|" << setw(spaceValue) << "Spalanie (miesieczne)" << setw(2) << "|" << setw(spaceValue) << "Najtansza stacja" << setw(2) << "|" << setw(spaceValue) << "Calkowity koszt" << setw(2) << "|" << setw(spaceValue) << "Z rabatem stacji" << setw(2) << "|" << setw(spaceValue) << "Koszt pracownika firmy" << setw(2) << "|" << endl;
+			cout << "\174" << setw(spaceValue) << "Imie i Nazwisko" << setw(2) << "|" << setw(spaceValue) << "Stanowisko" << setw(2) << "|" << setw(spaceValue) << "Spalanie (miesieczne)" << setw(2) << "|" << setw(spaceValue) << "Najtansza stacja" << setw(2) << "|" << setw(spaceValue) << "Calkowity koszt" << setw(2) << "|" << setw(spaceValue) << "Z rabatem stacji" << setw(2) << "|" << setw(spaceValue) << "Koszt dla firmy" << setw(2) << "|" << endl;
 			cout << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
 			cout.fill(' ');
 			for (int i = 0; i < map.size(); i++) {
