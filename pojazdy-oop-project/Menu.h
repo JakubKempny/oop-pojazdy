@@ -20,5 +20,6 @@ public:
 	void baseGasStations();
 	bool createMaps();
 	void calc();
+	void showFullscreen();
 };
 

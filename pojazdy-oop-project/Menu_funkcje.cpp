@@ -188,3 +188,12 @@ void Menu::baseGasStations() {
 		break;
 	}
 }
+
+void Menu::showFullscreen() {
+	SetConsoleDisplayMode(GetStdHandle(STD_OUTPUT_HANDLE), CONSOLE_FULLSCREEN_MODE, 0);
+	HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(hstdout, &csbi);
+	HWND x = GetConsoleWindow();
+	ShowScrollBar(x, SB_BOTH, FALSE);
+}

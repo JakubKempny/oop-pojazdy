@@ -135,7 +135,7 @@ void Kalkulator::computeEngine() {
 	for (auto const& keyMap : map) {
 		drivers.push_back(keyMap.first);
 	}
-	cout << "Obliczyc dla wszystkich czy konkretnego pracownika? a/i: \n";
+	cout << "Obliczyc dla wszystkich czy konkretnego pracownika? a/i: ";
 	do {
 		this->input = _getch();
 	} while ((input != 'a') && (input != 'i'));
@@ -171,7 +171,7 @@ void Kalkulator::computeEngine() {
 		break;
 	case 'a':
 		//TUTAJ SA KOLUMNY
-		cout << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
+		cout << endl << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
 		cout.fill(' ');
 		// wstawianie nazw kategorii
 		cout << "\174" << setw(spaceValue) << "Imie i Nazwisko" << setw(2) << "|" << setw(spaceValue) << "Stanowisko" << setw(2) << "|" << setw(spaceValue) << "Spalanie (miesieczne)" << setw(2) << "|" << setw(spaceValue) << "Najtansza stacja" << setw(2) << "|" << setw(spaceValue) << "Calkowity koszt" << setw(2) << "|" << setw(spaceValue) << "Z rabatem stacji" << setw(2) << "|" << setw(spaceValue) << "Koszt pracownika firmy" << setw(2) << "|" << endl;

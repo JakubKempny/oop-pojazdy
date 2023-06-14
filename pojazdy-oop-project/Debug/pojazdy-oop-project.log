@@ -1,5 +1,5 @@
 ﻿  Kalkulator-Funkcje.cpp
-C:\Users\lenovo\Desktop\project1.2\pojazdy-oop-project\Kalkulator-Funkcje.cpp(68,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\lenovo\Desktop\project1.2\pojazdy-oop-project\Kalkulator-Funkcje.cpp(161,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\lenovo\Desktop\project1.2\pojazdy-oop-project\Kalkulator-Funkcje.cpp(180,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  pojazdy-oop-project.vcxproj -> C:\Users\lenovo\Desktop\project1.2\Debug\pojazdy-oop-project.exe
+C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator-Funkcje.cpp(68,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator-Funkcje.cpp(161,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator-Funkcje.cpp(180,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+  pojazdy-oop-project.vcxproj -> C:\Users\Daru2\Desktop\Repo\Debug\pojazdy-oop-project.exe
