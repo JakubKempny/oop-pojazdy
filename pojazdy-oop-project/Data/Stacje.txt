@@ -1,3 +1,3 @@
 4;Gliwice ul.Jasna 65;Circle K;3.21;3.23;1.22;0.01;
-5;Gliwice ul.Stara 3;Orlen;6.40;4.30;0.50;0.01;
+5;Gliwice ul.Stara 3;Orlen;6.50;6.50;3.50;0.01;
 6;Gliwice ul.Moja 4;Orlen;1.00;1.00;1.00;0;

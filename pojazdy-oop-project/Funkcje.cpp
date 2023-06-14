@@ -31,6 +31,11 @@ bool containsDigitsANDLetters(string const& str) {
 }
 
 bool is_digits2(const string& str) {
+
+	char firstChar = str[0];
+	if (firstChar == '.' || firstChar == ',' || firstChar == ' ')
+		return false;
+
 	return str.find_first_not_of("0123456789,.") == std::string::npos;
 }
 

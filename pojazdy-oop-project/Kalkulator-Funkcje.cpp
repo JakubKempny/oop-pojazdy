@@ -47,10 +47,12 @@ void Kalkulator::discountCheck(double discountPrice, double fullPrice) {
 		SetConsoleTextAttribute(hConsole, 7);
 		cout << "|";
 	}
-	
-	cout << setw(spaceValue) << discountPrice << setw(2) ;
-	SetConsoleTextAttribute(hConsole, 7);
-	cout << "|";
+	else
+	{
+		cout << setw(spaceValue) << discountPrice << setw(2);
+		SetConsoleTextAttribute(hConsole, 7);
+		cout << "|";
+	}
 }
 
 
