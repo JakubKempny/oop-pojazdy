@@ -54,15 +54,15 @@ void KontenerStacji::addRecord() {
 		cout << "Podaj wysokosc ceny benzyny:";
 		getlineM(cenaBenzyny);
 		CommaWithDot(cenaBenzyny);
-		if (is_digits2(cenaBenzyny) == false || stod(cenaBenzyny) <= 0 || cenaBenzyny.length() > 10 || checkMultipleDotsCommas(cenaBenzyny) == false) throw CustomException("Cena zostala niepoprawnie wpisana!");
+		if (is_digits2(cenaBenzyny) == false || stod(cenaBenzyny) <= 0 || cenaBenzyny.length() > 5 || checkMultipleDotsCommas(cenaBenzyny) == false) throw CustomException("Cena zostala niepoprawnie wpisana!");
 		cout << "Podaj wysokosc ceny oleju napedowego:";
 		getlineM(cenaRopy);
 		CommaWithDot(cenaRopy);
-		if (is_digits2(cenaRopy) == false || stod(cenaRopy) <= 0 || cenaRopy.length() > 10 || checkMultipleDotsCommas(cenaRopy) == false) throw CustomException("Cena zostala niepoprawnie wpisana!");
+		if (is_digits2(cenaRopy) == false || stod(cenaRopy) <= 0 || cenaRopy.length() > 5 || checkMultipleDotsCommas(cenaRopy) == false) throw CustomException("Cena zostala niepoprawnie wpisana!");
 		cout << "Podaj wysokosc ceny gazu:";
 		getlineM(cenaGazu);
 		CommaWithDot(cenaGazu);
-		if (is_digits2(cenaGazu) == false || stod(cenaGazu) <= 0 || cenaGazu.length() > 10 || checkMultipleDotsCommas(cenaGazu) == false) throw CustomException("Cena zostala niepoprawnie wpisana!");
+		if (is_digits2(cenaGazu) == false || stod(cenaGazu) <= 0 || cenaGazu.length() > 5 || checkMultipleDotsCommas(cenaGazu) == false) throw CustomException("Cena zostala niepoprawnie wpisana!");
 		cout << "Podaj wysokosc znizki:";
 		getlineM(znizka);
 		CommaWithDot(znizka);

@@ -70,7 +70,7 @@ void KontenerKierow::addRecord(KontenerCar& k, KontenerStanow& s) {
 		cout << "Podaj sredni dystans jaki pokonuje pracownik km/dzien: ";
 		getlineM(dystansStr);
 		CommaWithDot(dystansStr);
-		if (is_digits2(dystansStr) == false || stod(dystansStr) < 0 || dystansStr.length() > 10 || checkMultipleDotsCommas(dystansStr) == false) throw CustomException(komunikat + "Dystans zostal niepoprawnie wpisany!");
+		if (is_digits2(dystansStr) == false || stod(dystansStr) < 0 || dystansStr.length() > 5 || checkMultipleDotsCommas(dystansStr) == false) throw CustomException(komunikat + "Dystans zostal niepoprawnie wpisany!");
 		dystans = stod(dystansStr);
 		cout << "Podaj stanowisko pracownika: ";
 		getlineM(stanowisko);

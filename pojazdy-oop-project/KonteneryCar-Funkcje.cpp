@@ -108,7 +108,7 @@ void KontenerCar::saveChanges() {
 }
 
 void KontenerCar::info() {
-	int spaceValue = 16;
+	int spaceValue = 25;
 	char z = '_';
 	cout << "Dane z pliku: " << getPathToFile() << " :" << endl << endl;
 	cout << setfill(z) << setw(spaceValue * 5 + 6 * 2 + spaceValue / 2 + 1) << z << endl;

@@ -137,8 +137,9 @@ void Kalkulator::computeEngine() {
 	try {
 		cout << endl << "Dla ilu dni wykonac obliczenia: ";
 		getlineM(daysText);
-		if (is_digits(daysText) == false || stod(daysText) == 0 || daysText.length() > 5) throw CustomException("Podano nieprawidlowa wartosc. ");
+		if (is_digits(daysText) == false || stod(daysText) <= 0 || daysText.length() > 5) throw CustomException("Podano nieprawidlowa wartosc. ");
 		days = stod(daysText);
+		string komunikat = "Spalanie dla " + daysText + " dni";
 		cout << "Obliczyc dla wszystkich czy konkretnego pracownika? a/i: ";
 		do {
 			this->input = _getch();
@@ -154,7 +155,7 @@ void Kalkulator::computeEngine() {
 			cout << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
 			cout.fill(' ');
 			// wstawianie nazw kategorii
-			cout << "\174" << setw(spaceValue) << "Imie i Nazwisko" << setw(2) << "|" << setw(spaceValue) << "Stanowisko" << setw(2) << "|" << setw(spaceValue) << "Spalanie (miesieczne)" << setw(2) << "|" << setw(spaceValue) << "Najtansza stacja" << setw(2) << "|" << setw(spaceValue) << "Calkowity koszt" << setw(2) << "|" << setw(spaceValue) << "Z rabatem stacji" << setw(2) << "|" << setw(spaceValue) << "Koszt dla firmy" << setw(2) << "|" << endl;
+			cout << "\174" << setw(spaceValue) << "Imie i Nazwisko" << setw(2) << "|" << setw(spaceValue) << "Stanowisko" << setw(2) << "|" << setw(spaceValue) << komunikat<<setw(2) << "|" << setw(spaceValue) << "Najtansza stacja" << setw(2) << "|" << setw(spaceValue) << "Calkowity koszt" << setw(2) << "|" << setw(spaceValue) << "Z rabatem stacji" << setw(2) << "|" << setw(spaceValue) << "Koszt dla firmy" << setw(2) << "|" << endl;
 			cout << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
 			cout.fill(' ');
 
@@ -170,7 +171,7 @@ void Kalkulator::computeEngine() {
 			cout << endl << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
 			cout.fill(' ');
 			// wstawianie nazw kategorii
-			cout << "\174" << setw(spaceValue) << "Imie i Nazwisko" << setw(2) << "|" << setw(spaceValue) << "Stanowisko" << setw(2) << "|" << setw(spaceValue) << "Spalanie (miesieczne)" << setw(2) << "|" << setw(spaceValue) << "Najtansza stacja" << setw(2) << "|" << setw(spaceValue) << "Calkowity koszt" << setw(2) << "|" << setw(spaceValue) << "Z rabatem stacji" << setw(2) << "|" << setw(spaceValue) << "Koszt dla firmy" << setw(2) << "|" << endl;
+			cout << "\174" << setw(spaceValue) << "Imie i Nazwisko" << setw(2) << "|" << setw(spaceValue) << "Stanowisko" << setw(2) << "|" << setw(spaceValue) << komunikat<< setw(2) << "|" << setw(spaceValue) << "Najtansza stacja" << setw(2) << "|" << setw(spaceValue) << "Calkowity koszt" << setw(2) << "|" << setw(spaceValue) << "Z rabatem stacji" << setw(2) << "|" << setw(spaceValue) << "Koszt dla firmy" << setw(2) << "|" << endl;
 			cout << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
 			cout.fill(' ');
 			for (int i = 0; i < map.size(); i++) {

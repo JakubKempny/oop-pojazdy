@@ -1,3 +1,6 @@
-﻿  Funkcje.cpp
-C:\Users\lenovo\Desktop\project1.2\pojazdy-oop-project\Funkcje.cpp(76,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+﻿  Kalkulator-Funkcje.cpp
+C:\Users\lenovo\Desktop\project1.2\pojazdy-oop-project\Kalkulator-Funkcje.cpp(70,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\lenovo\Desktop\project1.2\pojazdy-oop-project\Kalkulator-Funkcje.cpp(141,14): warning C4244: "=": konwersja z "double" do "int", możliwa utrata danych
+C:\Users\lenovo\Desktop\project1.2\pojazdy-oop-project\Kalkulator-Funkcje.cpp(162,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\lenovo\Desktop\project1.2\pojazdy-oop-project\Kalkulator-Funkcje.cpp(177,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
   pojazdy-oop-project.vcxproj -> C:\Users\lenovo\Desktop\project1.2\Debug\pojazdy-oop-project.exe
