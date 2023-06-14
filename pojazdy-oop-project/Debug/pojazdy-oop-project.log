@@ -1,24 +1,5 @@
-﻿  Budynki-Funkcje.cpp
-  Funkcje.cpp
-C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Funkcje.cpp(71,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  Kalkulator-Funkcje.cpp
-C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator-Funkcje.cpp(57,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator-Funkcje.cpp(119,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Kalkulator-Funkcje.cpp(133,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  KonteneryBudynk-Funkcje.cpp
-C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\KonteneryBudynk-Funkcje.cpp(89,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  KonteneryCar-Funkcje.cpp
-C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\KonteneryCar-Funkcje.cpp(8,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\KonteneryCar-Funkcje.cpp(49,13): warning C4244: "=": konwersja z "double" do "unsigned int", możliwa utrata danych
-  KonteneryPrac-Funkcje.cpp
-C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\KonteneryPrac-Funkcje.cpp(34,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  KonteneryStanow-Funkcje.cpp
-C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\KonteneryStanow-Funkcje.cpp(7,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  Menu_funkcje.cpp
-  Pojazdy-Funkcje.cpp
-  Pracownicy-Funkcje.cpp
-  Stanowiska-Funkcje.cpp
-  pojazdy-oop-project.cpp
-  Generowanie kodu...
-C:\Users\Daru2\Desktop\Repo\pojazdy-oop-project\Budynki-Funkcje.cpp(32): warning C4715: "StacjaPaliw::getFuelCost”: niewszystkie ścieżki kodu zwracają wartość
-  pojazdy-oop-project.vcxproj -> C:\Users\Daru2\Desktop\Repo\Debug\pojazdy-oop-project.exe
+﻿  Kalkulator-Funkcje.cpp
+C:\Users\lenovo\Desktop\project1.2\pojazdy-oop-project\Kalkulator-Funkcje.cpp(68,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\lenovo\Desktop\project1.2\pojazdy-oop-project\Kalkulator-Funkcje.cpp(161,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\lenovo\Desktop\project1.2\pojazdy-oop-project\Kalkulator-Funkcje.cpp(180,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+  pojazdy-oop-project.vcxproj -> C:\Users\lenovo\Desktop\project1.2\Debug\pojazdy-oop-project.exe

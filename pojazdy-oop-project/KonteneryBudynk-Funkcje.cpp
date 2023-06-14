@@ -124,7 +124,7 @@ void KontenerStacji::info() {
 	cout << setfill(z) << setw(spaceValue * 6 + 7 * 2 + spaceValue / 3 + 1) << z << endl;
 	cout.fill(' ');
 	// wstawianie nazw kategorii
-	cout << "\174" << setw(spaceValue / 3) << "Numer ID" << setw(2) << "|" << setw(spaceValue) << "Adres" << setw(2) << "|" << setw(spaceValue) << "Nazwa" << setw(2) << "|" << setw(spaceValue) << "Cena benzyny [zl/l]" << setw(2) << "|" << setw(spaceValue) << "Cena diesla [zl/l]" << setw(2) << "|" << setw(spaceValue) << "Cena gazu [zl/l]" << setw(2) << "|" << setw(spaceValue) << "Wysokosc znizki [*100%]" << setw(2) << "|" << endl;
+	cout << "\174" << setw(spaceValue / 3) << "Numer ID" << setw(2) << "|" << setw(spaceValue) << "Adres" << setw(2) << "|" << setw(spaceValue) << "Nazwa" << setw(2) << "|" << setw(spaceValue) << "Cena benzyny [zl/l]" << setw(2) << "|" << setw(spaceValue) << "Cena ropy [zl/l]" << setw(2) << "|" << setw(spaceValue) << "Cena gazu [zl/l]" << setw(2) << "|" << setw(spaceValue) << "Wysokosc znizki [*100%]" << setw(2) << "|" << endl;
 	cout << setfill(z) << setw(spaceValue * 6 + 7 * 2 + spaceValue / 3 + 1) << z << endl;
 	cout.fill(' ');
 	for (auto i : mapStacji) {

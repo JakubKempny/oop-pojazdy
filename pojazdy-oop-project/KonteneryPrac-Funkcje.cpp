@@ -60,7 +60,7 @@ void KontenerKierow::addRecord(KontenerCar& k, KontenerStanow& s) {
 		cout << "Podaj imie pracownika (2-20 znakow): ";
 		getlineM(imie);
 		if (containsOnlyLetters(imie) == false || imie.length() > 20 || imie.length() < 2) throw CustomException(komunikat + "Imie zawiera niedozwolone znaki! ");
-		cout << "Podaj nazwisko pracownika: (2-20 znakow)";
+		cout << "Podaj nazwisko pracownika: (2-20 znakow): ";
 		getlineM(nazwisko);
 		if (containsOnlyLetters(nazwisko) == false || nazwisko.length() > 20 || nazwisko.length() < 2) throw CustomException(komunikat + "Nazwisko zawiera niedozwolone znaki! ");
 		cout << "Podaj vin pojazdu pracownika: ";

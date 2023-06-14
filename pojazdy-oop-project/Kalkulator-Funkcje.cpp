@@ -39,13 +39,24 @@ double Kalkulator::companyCost(double price, double contribution) {
 }
 
 void Kalkulator::discountCheck(double discountPrice, double fullPrice) {
+	int spaceValue = 25;
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole, 6); 
 	if (fullPrice == discountPrice) {
-		cout << "BRAK RABATU";
+		cout << setw(spaceValue) << "BRAK RABATU" << setw(2) ;
+		SetConsoleTextAttribute(hConsole, 7);
+		cout << "|";
 	}
-	else cout << discountPrice;
+	
+	cout << setw(spaceValue) << discountPrice << setw(2) ;
+	SetConsoleTextAttribute(hConsole, 7);
+	cout << "|";
 }
 
+
 void Kalkulator::bestStation(double consumption, string fuelType, string position) {
+	char z = '_';
+	int spaceValue = 25;
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); //bajery do zmiany kolorow 
 	prices.clear(); // czyszcze wektor z danych poprzedniego pracownika
 	map<string, StacjaPaliw*> map = gasStation.getMap();
@@ -65,18 +76,36 @@ void Kalkulator::bestStation(double consumption, string fuelType, string positio
 	double discountPrice = afterDiscount(station, fullPrice);
 	double realPrice = companyCost(discountPrice, workerPositionContribution(position));
 	cout << fixed << setprecision(2);
+
+
+
+
 	//TUTAJ WYSWIETLA CALA RESZTE
-	cout << gasStationName(station) << "   ";
-	SetConsoleTextAttribute(hConsole, 4);
-	cout << fullPrice << "   ";
-	SetConsoleTextAttribute(hConsole, 6);
-	discountCheck(discountPrice, fullPrice);
-	SetConsoleTextAttribute(hConsole, 2);
-	cout << "   " << realPrice << endl;
+	SetConsoleTextAttribute(hConsole, 3);
+	cout << setw(spaceValue) << gasStationName(station) << setw(2) ;
+	
 	SetConsoleTextAttribute(hConsole, 7);
+	cout << "|";
+	
+	SetConsoleTextAttribute(hConsole, 4);
+	cout << setw(spaceValue) << fullPrice << setw(2);
+	SetConsoleTextAttribute(hConsole, 7);
+	cout << "|";
+	
+	discountCheck(discountPrice, fullPrice);
+
+	SetConsoleTextAttribute(hConsole, 2);
+	cout << setw(spaceValue) << realPrice << setw(2);
+	SetConsoleTextAttribute(hConsole, 7);
+	cout << "|" << endl;
+
+	cout << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
+	cout.fill(' ');
 }
 
 void Kalkulator::compute(int workerID) {
+	char z = '_';
+	int spaceValue = 25;
 	string idPrac{};
 	string vin{};
 	double dystans{};
@@ -89,19 +118,24 @@ void Kalkulator::compute(int workerID) {
 	surname = prac1->getNameSurname();
 	position = prac1->getPosition();
 	//TUTAJ WYSWIETLA IMIE, NAZWISKO, POZYCJE I SPALANIE
-	cout << surname << "   " << position << "   " << fuelConsumption(vin, dystans) << "   ";
+	cout << "\174" << setw(spaceValue ) << surname<< setw(2) << "|" << setw(spaceValue) << position << setw(2) << "|" << setw(spaceValue) << fuelConsumption(vin, dystans) << setw(2) << "|";
+	
+
+	//cout << surname << "   " << position << "   " << fuelConsumption(vin, dystans) << "   ";
 	bestStation(fuelConsumption(vin, dystans), fuelType(vin), position);
 }
 
 void Kalkulator::computeEngine() {
 	bool exist = false;
+	char z = '_';
+	int spaceValue = 25;
 	//wrzucam pesele pracownikow do wektora
 	map<string, Pracownik*> map = driver.getMap();
 	drivers.reserve(map.size()); //rezerwacja pamieci dla wektora
 	for (auto const& keyMap : map) {
 		drivers.push_back(keyMap.first);
 	}
-	cout << "Obliczyc dla wszystkich czy konkretnego pracownika? a/i: ";
+	cout << "Obliczyc dla wszystkich czy konkretnego pracownika? a/i: \n";
 	do {
 		this->input = _getch();
 	} while ((input != 'a') && (input != 'i'));
@@ -115,7 +149,15 @@ void Kalkulator::computeEngine() {
 		try {
 			if (!exist) throw CustomException("Pracownik o takim numerze PESEL nie istnieje w bazie.");
 			//TUTAJ SA KOLUMNY
-			cout << "Imie i Nazwisko |  Stanowisko  |  Spalanie (miesieczne)  |  Najtansza stacja  |  Calkowity Koszt  |  Z rabatem stacji  |  Koszt firmy  |" << endl;
+			
+
+			cout << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
+			cout.fill(' ');
+			// wstawianie nazw kategorii
+			cout << "\174" << setw(spaceValue) << "Imie i Nazwisko" << setw(2) << "|" << setw(spaceValue) << "Stanowisko" << setw(2) << "|" << setw(spaceValue) << "Spalanie (miesieczne)" << setw(2) << "|" << setw(spaceValue) << "Najtansza stacja" << setw(2) << "|" << setw(spaceValue) << "Calkowity koszt" << setw(2) << "|" << setw(spaceValue) << "Z rabatem stacji" << setw(2) << "|" << setw(spaceValue) << "Koszt pracownika firmy" << setw(2) << "|" << endl;
+			cout << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
+			cout.fill(' ');
+			
 			for (int i = 0; i < map.size(); i++)
 			{
 				if (drivers.at(i) == pesel) {
@@ -129,7 +171,12 @@ void Kalkulator::computeEngine() {
 		break;
 	case 'a':
 		//TUTAJ SA KOLUMNY
-		cout << endl << "Imie i Nazwisko |  Stanowisko  |  Spalanie (miesieczne)  |  Najtansza stacja  |  Calkowity Koszt  |  Z rabatem stacji  |  Koszt firmy  |" << endl;
+		cout << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
+		cout.fill(' ');
+		// wstawianie nazw kategorii
+		cout << "\174" << setw(spaceValue) << "Imie i Nazwisko" << setw(2) << "|" << setw(spaceValue) << "Stanowisko" << setw(2) << "|" << setw(spaceValue) << "Spalanie (miesieczne)" << setw(2) << "|" << setw(spaceValue) << "Najtansza stacja" << setw(2) << "|" << setw(spaceValue) << "Calkowity koszt" << setw(2) << "|" << setw(spaceValue) << "Z rabatem stacji" << setw(2) << "|" << setw(spaceValue) << "Koszt pracownika firmy" << setw(2) << "|" << endl;
+		cout << setfill(z) << setw(spaceValue * 7 + 7 * 2 + 1) << z << endl;
+		cout.fill(' ');
 		for (int i = 0; i < map.size(); i++) {
 			compute(i);
 		}
